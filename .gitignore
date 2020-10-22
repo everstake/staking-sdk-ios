@@ -48,3 +48,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+Example/EverstakeSDK.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+Example/EverstakeSDK.xcworkspace/xcuserdata/alex.xcuserdatad/UserInterfaceState.xcuserstate
+Example/EverstakeSDK.xcworkspace/xcuserdata/alex.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
