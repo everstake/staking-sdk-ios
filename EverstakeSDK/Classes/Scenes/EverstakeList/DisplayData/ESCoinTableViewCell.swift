@@ -9,7 +9,9 @@ import UIKit
 
 public class ESCoinTableViewCell: UITableViewCell {
 
-    
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
     
     public override func awakeFromNib() {
         super.awakeFromNib()

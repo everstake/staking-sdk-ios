@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EverstakeListViewController" customModule="EverstakeSDK" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="n6p-T4-Xpx" id="CTR-hd-wK3"/>
                 <outlet property="view" destination="iN0-l3-epB" id="NKC-Vt-JSS"/>
             </connections>
         </placeholder>

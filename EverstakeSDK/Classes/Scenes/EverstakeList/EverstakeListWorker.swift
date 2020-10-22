@@ -21,13 +21,17 @@ class EverstakeListWorker {
         let task = session.dataTask(with: url, completionHandler: { data, response, error in
 
                 if error != nil {
-                    failedWith(error!)
+                    DispatchQueue.main.async {
+                        failedWith(error!)
+                    }
                     return
                 }
                 
                 do {
                     let coins = try JSONDecoder().decode([EverstakeList.Coin].self, from: data!)
-                    successWith(coins)
+                    DispatchQueue.main.async {
+                        successWith(coins)
+                    }
                 } catch {
                     print("Error during JSON serialization: \(error.localizedDescription)")
                 }

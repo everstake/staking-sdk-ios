@@ -8,7 +8,7 @@
 import UIKit
 
 protocol EverstakeListDisplayLogic: class {
-    func display(viewModel: EverstakeList.ViewModel)
+    func display(coins: [EverstakeList.Coin]) 
 }
 
 class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
@@ -31,19 +31,23 @@ class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        displayManager.tableView = tableView
         loadDataList()
     }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
-  
+    @IBOutlet weak var tableView: UITableView!
+    
+    let displayManager = EverstakeListDisplayDataManager()
+    
     func loadDataList() {
         interactor?.loadDataList()
     }
   
-    func display(viewModel: EverstakeList.ViewModel) {
-        //TODO: show coins in list
+    func display(coins: [EverstakeList.Coin]) {
+        displayManager.coins = coins
     }
     
 }

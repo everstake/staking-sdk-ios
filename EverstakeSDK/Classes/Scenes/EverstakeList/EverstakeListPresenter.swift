@@ -17,7 +17,6 @@ class EverstakeListPresenter: EverstakeListPresentationLogic {
 // MARK: Do something
   
     func present(_ coins: [EverstakeList.Coin]) {
-        let viewModel = EverstakeList.ViewModel(coins: coins)
-        viewController?.display(viewModel: viewModel)
+        viewController?.display(coins: coins)
     }
 }

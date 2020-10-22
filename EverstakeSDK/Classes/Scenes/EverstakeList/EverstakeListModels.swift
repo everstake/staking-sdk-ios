@@ -8,14 +8,33 @@
 import UIKit
 
 enum EverstakeList {
-          
-    struct ViewModel {
-        let coins: [Coin]
-    }
     
     struct Coin: Codable {
+        
         let id: String?
-        let symbol: String?
-        let about: String?
+        let name: String?
+        let iconUrl: URL?
+        let precision: Int?
+
+//        let apr: Int?
+//        let order: Int?
+//        let yieldInterval: Int?
+//        let yieldPercent: String?
+//        let isActive: Bool?
+//        let symbol: String?
+//        let needsClaiming: Bool?
+//        let intervalStake: Int?
+//        let intervalUnstake: Int?
+//        let toUsd: String?
+//        let about: String?
+//        let aboutUrl: URL?
+//        let fee: Fee?
+        
     }
+    
+    struct Fee: Codable {
+        let min: Int?
+        let max: Int?
+    }
+
 }

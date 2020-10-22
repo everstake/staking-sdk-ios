@@ -11,9 +11,8 @@ class EverstakeListConfigurator {
     
     static func setup() -> UIViewController {
         
-        let bundle = Bundle(for: EverstakeListViewController.self)
         let viewController = EverstakeListViewController(nibName: "EverstakeListViewController",
-                                                         bundle: bundle)
+                                                         bundle: ESUtilities.shared.bundle)
         
         let interactor = EverstakeListInteractor()
         let presenter = EverstakeListPresenter()
