@@ -1,0 +1,16 @@
+PODS:
+  - EverstakeSDK (0.1.0)
+
+DEPENDENCIES:
+  - EverstakeSDK (from `../`)
+
+EXTERNAL SOURCES:
+  EverstakeSDK:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EverstakeSDK: 85d901ad4ffdd92ac46ce4c163ea954f8895e3f5
+
+PODFILE CHECKSUM: 7ca35c2b025129a487adcaf21fd4e681f88c5631
+
+COCOAPODS: 1.9.3

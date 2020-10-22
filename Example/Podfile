@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'EverstakeSDK_Example' do
+  pod 'EverstakeSDK', :path => '../'
+
+  target 'EverstakeSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
