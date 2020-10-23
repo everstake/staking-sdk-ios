@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ESCoinTableViewCell" customModule="EverstakeSDK" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ESCoinTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="coinCell" rowHeight="60" id="WyU-fZ-eZO" customClass="ESCoinTableViewCell" customModule="EverstakeSDK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WyU-fZ-eZO" id="jHR-1p-Rib">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yza-F3-jCa">
+                        <rect key="frame" x="16" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="7cC-fg-ITI"/>
+                            <constraint firstAttribute="width" constant="40" id="Sf0-ts-rW3"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tezos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHj-Jw-lRp">
+                        <rect key="frame" x="66" y="10" width="45" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6PP-vs-qDb">
+                        <rect key="frame" x="66" y="33" width="30" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59835188356164382" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure.png" translatesAutoresizingMaskIntoConstraints="NO" id="hhM-fj-Sfl">
+                        <rect key="frame" x="390" y="22.5" width="9" height="15"/>
+                    </imageView>
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iva-dH-Z1h" userLabel="Coin Content View">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gva-3V-VjP" userLabel="separator">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                        <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" id="PW8-Cw-G2M"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Iva-dH-Z1h" secondAttribute="trailing" id="16x-PP-Ylo"/>
+                    <constraint firstAttribute="trailing" secondItem="hhM-fj-Sfl" secondAttribute="trailing" constant="15" id="2kc-7a-yUR"/>
+                    <constraint firstItem="Yza-F3-jCa" firstAttribute="leading" secondItem="jHR-1p-Rib" secondAttribute="leading" constant="16" id="8pC-50-JNu"/>
+                    <constraint firstItem="gva-3V-VjP" firstAttribute="leading" secondItem="jHR-1p-Rib" secondAttribute="leading" id="BVQ-5e-od3"/>
+                    <constraint firstItem="RHj-Jw-lRp" firstAttribute="leading" secondItem="Yza-F3-jCa" secondAttribute="trailing" constant="10" id="CKO-Q9-usd"/>
+                    <constraint firstItem="RHj-Jw-lRp" firstAttribute="top" secondItem="gva-3V-VjP" secondAttribute="bottom" constant="10" id="Cun-qi-lF0"/>
+                    <constraint firstItem="hhM-fj-Sfl" firstAttribute="centerY" secondItem="jHR-1p-Rib" secondAttribute="centerY" id="FCp-1S-WR7"/>
+                    <constraint firstAttribute="trailing" secondItem="gva-3V-VjP" secondAttribute="trailing" id="X27-qw-bew"/>
+                    <constraint firstAttribute="bottom" secondItem="6PP-vs-qDb" secondAttribute="bottom" constant="9" id="aF4-T7-Gsf"/>
+                    <constraint firstItem="Yza-F3-jCa" firstAttribute="centerY" secondItem="jHR-1p-Rib" secondAttribute="centerY" id="dOX-b3-YOx"/>
+                    <constraint firstAttribute="bottom" secondItem="Iva-dH-Z1h" secondAttribute="bottom" id="h4N-Lx-ORC"/>
+                    <constraint firstItem="Iva-dH-Z1h" firstAttribute="top" secondItem="jHR-1p-Rib" secondAttribute="top" id="obz-Cg-g9W"/>
+                    <constraint firstItem="gva-3V-VjP" firstAttribute="top" secondItem="jHR-1p-Rib" secondAttribute="top" id="r67-N6-Dgi"/>
+                    <constraint firstItem="6PP-vs-qDb" firstAttribute="leading" secondItem="Yza-F3-jCa" secondAttribute="trailing" constant="10" id="s4W-Zr-210"/>
+                    <constraint firstItem="Iva-dH-Z1h" firstAttribute="leading" secondItem="jHR-1p-Rib" secondAttribute="leading" id="sTL-Ll-CMq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="coinContentView" destination="Iva-dH-Z1h" id="Hie-dA-C3C"/>
+                <outlet property="disclosureImageView" destination="hhM-fj-Sfl" id="Ny4-Qw-Jha"/>
+                <outlet property="logoImageView" destination="Yza-F3-jCa" id="JLi-J6-Pu1"/>
+                <outlet property="separatorViewHeightConstraint" destination="PW8-Cw-G2M" id="UDh-el-E87"/>
+                <outlet property="subTitleLabel" destination="6PP-vs-qDb" id="6nb-gW-wr8"/>
+                <outlet property="titleLabel" destination="RHj-Jw-lRp" id="y5X-yu-0lG"/>
+            </connections>
+            <point key="canvasLocation" x="308.69565217391306" y="31.473214285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="disclosure.png" width="9" height="15"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

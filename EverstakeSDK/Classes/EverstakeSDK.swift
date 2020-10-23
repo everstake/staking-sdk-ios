@@ -11,7 +11,9 @@ import UIKit
 public class EverstakeSDK {
     
     public static func createViewController() -> UIViewController {
-        return EverstakeListConfigurator.setup()
+        let viewController = EverstakeListConfigurator.setup()
+        viewController.modalPresentationStyle = .fullScreen
+        return viewController
     }
     
 }

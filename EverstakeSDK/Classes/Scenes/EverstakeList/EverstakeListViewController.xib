@@ -24,20 +24,20 @@
                     <rect key="frame" x="363" y="44" width="25" height="24"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsS-mf-MYb" userLabel="Close">
-                    <rect key="frame" x="26" y="44" width="30" height="35"/>
+                    <rect key="frame" x="26" y="44" width="14" height="23"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <state key="normal" title="(X)">
+                    <state key="normal" image="close.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Staking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSK-MU-Q0M">
-                    <rect key="frame" x="16" y="101" width="115" height="40"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
+                    <rect key="frame" x="16" y="97" width="121" height="41"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n6p-T4-Xpx">
-                    <rect key="frame" x="0.0" y="149" width="414" height="747"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n6p-T4-Xpx">
+                    <rect key="frame" x="0.0" y="146" width="414" height="750"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="36"/>
                 </tableView>
@@ -54,12 +54,13 @@
                 <constraint firstItem="FsS-mf-MYb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="hR2-NB-oko"/>
                 <constraint firstItem="FsS-mf-MYb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="26" id="hfs-mw-qCQ"/>
                 <constraint firstItem="SSK-MU-Q0M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="kF7-64-Bjx"/>
-                <constraint firstItem="SSK-MU-Q0M" firstAttribute="top" secondItem="FsS-mf-MYb" secondAttribute="bottom" constant="22" id="rp1-xP-fgH"/>
+                <constraint firstItem="SSK-MU-Q0M" firstAttribute="top" secondItem="FsS-mf-MYb" secondAttribute="bottom" constant="30" id="rp1-xP-fgH"/>
             </constraints>
             <point key="canvasLocation" x="-122" y="153"/>
         </view>
     </objects>
     <resources>
+        <image name="close.png" width="14" height="14"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

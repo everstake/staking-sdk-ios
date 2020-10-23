@@ -15,12 +15,12 @@ enum EverstakeList {
         let name: String?
         let iconUrl: URL?
         let apr: Int?
+        let isActive: Bool?
 
 //        let precision: Int?
 //        let order: Int?
 //        let yieldInterval: Int?
 //        let yieldPercent: String?
-//        let isActive: Bool?
 //        let symbol: String?
 //        let needsClaiming: Bool?
 //        let intervalStake: Int?

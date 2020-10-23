@@ -41,7 +41,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		6861F798BBABF9FB6D368531 /* Pods-EverstakeSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverstakeSDK_Example.release.xcconfig"; path = "Target Support Files/Pods-EverstakeSDK_Example/Pods-EverstakeSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
-		8D8240FFFC46FFAFA13D8E6E /* EverstakeSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = EverstakeSDK.podspec; path = ../EverstakeSDK.podspec; sourceTree = "<group>"; };
+		8D8240FFFC46FFAFA13D8E6E /* EverstakeSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = EverstakeSDK.podspec; path = ../EverstakeSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9763D7D2A277876360FAB6A3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		AEE3326699C87C276023F700 /* Pods_EverstakeSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EverstakeSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF9DB4F97BC6119C7D43A661 /* Pods-EverstakeSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverstakeSDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-EverstakeSDK_Tests/Pods-EverstakeSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -292,10 +292,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EverstakeSDK_Example/Pods-EverstakeSDK_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/EverstakeSDK/EverstakeSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EverstakeSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -1,15 +1,24 @@
 PODS:
-  - EverstakeSDK (0.1.0)
+  - EverstakeSDK (0.1.0):
+    - Kingfisher (~> 5.15)
+  - Kingfisher (5.15.0):
+    - Kingfisher/Core (= 5.15.0)
+  - Kingfisher/Core (5.15.0)
 
 DEPENDENCIES:
   - EverstakeSDK (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
 
 EXTERNAL SOURCES:
   EverstakeSDK:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EverstakeSDK: 85d901ad4ffdd92ac46ce4c163ea954f8895e3f5
+  EverstakeSDK: 820ca9fd908eb7bcc05a25531552403cabec85c7
+  Kingfisher: 1acb67597a520c2d0310677e66d6e0af455ef757
 
 PODFILE CHECKSUM: 7ca35c2b025129a487adcaf21fd4e681f88c5631
 
