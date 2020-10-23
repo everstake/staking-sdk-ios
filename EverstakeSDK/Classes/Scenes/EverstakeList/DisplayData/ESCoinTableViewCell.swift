@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ESCoinTableViewCell: UITableViewCell {
+class ESCoinTableViewCell: UITableViewCell {
 
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

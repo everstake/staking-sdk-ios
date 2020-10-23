@@ -14,9 +14,9 @@ enum EverstakeList {
         let id: String?
         let name: String?
         let iconUrl: URL?
-        let precision: Int?
+        let apr: Int?
 
-//        let apr: Int?
+//        let precision: Int?
 //        let order: Int?
 //        let yieldInterval: Int?
 //        let yieldPercent: String?

@@ -14,9 +14,9 @@ class EverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableV
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
-//            tableView.register(UINib(nibName: "ESCoinTableViewCell",
-//                                     bundle: ESUtilities.shared.bundle),
-//                               forCellReuseIdentifier: "coinCell")
+            tableView.register(UINib(nibName: "ESCoinTableViewCell",
+                                     bundle: ESUtilities.shared.bundle),
+                               forCellReuseIdentifier: "coinCell")
         }
     }
     
@@ -34,10 +34,10 @@ class EverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "coinCell") as! ESCoinTableViewCell
         
-//        let coin = coins[indexPath.item]
-////        cell.logoImageView.image = coin.iconUrl
-//        cell.titleLabel.text = coin.name
-//        cell.titleLabel.text = "\(coin.precision ?? 0)%"
+        let coin = coins[indexPath.item]
+//        cell.logoImageView.image = coin.iconUrl
+        cell.titleLabel.text = coin.name
+        cell.subTitleLabel.text = "\(coin.apr ?? 0)%"
         
         return cell
     }
