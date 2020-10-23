@@ -12,20 +12,49 @@ protocol EverstakeListBusinessLogic {
 }
 
 protocol EverstakeListDataStore {
-    //var name: String { get set }
+    var coins: [EverstakeList.Coin]? { get set }
+    var stakes: [EverstakeList.Stake]? { get set }
 }
 
 class EverstakeListInteractor: EverstakeListBusinessLogic, EverstakeListDataStore {
+    
+    var coins: [EverstakeList.Coin]?
+    var stakes: [EverstakeList.Stake]?
+    
     var presenter: EverstakeListPresentationLogic?
-    var worker: EverstakeListWorker?
+    var worker = EverstakeListWorker()
     
     func loadDataList() {
-        worker = EverstakeListWorker()
-        worker?.loadStakingList(successWith: { (coins) in
-            self.presenter?.present(coins)
-        }, failedWith: { (error) in
-            //TODO: handle error
+        worker.loadCoinList(successWith: { data in
+            self.coins = ESUtilities.decode([EverstakeList.Coin].self, from: data)
+            self.tryCompleteLoad()
         })
         
+        worker.loadStakeList(successWith: { data in
+            self.stakes = ESUtilities.decode([EverstakeList.Stake].self, from: data)
+            self.tryCompleteLoad()
+        })
     }
+    
+    private func tryCompleteLoad() {
+        
+        guard let coins = coins, let stakes = stakes else {
+            return
+        }
+        
+        //TODO: refactor
+        let c = coins.reduce(into: [:]) { result, model in
+            result[model.id!] = model
+        }
+        
+        let s = stakes.reduce(into: [:]) { result, model in
+            result[model.coinId!] = model
+        }
+        
+        presenter?.updateWith(coins: c, stakes: s)
+        
+        self.coins = nil
+        self.stakes = nil
+    }
+    
 }

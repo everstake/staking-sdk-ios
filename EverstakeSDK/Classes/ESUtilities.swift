@@ -15,4 +15,12 @@ class ESUtilities {
         return Bundle(for: EverstakeSDK.self)
     }
     
+    static func decode<T>(_ type: T.Type, from data: Data) -> T? where T : Decodable {
+        do {
+            return try JSONDecoder().decode(type, from: data)
+        } catch {
+            print("Error during JSON serialization: \(error.localizedDescription)")
+        }
+        return nil
+    }
 }

@@ -17,14 +17,30 @@ class EverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableV
         }
     }
     
-    var coins = [EverstakeList.Coin]() {
+    var viewModel = EverstakeList.ViewModel() {
         didSet {
             tableView.reloadData()
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        // TODO: Make dynamic
+        
+        return 2
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coins.count
+        
+        // TODO: Make dynamic
+        
+        switch section {
+        case 0:
+            return viewModel.steakedList.count
+        default:
+            return viewModel.readyToStakeList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,11 +49,15 @@ class EverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableV
         
         //TODO: User view model here
         
-        let coin = coins[indexPath.item]
+        // TODO: Refactor
+        let coin = indexPath.section == 0 ? viewModel.steakedList[indexPath.item] :
+                                            viewModel.readyToStakeList[indexPath.item]
+        
+        
         cell.logoImageView.kf.setImage(with: coin.iconUrl)
-        cell.titleLabel.text = coin.name
+        cell.titleLabel.text = coin.title
         cell.subTitleLabel.text = "\(coin.apr ?? 0)%"
-        cell.coinContentView.alpha = coin.isActive! ? 0 : 0.7
+        cell.coinContentView.alpha = coin.comingSoon ? 0 : 0.7
         
         return cell
     }
@@ -47,7 +67,13 @@ class EverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableCell(withIdentifier: Constants.readyToStakeHeader)?.contentView
+        let header = tableView.dequeueReusableCell(withIdentifier: Constants.readyToStakeHeader) as! ESReadyToStakeHeader
+        
+        // TODO: Make dynamic
+
+        header.titleLabel.text = section == 0 ? "STEAKED" : "READY TO STAKE"
+        
+        return header.contentView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
