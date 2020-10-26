@@ -27,20 +27,18 @@ class EverstakeListInteractor: EverstakeListBusinessLogic, EverstakeListDataStor
     func loadDataList() {
         worker.loadCoinList(successWith: { data in
             self.coins = ESUtilities.decode([EverstakeList.Coin].self, from: data)
-            self.tryCompleteLoad()
+            self.completedDataLoad()
         })
         
         worker.loadStakeList(successWith: { data in
             self.stakes = ESUtilities.decode([EverstakeList.Stake].self, from: data)
-            self.tryCompleteLoad()
+            self.completedDataLoad()
         })
     }
     
-    private func tryCompleteLoad() {
+    private func completedDataLoad() {
         
-        //TODO: show coins list, not wait for stakes
-
-        guard let coins = coins, let stakes = stakes else {
+        guard let coins = coins else {
             return
         }
         
@@ -48,14 +46,11 @@ class EverstakeListInteractor: EverstakeListBusinessLogic, EverstakeListDataStor
             result[model.id!] = model
         }
         
-        let stakesMap = stakes.reduce(into: [:]) { result, model in
+        let stakesMap = stakes?.reduce(into: [:]) { result, model in
             result[model.coinId!] = model
-        }
+        } ?? [String: EverstakeList.Stake]()
         
         presenter?.updateWith(coins: coinsMap, stakes: stakesMap)
-        
-        self.coins = nil
-        self.stakes = nil
     }
     
 }

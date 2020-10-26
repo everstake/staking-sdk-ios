@@ -32,14 +32,14 @@ class EverstakeListPresenter: EverstakeListPresentationLogic {
                       [EverstakeList.CoinModel]())
                 
         for key in coins.keys {
-            guard let coin = coins[key],
-                  let stake = stakes[key] else {
+            guard let coin = coins[key] else {
                 break
             }
             
+            let stake = stakes[key]
             let model = EverstakeList.CoinModel(coin: coin, stake: stake)
             
-            if stake.amount > 0 {
+            if let s = stake, s.amount > 0 {
                 result.0.append(model)
             } else {
                 result.1.append(model)
