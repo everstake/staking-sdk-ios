@@ -38,20 +38,21 @@ class EverstakeListInteractor: EverstakeListBusinessLogic, EverstakeListDataStor
     
     private func tryCompleteLoad() {
         
+        //TODO: show coins list, not wait for stakes
+
         guard let coins = coins, let stakes = stakes else {
             return
         }
         
-        //TODO: refactor
-        let c = coins.reduce(into: [:]) { result, model in
+        let coinsMap = coins.reduce(into: [:]) { result, model in
             result[model.id!] = model
         }
         
-        let s = stakes.reduce(into: [:]) { result, model in
+        let stakesMap = stakes.reduce(into: [:]) { result, model in
             result[model.coinId!] = model
         }
         
-        presenter?.updateWith(coins: c, stakes: s)
+        presenter?.updateWith(coins: coinsMap, stakes: stakesMap)
         
         self.coins = nil
         self.stakes = nil

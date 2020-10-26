@@ -39,17 +39,20 @@ class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
         loadDataList()
     }
   
-  // MARK: Do something
+// MARK: Properties
   
-  //@IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
     let displayManager = EverstakeListDisplayDataManager()
     
+// MARK: Methods
+    
     func loadDataList() {
         interactor?.loadDataList()
     }
-  
+    
+//MARK: EverstakeListDisplayLogic
+    
     func updateWith(viewModel: EverstakeList.ViewModel) {
         displayManager.viewModel = viewModel
     }

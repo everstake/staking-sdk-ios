@@ -13,16 +13,24 @@ protocol EverstakeListPresentationLogic {
 }
 
 class EverstakeListPresenter: EverstakeListPresentationLogic {
+    
     weak var viewController: EverstakeListDisplayLogic?
     
     func updateWith(coins: [String: EverstakeList.Coin],
                     stakes: [String: EverstakeList.Stake]) {
                   
-        var readyToStake = [EverstakeList.CoinModel]()
-        var staked = [EverstakeList.CoinModel]()
+        let viewModel = convertToViewModel(coins: coins, stakes: stakes)
+        viewController?.updateWith(viewModel: viewModel)
+    }
+    
+//MARK: Private
+    
+    private func convertToViewModel(coins: [String: EverstakeList.Coin],
+                                    stakes: [String: EverstakeList.Stake]) -> EverstakeList.ViewModel {
         
-        //TODO: Refactor
-        
+        var result = ([EverstakeList.CoinModel](),
+                      [EverstakeList.CoinModel]())
+                
         for key in coins.keys {
             guard let coin = coins[key],
                   let stake = stakes[key] else {
@@ -31,19 +39,15 @@ class EverstakeListPresenter: EverstakeListPresentationLogic {
             
             let model = EverstakeList.CoinModel(coin: coin, stake: stake)
             
-            if stake.floatAmount > 0 {
-                staked.append(model)
+            if stake.amount > 0 {
+                result.0.append(model)
             } else {
-                readyToStake.append(model)
+                result.1.append(model)
             }
-                        
         }
         
-        let viewModel = EverstakeList.ViewModel(readyToStakeList: readyToStake,
-                                                steakedList: staked)
-
-    
-        viewController?.updateWith(viewModel: viewModel)
+        return EverstakeList.ViewModel(readyToStakeList: result.1,
+                                            steakedList: result.0)
     }
     
 }
