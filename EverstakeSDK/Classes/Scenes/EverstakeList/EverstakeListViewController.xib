@@ -5,12 +5,12 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EverstakeListViewController" customModule="EverstakeSDK" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="bWa-Ys-HOZ" id="Xcx-FC-89w"/>
                 <outlet property="tableView" destination="n6p-T4-Xpx" id="CTR-hd-wK3"/>
                 <outlet property="view" destination="iN0-l3-epB" id="NKC-Vt-JSS"/>
             </connections>
@@ -20,9 +20,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzF-KV-Dds" userLabel="Info">
-                    <rect key="frame" x="363" y="44" width="25" height="24"/>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsS-mf-MYb" userLabel="Close">
                     <rect key="frame" x="26" y="44" width="14" height="23"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -30,6 +27,12 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzF-KV-Dds" userLabel="Info">
+                    <rect key="frame" x="363" y="44" width="25" height="24"/>
+                </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bWa-Ys-HOZ">
+                    <rect key="frame" x="197" y="438" width="20" height="20"/>
+                </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Staking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSK-MU-Q0M">
                     <rect key="frame" x="16" y="97" width="121" height="41"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
@@ -38,7 +41,7 @@
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n6p-T4-Xpx">
                     <rect key="frame" x="0.0" y="146" width="414" height="750"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="36"/>
                 </tableView>
             </subviews>
@@ -51,8 +54,10 @@
                 <constraint firstItem="n6p-T4-Xpx" firstAttribute="top" secondItem="SSK-MU-Q0M" secondAttribute="bottom" constant="8" symbolic="YES" id="R8t-UE-NhZ"/>
                 <constraint firstItem="zzF-KV-Dds" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="VNC-i8-N1s"/>
                 <constraint firstAttribute="bottom" secondItem="n6p-T4-Xpx" secondAttribute="bottom" id="Xy5-t0-KN3"/>
+                <constraint firstItem="bWa-Ys-HOZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="aDL-1D-HUX"/>
                 <constraint firstItem="FsS-mf-MYb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="hR2-NB-oko"/>
                 <constraint firstItem="FsS-mf-MYb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="26" id="hfs-mw-qCQ"/>
+                <constraint firstItem="bWa-Ys-HOZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iaZ-cW-8bf"/>
                 <constraint firstItem="SSK-MU-Q0M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="kF7-64-Bjx"/>
                 <constraint firstItem="SSK-MU-Q0M" firstAttribute="top" secondItem="FsS-mf-MYb" secondAttribute="bottom" constant="30" id="rp1-xP-fgH"/>
             </constraints>
@@ -61,8 +66,5 @@
     </objects>
     <resources>
         <image name="close.png" width="14" height="14"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

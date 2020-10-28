@@ -9,6 +9,7 @@ import UIKit
 
 protocol EverstakeListDisplayLogic: class {
     func updateWith(viewModel: EverstakeList.ViewModel)
+    func unableToLoadData()
 }
 
 class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
@@ -42,6 +43,7 @@ class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
 // MARK: Properties
   
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let displayManager = EverstakeListDisplayDataManager()
     
@@ -55,6 +57,12 @@ class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
     
     func updateWith(viewModel: EverstakeList.ViewModel) {
         displayManager.viewModel = viewModel
+        activityIndicator.stopAnimating()
+    }
+    
+    func unableToLoadData() {
+        activityIndicator.stopAnimating()
+        //TODO: show proper view
     }
     
 }
