@@ -13,6 +13,8 @@ class ESEverstakeListConfigurator {
         
         let viewController = ESEverstakeListViewController(nibName: "ESEverstakeListViewController",
                                                            bundle: ESUtilities.shared.bundle)
+        let navigationViewController = UINavigationController(rootViewController: viewController)
+        navigationViewController.isNavigationBarHidden = true
         
         let interactor = ESEverstakeListInteractor()
         let presenter = ESEverstakeListPresenter()
@@ -24,7 +26,7 @@ class ESEverstakeListConfigurator {
         router.viewController = viewController
         router.dataStore = interactor
         
-        return viewController
+        return navigationViewController
         
     }
 

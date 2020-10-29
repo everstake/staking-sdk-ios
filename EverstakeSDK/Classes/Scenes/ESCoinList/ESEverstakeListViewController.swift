@@ -12,20 +12,10 @@ protocol ESEverstakeListDisplayLogic: class {
     func unableToLoadData()
 }
 
-class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLogic {
+class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLogic,
+                                     ESEverstakeListDisplayDataManagerDelegate {
     var interactor: ESEverstakeListBusinessLogic?
-    var router: (NSObjectProtocol & ESEverstakeListRoutingLogic & ESEverstakeListDataPassing)?
-
-// MARK: Routing
-  
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
+    var router: (NSObjectProtocol & ESEverstakeListRoutingLogic)?
   
 // MARK: View lifecycle
   
@@ -37,6 +27,7 @@ class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLog
         }
         
         displayManager.tableView = tableView
+        displayManager.delegate = self
         loadDataList()
     }
   
@@ -63,6 +54,12 @@ class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLog
     func unableToLoadData() {
         activityIndicator.stopAnimating()
         //TODO: show proper view
+    }
+    
+//MARK: ESEverstakeListDisplayDataManagerDelegate
+    
+    func didSelected(_ coin: ESEverstakeList.CoinModel) {
+        router?.routeToStakeCoinDetails(coin)
     }
     
 }

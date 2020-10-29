@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import Kingfisher
 
+protocol ESEverstakeListDisplayDataManagerDelegate {
+    func didSelected(_ coin: ESEverstakeList.CoinModel)
+}
+
 class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     private enum SectionType {
@@ -27,6 +31,8 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
             tableView.reloadData()
         }
     }
+    
+    var delegate: ESEverstakeListDisplayDataManagerDelegate?
     
 //MARK: Private
     
@@ -100,7 +106,11 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let coin = itemsFor(indexPath.section)[indexPath.row]
+        delegate?.didSelected(coin)
     }
+    
+//MARK: Setup
     
     private func setupTableView() {
         tableView.dataSource = self

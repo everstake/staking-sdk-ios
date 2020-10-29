@@ -12,26 +12,26 @@ protocol ESEverstakeListBusinessLogic {
 }
 
 protocol ESEverstakeListDataStore {
-    var coins: [ESEverstakeList.Coin]? { get set }
-    var stakes: [ESEverstakeList.Stake]? { get set }
+    var coins: [ESEverstakeList.Response.Coin]? { get set }
+    var stakes: [ESEverstakeList.Response.Stake]? { get set }
 }
 
 class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDataStore {
     
-    var coins: [ESEverstakeList.Coin]?
-    var stakes: [ESEverstakeList.Stake]?
+    var coins: [ESEverstakeList.Response.Coin]?
+    var stakes: [ESEverstakeList.Response.Stake]?
     
     var presenter: ESEverstakeListPresentationLogic?
     var worker = ESEverstakeListWorker()
     
     func loadDataList() {
         worker.loadCoinList(successWith: { data in
-            self.coins = ESUtilities.decode([ESEverstakeList.Coin].self, from: data)
+            self.coins = ESUtilities.decode([ESEverstakeList.Response.Coin].self, from: data)
             self.completedDataLoad()
         })
         
         worker.loadStakeList(successWith: { data in
-            self.stakes = ESUtilities.decode([ESEverstakeList.Stake].self, from: data)
+            self.stakes = ESUtilities.decode([ESEverstakeList.Response.Stake].self, from: data)
             self.completedDataLoad()
         })
     }
@@ -48,7 +48,7 @@ class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDa
         
         let stakesMap = stakes?.reduce(into: [:]) { result, model in
             result[model.coinId!] = model
-        } ?? [String: ESEverstakeList.Stake]()
+        } ?? [String: ESEverstakeList.Response.Stake]()
         
         presenter?.updateWith(coins: coinsMap, stakes: stakesMap)
     }

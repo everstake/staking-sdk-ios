@@ -8,16 +8,16 @@
 import UIKit
 
 protocol ESEverstakeListPresentationLogic {
-    func updateWith(coins: [String: ESEverstakeList.Coin],
-                    stakes: [String: ESEverstakeList.Stake])
+    func updateWith(coins: [String: ESEverstakeList.Response.Coin],
+                    stakes: [String: ESEverstakeList.Response.Stake])
 }
 
 class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
     
     weak var viewController: ESEverstakeListDisplayLogic?
     
-    func updateWith(coins: [String: ESEverstakeList.Coin],
-                    stakes: [String: ESEverstakeList.Stake]) {
+    func updateWith(coins: [String: ESEverstakeList.Response.Coin],
+                    stakes: [String: ESEverstakeList.Response.Stake]) {
                   
         var viewModel = convertToViewModel(coins: coins, stakes: stakes)
         
@@ -38,8 +38,8 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
     
 //MARK: Private
     
-    private func convertToViewModel(coins: [String: ESEverstakeList.Coin],
-                                    stakes: [String: ESEverstakeList.Stake]) -> ESEverstakeList.ViewModel {
+    private func convertToViewModel(coins: [String: ESEverstakeList.Response.Coin],
+                                    stakes: [String: ESEverstakeList.Response.Stake]) -> ESEverstakeList.ViewModel {
         
         var result = ([ESEverstakeList.CoinModel](),
                       [ESEverstakeList.CoinModel]())
