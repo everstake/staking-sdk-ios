@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EverstakeListViewController" customModule="EverstakeSDK" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ESEverstakeListViewController" customModule="EverstakeSDK" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="bWa-Ys-HOZ" id="Xcx-FC-89w"/>
                 <outlet property="tableView" destination="n6p-T4-Xpx" id="CTR-hd-wK3"/>

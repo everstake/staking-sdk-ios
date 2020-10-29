@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum EverstakeList {
+enum ESEverstakeList {
         
 //MARK: - UI Models
     

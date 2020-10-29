@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol EverstakeListDisplayLogic: class {
-    func updateWith(viewModel: EverstakeList.ViewModel)
+protocol ESEverstakeListDisplayLogic: class {
+    func updateWith(viewModel: ESEverstakeList.ViewModel)
     func unableToLoadData()
 }
 
-class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
-    var interactor: EverstakeListBusinessLogic?
-    var router: (NSObjectProtocol & EverstakeListRoutingLogic & EverstakeListDataPassing)?
+class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLogic {
+    var interactor: ESEverstakeListBusinessLogic?
+    var router: (NSObjectProtocol & ESEverstakeListRoutingLogic & ESEverstakeListDataPassing)?
 
 // MARK: Routing
   
@@ -45,7 +45,7 @@ class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    let displayManager = EverstakeListDisplayDataManager()
+    let displayManager = ESEverstakeListDisplayDataManager()
     
 // MARK: Methods
     
@@ -55,7 +55,7 @@ class EverstakeListViewController: UIViewController, EverstakeListDisplayLogic {
     
 //MARK: EverstakeListDisplayLogic
     
-    func updateWith(viewModel: EverstakeList.ViewModel) {
+    func updateWith(viewModel: ESEverstakeList.ViewModel) {
         displayManager.viewModel = viewModel
         activityIndicator.stopAnimating()
     }

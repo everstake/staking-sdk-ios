@@ -14,7 +14,7 @@ protocol ESEverstakeListPresentationLogic {
 
 class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
     
-    weak var viewController: EverstakeListDisplayLogic?
+    weak var viewController: ESEverstakeListDisplayLogic?
     
     func updateWith(coins: [String: ESEverstakeList.Coin],
                     stakes: [String: ESEverstakeList.Stake]) {

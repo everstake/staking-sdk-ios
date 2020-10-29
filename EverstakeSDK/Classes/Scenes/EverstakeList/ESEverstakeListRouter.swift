@@ -7,17 +7,17 @@
 
 import UIKit
 
-@objc protocol EverstakeListRoutingLogic {
+@objc protocol ESEverstakeListRoutingLogic {
     //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
-protocol EverstakeListDataPassing {
-    var dataStore: EverstakeListDataStore? { get }
+protocol ESEverstakeListDataPassing {
+    var dataStore: ESEverstakeListDataStore? { get }
 }
 
-class EverstakeListRouter: NSObject, EverstakeListRoutingLogic, EverstakeListDataPassing {
-    weak var viewController: EverstakeListViewController?
-    var dataStore: EverstakeListDataStore?
+class ESEverstakeListRouter: NSObject, ESEverstakeListRoutingLogic, ESEverstakeListDataPassing {
+    weak var viewController: ESEverstakeListViewController?
+    var dataStore: ESEverstakeListDataStore?
 
     // MARK: Routing
 

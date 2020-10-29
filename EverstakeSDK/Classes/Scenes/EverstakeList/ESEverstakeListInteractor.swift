@@ -7,31 +7,31 @@
 
 import UIKit
 
-protocol EverstakeListBusinessLogic {
+protocol ESEverstakeListBusinessLogic {
     func loadDataList()
 }
 
-protocol EverstakeListDataStore {
-    var coins: [EverstakeList.Coin]? { get set }
-    var stakes: [EverstakeList.Stake]? { get set }
+protocol ESEverstakeListDataStore {
+    var coins: [ESEverstakeList.Coin]? { get set }
+    var stakes: [ESEverstakeList.Stake]? { get set }
 }
 
-class EverstakeListInteractor: EverstakeListBusinessLogic, EverstakeListDataStore {
+class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDataStore {
     
-    var coins: [EverstakeList.Coin]?
-    var stakes: [EverstakeList.Stake]?
+    var coins: [ESEverstakeList.Coin]?
+    var stakes: [ESEverstakeList.Stake]?
     
-    var presenter: EverstakeListPresentationLogic?
-    var worker = EverstakeListWorker()
+    var presenter: ESEverstakeListPresentationLogic?
+    var worker = ESEverstakeListWorker()
     
     func loadDataList() {
         worker.loadCoinList(successWith: { data in
-            self.coins = ESUtilities.decode([EverstakeList.Coin].self, from: data)
+            self.coins = ESUtilities.decode([ESEverstakeList.Coin].self, from: data)
             self.completedDataLoad()
         })
         
         worker.loadStakeList(successWith: { data in
-            self.stakes = ESUtilities.decode([EverstakeList.Stake].self, from: data)
+            self.stakes = ESUtilities.decode([ESEverstakeList.Stake].self, from: data)
             self.completedDataLoad()
         })
     }
@@ -48,7 +48,7 @@ class EverstakeListInteractor: EverstakeListBusinessLogic, EverstakeListDataStor
         
         let stakesMap = stakes?.reduce(into: [:]) { result, model in
             result[model.coinId!] = model
-        } ?? [String: EverstakeList.Stake]()
+        } ?? [String: ESEverstakeList.Stake]()
         
         presenter?.updateWith(coins: coinsMap, stakes: stakesMap)
     }

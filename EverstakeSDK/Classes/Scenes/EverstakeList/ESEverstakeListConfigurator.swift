@@ -7,16 +7,16 @@
 
 import Foundation
 
-class EverstakeListConfigurator {
+class ESEverstakeListConfigurator {
     
     static func setup() -> UIViewController {
         
-        let viewController = EverstakeListViewController(nibName: "EverstakeListViewController",
-                                                         bundle: ESUtilities.shared.bundle)
+        let viewController = ESEverstakeListViewController(nibName: "ESEverstakeListViewController",
+                                                           bundle: ESUtilities.shared.bundle)
         
-        let interactor = EverstakeListInteractor()
-        let presenter = EverstakeListPresenter()
-        let router = EverstakeListRouter()
+        let interactor = ESEverstakeListInteractor()
+        let presenter = ESEverstakeListPresenter()
+        let router = ESEverstakeListRouter()
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter

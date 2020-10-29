@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EverstakeListWorker {
+class ESEverstakeListWorker {
     
     struct Constants {
         static let coinList = "coin"
