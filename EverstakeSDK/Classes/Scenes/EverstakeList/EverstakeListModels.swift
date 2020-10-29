@@ -22,15 +22,32 @@ enum EverstakeList {
         let iconUrl: URL?
         let apr: Int?
         let comingSoon: Bool
-        let amountToClaim: String?
+        let amount: Double?
+        let symbol: String?
+        
+        var displayApr: String {
+           return "\(apr ?? 0)%"
+        }
+        
+        var displayAmount: String {
+            if let amount = amount,
+               let symbol = symbol,
+               amount > 0 {
+                return "\(amount) " + symbol
+            } else {
+                return ""
+            }
+        }
         
         init(coin: Coin, stake: Stake?) {
             title = coin.name
             iconUrl = coin.iconUrl
             apr = coin.apr
             comingSoon = coin.isActive ?? true
-            amountToClaim = stake?.amountToClaim
+            symbol = coin.symbol
+            amount = stake?.amount
         }
+        
     }
     
     
@@ -70,12 +87,12 @@ enum EverstakeList {
         let iconUrl: URL?
         let apr: Int?
         let isActive: Bool?
+        let symbol: String?
 
 //        let precision: Int?
 //        let order: Int?
 //        let yieldInterval: Int?
 //        let yieldPercent: String?
-//        let symbol: String?
 //        let needsClaiming: Bool?
 //        let intervalStake: Int?
 //        let intervalUnstake: Int?

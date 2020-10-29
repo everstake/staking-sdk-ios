@@ -14,6 +14,7 @@ class ESCoinTableViewCell: UITableViewCell {
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var disclosureImageView: UIImageView!
     @IBOutlet weak var coinContentView: UIView!
+    @IBOutlet weak var steakedLabel: UILabel!
     @IBOutlet weak var separatorViewHeightConstraint: NSLayoutConstraint!
     
     public override func awakeFromNib() {

@@ -78,7 +78,8 @@ class EverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableV
         let coin = itemsFor(indexPath.section)[indexPath.row]
         cell.logoImageView.kf.setImage(with: coin.iconUrl)
         cell.titleLabel.text = coin.title
-        cell.subTitleLabel.text = "\(coin.apr ?? 0)%"
+        cell.subTitleLabel.text = coin.displayApr
+        cell.steakedLabel.text = coin.displayAmount
         cell.coinContentView.alpha = coin.comingSoon ? 0 : 0.7
         
         return cell
