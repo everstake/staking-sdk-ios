@@ -24,6 +24,7 @@ enum EverstakeList {
         let comingSoon: Bool
         let amount: Double?
         let symbol: String?
+        let order: Int
         
         var displayApr: String {
            return "\(apr ?? 0)%"
@@ -45,6 +46,7 @@ enum EverstakeList {
             apr = coin.apr
             comingSoon = coin.isActive ?? true
             symbol = coin.symbol
+            order = coin.order ?? 0
             amount = stake?.amount
         }
         
@@ -88,9 +90,9 @@ enum EverstakeList {
         let apr: Int?
         let isActive: Bool?
         let symbol: String?
+        let order: Int?
 
 //        let precision: Int?
-//        let order: Int?
 //        let yieldInterval: Int?
 //        let yieldPercent: String?
 //        let needsClaiming: Bool?

@@ -19,7 +19,11 @@ class EverstakeListPresenter: EverstakeListPresentationLogic {
     func updateWith(coins: [String: EverstakeList.Coin],
                     stakes: [String: EverstakeList.Stake]) {
                   
-        let viewModel = convertToViewModel(coins: coins, stakes: stakes)
+        var viewModel = convertToViewModel(coins: coins, stakes: stakes)
+        
+        viewModel.readyToStakeList.sort{ $0.order > $1.order }
+        viewModel.steakedList.sort{ $0.order > $1.order }
+        
         viewController?.updateWith(viewModel: viewModel)
     }
     
