@@ -10,10 +10,13 @@ import UIKit
 class ESReadyToStakeHeader: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var separatorViewHeightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        separatorViewHeightConstraint.constant = 0.5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

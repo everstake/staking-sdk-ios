@@ -43,7 +43,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gva-3V-VjP" userLabel="separator">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gva-3V-VjP" userLabel="Top separator">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                         <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
@@ -73,7 +73,7 @@
                 <outlet property="coinContentView" destination="Iva-dH-Z1h" id="Hie-dA-C3C"/>
                 <outlet property="disclosureImageView" destination="hhM-fj-Sfl" id="Ny4-Qw-Jha"/>
                 <outlet property="logoImageView" destination="Yza-F3-jCa" id="JLi-J6-Pu1"/>
-                <outlet property="separatorViewHeightConstraint" destination="PW8-Cw-G2M" id="UDh-el-E87"/>
+                <outlet property="separatorViewHeightConstraint" destination="PW8-Cw-G2M" id="Qfd-cb-Xsw"/>
                 <outlet property="subTitleLabel" destination="6PP-vs-qDb" id="6nb-gW-wr8"/>
                 <outlet property="titleLabel" destination="RHj-Jw-lRp" id="y5X-yu-0lG"/>
             </connections>

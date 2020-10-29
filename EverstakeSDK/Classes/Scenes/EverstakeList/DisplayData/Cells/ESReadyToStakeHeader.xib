@@ -17,6 +17,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1J-cM-yM9" userLabel="Separator View">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Fgr-HS-v2l"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="READY TO STAKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cy9-Nu-x8B">
                         <rect key="frame" x="16" y="14" width="107.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -27,14 +34,19 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Cy9-Nu-x8B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="YJc-xN-KkO"/>
+                    <constraint firstItem="x1J-cM-yM9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ysr-y1-gaO"/>
                     <constraint firstItem="Cy9-Nu-x8B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="gY5-fQ-TKT"/>
+                    <constraint firstItem="x1J-cM-yM9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pY3-na-hmf"/>
+                    <constraint firstAttribute="trailing" secondItem="x1J-cM-yM9" secondAttribute="trailing" id="xuo-IH-sIS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="separatorView" destination="x1J-cM-yM9" id="6fc-6V-uIj"/>
+                <outlet property="separatorViewHeightConstraint" destination="Fgr-HS-v2l" id="RLM-AS-zve"/>
                 <outlet property="titleLabel" destination="Cy9-Nu-x8B" id="m8V-od-CLi"/>
             </connections>
-            <point key="canvasLocation" x="46" y="114"/>
+            <point key="canvasLocation" x="44.927536231884062" y="113.83928571428571"/>
         </tableViewCell>
     </objects>
 </document>

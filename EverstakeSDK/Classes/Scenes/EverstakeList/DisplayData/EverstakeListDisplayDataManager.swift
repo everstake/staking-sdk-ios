@@ -93,6 +93,7 @@ class EverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableCell(withIdentifier: Constants.readyToStakeHeader) as! ESReadyToStakeHeader
         header.titleLabel.text = titleFor(section)
+        header.separatorView.isHidden = (section == 0)
         return header.contentView
     }
     
