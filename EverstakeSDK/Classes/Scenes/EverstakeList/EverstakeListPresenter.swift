@@ -21,10 +21,19 @@ class EverstakeListPresenter: EverstakeListPresentationLogic {
                   
         var viewModel = convertToViewModel(coins: coins, stakes: stakes)
         
-        viewModel.readyToStakeList.sort{ $0.order > $1.order }
-        viewModel.steakedList.sort{ $0.order > $1.order }
+        viewModel.readyToStakeList.sort(by: sortLogic)
+        viewModel.steakedList.sort(by: sortLogic)
         
         viewController?.updateWith(viewModel: viewModel)
+    }
+    
+    private func sortLogic(this: EverstakeList.CoinModel,
+                        that: EverstakeList.CoinModel) -> Bool {
+        if (this.order == that.order) {
+            return this.title > that.title
+        } else {
+            return this.order > that.order
+        }
     }
     
 //MARK: Private

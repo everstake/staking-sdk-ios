@@ -18,7 +18,7 @@ enum EverstakeList {
     
     struct CoinModel {
         
-        let title: String?
+        let title: String
         let iconUrl: URL?
         let apr: Int?
         let comingSoon: Bool
@@ -41,7 +41,7 @@ enum EverstakeList {
         }
         
         init(coin: Coin, stake: Stake?) {
-            title = coin.name
+            title = coin.name ?? ""
             iconUrl = coin.iconUrl
             apr = coin.apr
             comingSoon = coin.isActive ?? true
