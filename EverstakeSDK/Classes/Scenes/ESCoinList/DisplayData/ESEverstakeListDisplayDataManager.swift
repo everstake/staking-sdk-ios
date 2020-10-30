@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol ESEverstakeListDisplayDataManagerDelegate {
-    func didSelected(_ coin: ESEverstakeList.CoinModel)
+    func didSelected(_ coin: ESEverstakeList.Coin)
 }
 
 class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITableViewDelegate {
@@ -49,7 +49,7 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
         }
     }
     
-    private func itemsFor(_ section: Int) -> [ESEverstakeList.CoinModel] {
+    private func itemsFor(_ section: Int) -> [ESEverstakeList.Coin] {
         switch sectionTypeFor(section) {
         case .staked:
             return viewModel.steakedList

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Kingfisher
 
 class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UITableViewDelegate {
     
@@ -30,10 +31,19 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.mainCoinDetails)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.mainCoinDetails) as! ESStakeCoinDetailsMainCell
+        
+        cell.titleLabel.text = viewModel.title
+        cell.logoImageView.kf.setImage(with: viewModel.iconURL)
+        cell.aprLabel.text = viewModel.displayApr
+        
+        
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 164
+    }
     
 //MARK: Setup
     

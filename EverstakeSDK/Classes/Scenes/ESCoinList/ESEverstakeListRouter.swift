@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ESEverstakeListRoutingLogic {
-    func routeToStakeCoinDetails(_ coin: ESEverstakeList.CoinModel)
+    func routeToStakeCoinDetails(_ model: ESSharedModel.Combined)
 }
 
 class ESEverstakeListRouter: NSObject, ESEverstakeListRoutingLogic {
@@ -17,8 +17,8 @@ class ESEverstakeListRouter: NSObject, ESEverstakeListRoutingLogic {
 
     // MARK: Routing
 
-    func routeToStakeCoinDetails(_ coin: ESEverstakeList.CoinModel) {
-        let detailsViewController = ESStakingCoinDetailsConfigurator.viewControllerWith(coin)
+    func routeToStakeCoinDetails(_ model: ESSharedModel.Combined) {
+        let detailsViewController = ESStakingCoinDetailsConfigurator.viewControllerWith(model)
         viewController?.navigationController?.pushViewController(detailsViewController,
                                                                  animated: true)
     }

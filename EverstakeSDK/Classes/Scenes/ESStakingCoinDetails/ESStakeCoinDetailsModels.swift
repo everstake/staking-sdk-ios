@@ -13,16 +13,21 @@
 import UIKit
 
 enum ESStakeCoinDetails {
-
-// MARK: Use cases
   
-//        struct Request { }
-//        struct Response { }
-        struct ViewModel {
-            
-            var title: String!
-            
-            
-            
+    struct ViewModel {
+        
+        let title: String!
+        let iconURL: URL!
+        let apr: Int?
+        
+        init(model: ESSharedModel.Combined) {
+            title = model.coin.name
+            iconURL = model.coin.iconUrl
+            apr = model.coin.apr
         }
+        
+        var displayApr: String {
+           return "\(apr ?? 0)%"
+        }
+    }
 }

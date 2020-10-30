@@ -25,16 +25,16 @@ class ESStakeCoinDetailsInteractor: ESStakeCoinDetailsBusinessLogic, ESStakeCoin
     var presenter: ESStakeCoinDetailsPresentationLogic?
     var worker: ESStakeCoinDetailsWorker?
     
-    var coin: ESEverstakeList.CoinModel!
+    var model: ESSharedModel.Combined!
     
-    init(_ coin: ESEverstakeList.CoinModel) {
-        self.coin = coin
+    init(_ model: ESSharedModel.Combined) {
+        self.model = model
     }
     
 // MARK: ESStakeCoinDetailsBusinessLogic
   
     func getDisplayData() {
-        presenter?.present(coin)
+        presenter?.present(model)
     }
     
 // MARK: ESStakeCoinDetailsDataStore

@@ -8,16 +8,17 @@
 import UIKit
 
 protocol ESEverstakeListPresentationLogic {
-    func updateWith(coins: [String: ESEverstakeList.Response.Coin],
-                    stakes: [String: ESEverstakeList.Response.Stake])
+    func updateWith(coins: [String: ESSharedModel.Coin],
+                    stakes: [String: ESSharedModel.Stake])
+    func preparedShared(model: ESSharedModel.Combined, action: ESEverstakeList.Action)
 }
 
 class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
     
     weak var viewController: ESEverstakeListDisplayLogic?
     
-    func updateWith(coins: [String: ESEverstakeList.Response.Coin],
-                    stakes: [String: ESEverstakeList.Response.Stake]) {
+    func updateWith(coins: [String: ESSharedModel.Coin],
+                    stakes: [String: ESSharedModel.Stake]) {
                   
         var viewModel = convertToViewModel(coins: coins, stakes: stakes)
         
@@ -27,8 +28,12 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
         viewController?.updateWith(viewModel: viewModel)
     }
     
-    private func sortLogic(this: ESEverstakeList.CoinModel,
-                        that: ESEverstakeList.CoinModel) -> Bool {
+    func preparedShared(model: ESSharedModel.Combined, action: ESEverstakeList.Action) {
+        viewController?.preparedShared(model, action: action)
+    }
+    
+    private func sortLogic(this: ESEverstakeList.Coin,
+                        that: ESEverstakeList.Coin) -> Bool {
         if (this.order == that.order) {
             return this.title > that.title
         } else {
@@ -38,11 +43,11 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
     
 //MARK: Private
     
-    private func convertToViewModel(coins: [String: ESEverstakeList.Response.Coin],
-                                    stakes: [String: ESEverstakeList.Response.Stake]) -> ESEverstakeList.ViewModel {
+    private func convertToViewModel(coins: [String: ESSharedModel.Coin],
+                                    stakes: [String: ESSharedModel.Stake]) -> ESEverstakeList.ViewModel {
         
-        var result = ([ESEverstakeList.CoinModel](),
-                      [ESEverstakeList.CoinModel]())
+        var result = ([ESEverstakeList.Coin](),
+                      [ESEverstakeList.Coin]())
                 
         for key in coins.keys {
             guard let coin = coins[key] else {
@@ -50,7 +55,7 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
             }
             
             let stake = stakes[key]
-            let model = ESEverstakeList.CoinModel(coin: coin, stake: stake)
+            let model = ESEverstakeList.Coin(coin: coin, stake: stake)
             
             if let s = stake, s.amount > 0 {
                 result.0.append(model)

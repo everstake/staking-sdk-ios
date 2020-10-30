@@ -10,10 +10,10 @@ import UIKit
 
 class ESStakingCoinDetailsConfigurator {
        
-    public static func viewControllerWith(_ coin: ESEverstakeList.CoinModel) -> UIViewController {
+    public static func viewControllerWith(_ model: ESSharedModel.Combined) -> UIViewController {
         let viewController = ESStakeCoinDetailsViewController(nibName: "ESStakeCoinDetailsViewController",
                                                               bundle: ESUtilities.shared.bundle)
-        let interactor = ESStakeCoinDetailsInteractor(coin)
+        let interactor = ESStakeCoinDetailsInteractor(model)
         let presenter = ESStakeCoinDetailsPresenter()
         let router = ESStakeCoinDetailsRouter()
         viewController.interactor = interactor

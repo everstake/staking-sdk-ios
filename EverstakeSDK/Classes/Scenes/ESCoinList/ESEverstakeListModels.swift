@@ -8,16 +8,17 @@
 import UIKit
 
 enum ESEverstakeList {
-        
-//MARK: - UI Models
+    
+//MARK: UI Models
     
     struct ViewModel {
-        var readyToStakeList = [CoinModel]()
-        var steakedList = [CoinModel]()
+        var readyToStakeList = [Coin]()
+        var steakedList = [Coin]()
     }
     
-    struct CoinModel {
+    struct Coin {
         
+        let id: String!
         let title: String
         let iconUrl: URL?
         let apr: Int?
@@ -40,7 +41,8 @@ enum ESEverstakeList {
             }
         }
         
-        init(coin: Response.Coin, stake: Response.Stake?) {
+        init(coin: ESSharedModel.Coin, stake: ESSharedModel.Stake?) {
+            id = coin.id
             title = coin.name ?? ""
             iconUrl = coin.iconUrl
             apr = coin.apr
@@ -52,67 +54,10 @@ enum ESEverstakeList {
         
     }
     
-    
-//MARK: - Server Models
-    
-    struct Response {
-        
-        struct Stake: Codable {
-            
-            let _amount: String?
-            let coinId: String?
-            let amountToClaim: String?
-            
-    //        let validator: Validator?
-    //
-    //        struct Validator: Codable {
-    //            let id: String?
-    //            let validatorName: String?
-    //            let fee: String?
-    //            let isReliable: Bool?
-    //        }
-            
-            enum CodingKeys: String, CodingKey {
-                case _amount = "amount"
-                case coinId
-                case amountToClaim
-            }
-            
-            var amount: Double {
-                return Double(_amount ?? "") ?? 0
-            }
-            
-        }
-        
-        struct Coin: Codable {
-            
-            let id: String?
-            let name: String?
-            let iconUrl: URL?
-            let apr: Int?
-            let isActive: Bool?
-            let symbol: String?
-            let order: Int?
+//MARK: Action
 
-    //        let precision: Int?
-    //        let yieldInterval: Int?
-    //        let yieldPercent: String?
-    //        let needsClaiming: Bool?
-    //        let intervalStake: Int?
-    //        let intervalUnstake: Int?
-    //        let toUsd: String?
-    //        let about: String?
-    //        let aboutUrl: URL?
-    //        let fee: Fee?
-            
-    //        struct Fee: Codable {
-    //            let min: Int?
-    //            let max: Int?
-    //        }
-            
-        }
-        
+    enum Action  {
+        case openCoinDetail
     }
-    
-    
+
 }

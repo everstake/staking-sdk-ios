@@ -10,10 +10,12 @@ import UIKit
 protocol ESEverstakeListDisplayLogic: class {
     func updateWith(viewModel: ESEverstakeList.ViewModel)
     func unableToLoadData()
+    func preparedShared(_ model: ESSharedModel.Combined, action: ESEverstakeList.Action)
 }
 
 class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLogic,
                                      ESEverstakeListDisplayDataManagerDelegate {
+        
     var interactor: ESEverstakeListBusinessLogic?
     var router: (NSObjectProtocol & ESEverstakeListRoutingLogic)?
   
@@ -58,8 +60,15 @@ class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLog
     
 //MARK: ESEverstakeListDisplayDataManagerDelegate
     
-    func didSelected(_ coin: ESEverstakeList.CoinModel) {
-        router?.routeToStakeCoinDetails(coin)
+    func didSelected(_ coin: ESEverstakeList.Coin) {
+       interactor?.getCoinStakeWith(coin.id, with: .openCoinDetail)
+    }
+    
+    func preparedShared(_ model: ESSharedModel.Combined, action: ESEverstakeList.Action) {
+        switch action {
+        case .openCoinDetail:
+            router?.routeToStakeCoinDetails(model)
+        }
     }
     
 }

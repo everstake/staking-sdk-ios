@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ESStakeCoinDetailsPresentationLogic {
-    func present(_ coin: ESEverstakeList.CoinModel)
+    func present(_ coin: ESSharedModel.Combined)
 }
 
 class ESStakeCoinDetailsPresenter: ESStakeCoinDetailsPresentationLogic {
@@ -22,11 +22,8 @@ class ESStakeCoinDetailsPresenter: ESStakeCoinDetailsPresentationLogic {
   
 // MARK: ESStakeCoinDetailsPresentationLogic
   
-    func present(_ coin: ESEverstakeList.CoinModel) {
-        
-        var viewModel = ESStakeCoinDetails.ViewModel()
-        viewModel.title = coin.title
-        
+    func present(_ model: ESSharedModel.Combined) {
+        let viewModel = ESStakeCoinDetails.ViewModel(model: model)
         viewController?.updateWith(viewModel)
     }
 
