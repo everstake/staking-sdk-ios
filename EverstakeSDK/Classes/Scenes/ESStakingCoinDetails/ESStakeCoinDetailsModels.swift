@@ -18,16 +18,30 @@ enum ESStakeCoinDetails {
         
         let title: String!
         let iconURL: URL!
-        let apr: Int?
+        let apr: String!
+        let serviceFeeMin: String!
+        let serviceFeeMax: String!
+        let about: String!
         
         init(model: ESSharedModel.Combined) {
             title = model.coin.name
             iconURL = model.coin.iconUrl
             apr = model.coin.apr
+            serviceFeeMin = model.coin.fee?.min ?? "0"
+            serviceFeeMax = model.coin.fee?.max ?? "0"
+            about = model.coin.about ?? ""
         }
         
         var displayApr: String {
-           return "\(apr ?? 0)%"
+            return apr + "%"
+        }
+        
+        var displayServiceFee: String {
+            if (serviceFeeMin == serviceFeeMax) {
+                return serviceFeeMin + "%"
+            } else {
+                return serviceFeeMin + "-" + serviceFeeMax + "%"
+            }
         }
     }
 }

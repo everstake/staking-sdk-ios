@@ -27,22 +27,49 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
 //MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.mainCoinDetails) as! ESStakeCoinDetailsMainCell
         
-        cell.titleLabel.text = viewModel.title
-        cell.logoImageView.kf.setImage(with: viewModel.iconURL)
-        cell.aprLabel.text = viewModel.displayApr
-        
+        let reuseIdentifier = CellType(rawValue: indexPath.row)!.reuseIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
+        setup(cell)
         
         return cell
     }
     
+    private func setup(_ cell: UITableViewCell) {
+        if let cell = cell as? ESStakeCoinDetailsMainCell {
+            cell.titleLabel.text = viewModel.title
+            cell.logoImageView.kf.setImage(with: viewModel.iconURL)
+            cell.aprLabel.text = viewModel.displayApr
+            cell.serviceFeeLabel.text = viewModel.displayServiceFee
+        } else if let cell = cell as? ESStakeCoinDetailsAboutCell  {
+            cell.aboutCoinTextView.text = viewModel.about
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 164
+        switch CellType(rawValue: indexPath.row) {
+        case .main:
+            return Constants.Height.mainCell
+        case .about:
+            return max(tableView.bounds.height - Constants.Height.mainCell, calculateHeightFor(type: .about))
+        default:
+            return 0
+        }
+    }
+    
+    private func calculateHeightFor(type: CellType) -> CGFloat {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: type.reuseIdentifier)!
+//        setup(cell)
+//        cell.setNeedsLayout()
+//        cell.layoutIfNeeded()
+//        let height = cell.contentView.systemLayoutSizeFitting(UILayoutFittingExpandedSize).height
+        
+        //TODO: Implement
+        return 300
     }
     
 //MARK: Setup
@@ -53,11 +80,37 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
 
         tableView.register(UINib(nibName: "ESStakeCoinDetailsMainCell",
                                  bundle: ESUtilities.shared.bundle),
-                           forCellReuseIdentifier: Constants.mainCoinDetails)
+                           forCellReuseIdentifier: Constants.ReuseIdentifier.mainCell)
+        
+        tableView.register(UINib(nibName: "ESStakeCoinDetailsAboutCell",
+                                 bundle: ESUtilities.shared.bundle),
+                           forCellReuseIdentifier: Constants.ReuseIdentifier.aboutCell)
+        
     }
     
     private struct Constants {
-        static let mainCoinDetails = "mainCoinDetails"
+        
+        struct ReuseIdentifier {
+            static let mainCell = "mainCell"
+            static let aboutCell = "aboutCell"
+        }
+        
+        struct Height {
+            static let mainCell = 164 as CGFloat
+        }
+
     }
     
+    private enum CellType: Int {
+        case main, about
+        
+        var reuseIdentifier: String {
+            switch self {
+            case .main:
+                return Constants.ReuseIdentifier.mainCell
+            case .about:
+                return Constants.ReuseIdentifier.aboutCell
+            }
+        }
+    }
 }

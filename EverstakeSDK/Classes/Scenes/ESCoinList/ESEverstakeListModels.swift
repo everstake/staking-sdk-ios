@@ -21,14 +21,14 @@ enum ESEverstakeList {
         let id: String!
         let title: String
         let iconUrl: URL?
-        let apr: Int?
+        let apr: String?
         let comingSoon: Bool
         let amount: Double?
         let symbol: String?
         let order: Int
         
         var displayApr: String {
-           return "\(apr ?? 0)%"
+           return (apr ?? "0") + "%"
         }
         
         var displayAmount: String {
@@ -48,7 +48,7 @@ enum ESEverstakeList {
             apr = coin.apr
             comingSoon = coin.isActive ?? true
             symbol = coin.symbol
-            order = coin.order ?? 0
+            order = Int(coin.order ?? "0") ?? 0
             amount = stake?.amount
         }
         
