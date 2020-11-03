@@ -10,10 +10,11 @@ import UIKit
 class ESStakeCoinDetailsAboutCell: UITableViewCell {
     
     @IBOutlet weak var aboutCoinTextView: UITextView!
+    @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        separatorHeightConstraint.constant = 0.5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

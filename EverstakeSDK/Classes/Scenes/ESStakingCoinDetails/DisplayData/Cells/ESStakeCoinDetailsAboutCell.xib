@@ -27,16 +27,26 @@
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzo-pq-gZS">
                         <rect key="frame" x="12" y="51" width="296" height="287"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOl-aO-3gv" userLabel="separator">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="iCk-FF-jIh"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="IOl-aO-3gv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9qT-wx-JNl"/>
                     <constraint firstItem="Nzo-pq-gZS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="DJO-un-plX"/>
                     <constraint firstItem="eiu-92-gPB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="S6C-az-4Wh"/>
                     <constraint firstAttribute="bottom" secondItem="Nzo-pq-gZS" secondAttribute="bottom" constant="10" id="SqE-vJ-oAJ"/>
+                    <constraint firstAttribute="trailing" secondItem="IOl-aO-3gv" secondAttribute="trailing" id="brd-zW-STt"/>
+                    <constraint firstItem="IOl-aO-3gv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dM2-jn-CK8"/>
                     <constraint firstItem="eiu-92-gPB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="gao-DD-2Qz"/>
                     <constraint firstAttribute="trailing" secondItem="Nzo-pq-gZS" secondAttribute="trailing" constant="12" id="heg-Q8-xuW"/>
                     <constraint firstItem="Nzo-pq-gZS" firstAttribute="top" secondItem="eiu-92-gPB" secondAttribute="bottom" constant="10" id="m33-sN-IS0"/>
@@ -45,6 +55,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="aboutCoinTextView" destination="Nzo-pq-gZS" id="ZPl-mv-uT6"/>
+                <outlet property="separatorHeightConstraint" destination="iCk-FF-jIh" id="Xgc-rZ-g1C"/>
             </connections>
             <point key="canvasLocation" x="128.98550724637681" y="163.39285714285714"/>
         </tableViewCell>

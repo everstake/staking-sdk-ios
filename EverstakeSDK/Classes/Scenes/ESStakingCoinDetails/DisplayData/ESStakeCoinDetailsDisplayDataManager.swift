@@ -27,7 +27,7 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
 //MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,8 +45,11 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             cell.logoImageView.kf.setImage(with: viewModel.iconURL)
             cell.aprLabel.text = viewModel.displayApr
             cell.serviceFeeLabel.text = viewModel.displayServiceFee
+            cell.delegate = self
         } else if let cell = cell as? ESStakeCoinDetailsAboutCell  {
             cell.aboutCoinTextView.text = viewModel.about
+        } else if let cell = cell as? ESStakeCoinDetailsCalculatorCell {
+            cell.delegate = self
         }
     }
     
@@ -55,21 +58,12 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
         case .main:
             return Constants.Height.mainCell
         case .about:
-            return max(tableView.bounds.height - Constants.Height.mainCell, calculateHeightFor(type: .about))
+            return tableView.bounds.height - Constants.Height.mainCell
+        case .calculator:
+            return Constants.Height.calculatorCell
         default:
             return 0
         }
-    }
-    
-    private func calculateHeightFor(type: CellType) -> CGFloat {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: type.reuseIdentifier)!
-//        setup(cell)
-//        cell.setNeedsLayout()
-//        cell.layoutIfNeeded()
-//        let height = cell.contentView.systemLayoutSizeFitting(UILayoutFittingExpandedSize).height
-        
-        //TODO: Implement
-        return 300
     }
     
 //MARK: Setup
@@ -77,6 +71,7 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+//        tableView.delaysContentTouches = false
 
         tableView.register(UINib(nibName: "ESStakeCoinDetailsMainCell",
                                  bundle: ESUtilities.shared.bundle),
@@ -86,6 +81,11 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
                                  bundle: ESUtilities.shared.bundle),
                            forCellReuseIdentifier: Constants.ReuseIdentifier.aboutCell)
         
+        tableView.register(UINib(nibName: "ESStakeCoinDetailsCalculatorCell",
+                                 bundle: ESUtilities.shared.bundle),
+                           forCellReuseIdentifier: Constants.ReuseIdentifier.calculatorCell)
+        
+        
     }
     
     private struct Constants {
@@ -93,16 +93,18 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
         struct ReuseIdentifier {
             static let mainCell = "mainCell"
             static let aboutCell = "aboutCell"
+            static let calculatorCell = "calculatorCell"
         }
         
         struct Height {
             static let mainCell = 164 as CGFloat
+            static let calculatorCell = 64 as CGFloat
         }
 
     }
     
     private enum CellType: Int {
-        case main, about
+        case main, calculator, about
         
         var reuseIdentifier: String {
             switch self {
@@ -110,7 +112,22 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
                 return Constants.ReuseIdentifier.mainCell
             case .about:
                 return Constants.ReuseIdentifier.aboutCell
+            case .calculator:
+                return Constants.ReuseIdentifier.calculatorCell
             }
         }
     }
 }
+
+extension ESStakeCoinDetailsDisplayDataManager: ESStakeCoinDetailsCalculatorCellDelegate,
+                                                ESStakeCoinDetailsMainCellDelegate {
+    func stakeButtonPressed() {
+        //TODO: Implement
+    }
+    
+    func openCalculatorPressed() {
+        //TODO: Implement
+    }
+    
+}
+
