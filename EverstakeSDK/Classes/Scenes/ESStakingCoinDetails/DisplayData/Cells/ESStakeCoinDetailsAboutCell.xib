@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="aboutCell" rowHeight="348" id="KGk-i7-Jjw" customClass="ESStakeCoinDetailsAboutCell" customModule="EverstakeSDK" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="348"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="aboutCell" rowHeight="383" id="KGk-i7-Jjw" customClass="ESStakeCoinDetailsAboutCell" customModule="EverstakeSDK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="383"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="348"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="383"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiu-92-gPB">
@@ -24,12 +24,12 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzo-pq-gZS">
-                        <rect key="frame" x="12" y="51" width="296" height="287"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzo-pq-gZS">
+                        <rect key="frame" x="12" y="51" width="296" height="320.5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <color key="textColor" systemColor="labelColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOl-aO-3gv" userLabel="separator">
@@ -44,7 +44,7 @@
                     <constraint firstItem="IOl-aO-3gv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9qT-wx-JNl"/>
                     <constraint firstItem="Nzo-pq-gZS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="DJO-un-plX"/>
                     <constraint firstItem="eiu-92-gPB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="S6C-az-4Wh"/>
-                    <constraint firstAttribute="bottom" secondItem="Nzo-pq-gZS" secondAttribute="bottom" constant="10" id="SqE-vJ-oAJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Nzo-pq-gZS" secondAttribute="bottom" constant="11.5" id="aXv-Ih-laf"/>
                     <constraint firstAttribute="trailing" secondItem="IOl-aO-3gv" secondAttribute="trailing" id="brd-zW-STt"/>
                     <constraint firstItem="IOl-aO-3gv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dM2-jn-CK8"/>
                     <constraint firstItem="eiu-92-gPB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="gao-DD-2Qz"/>
@@ -57,7 +57,7 @@
                 <outlet property="aboutCoinTextView" destination="Nzo-pq-gZS" id="ZPl-mv-uT6"/>
                 <outlet property="separatorHeightConstraint" destination="iCk-FF-jIh" id="Xgc-rZ-g1C"/>
             </connections>
-            <point key="canvasLocation" x="128.98550724637681" y="163.39285714285714"/>
+            <point key="canvasLocation" x="128.98550724637681" y="175.11160714285714"/>
         </tableViewCell>
     </objects>
     <resources>

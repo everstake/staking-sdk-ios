@@ -22,6 +22,10 @@ enum ESStakeCoinDetails {
         let serviceFeeMin: String!
         let serviceFeeMax: String!
         let about: String!
+        let symbol: String!
+        let amount: Double!
+        let validator: String!
+        let isStaked: Bool!
         
         init(model: ESSharedModel.Combined) {
             title = model.coin.name
@@ -30,10 +34,24 @@ enum ESStakeCoinDetails {
             serviceFeeMin = model.coin.fee?.min ?? "0"
             serviceFeeMax = model.coin.fee?.max ?? "0"
             about = model.coin.about ?? ""
+            symbol = model.coin.symbol ?? ""
+            isStaked = model.stake != nil && model.stake!.amount > 0
+            amount = model.stake?.amount ?? 0
+            validator = model.stake?.validator?.name ?? ""
         }
         
         var displayApr: String {
             return apr + "%"
+        }
+        
+        var displayStakedAmount: String {
+            if let amount = amount,
+               let symbol = symbol,
+               amount > 0 {
+                return "\(amount) " + symbol
+            } else {
+                return ""
+            }
         }
         
         var displayServiceFee: String {
@@ -42,6 +60,23 @@ enum ESStakeCoinDetails {
             } else {
                 return serviceFeeMin + "-" + serviceFeeMax + "%"
             }
+        }
+        
+        var visibleCells: [ESStakeCoinDetailsDisplayDataManager.CellType] {
+            
+            var result = [ESStakeCoinDetailsDisplayDataManager.CellType]()
+            
+            result.append(.main)
+            result.append(.calculator)
+            
+            if isStaked {
+                result.append(.staked)
+            }
+            if !about.isEmpty {
+                result.append(.about)
+            }
+
+            return result
         }
     }
 }

@@ -23,16 +23,17 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             titleLabel.text = viewModel.title
         }
     }
-    
+        
 //MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return viewModel.visibleCells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let reuseIdentifier = CellType(rawValue: indexPath.row)!.reuseIdentifier
+        let cellType = viewModel.visibleCells[indexPath.row]
+        let reuseIdentifier = cellType.reuseIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
         setup(cell)
         
@@ -50,28 +51,22 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             cell.aboutCoinTextView.text = viewModel.about
         } else if let cell = cell as? ESStakeCoinDetailsCalculatorCell {
             cell.delegate = self
+        } else if let cell = cell as? ESStakeCoinDetailsStakedCell {
+            cell.stakedValueLabel.text = viewModel.displayStakedAmount
+            cell.validatorValueLabel.text = viewModel.validator
+            cell.yearlyIncomeValueLabel.text = viewModel.displayApr
+            cell.delegate = self
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch CellType(rawValue: indexPath.row) {
-        case .main:
-            return Constants.Height.mainCell
-        case .about:
-            return tableView.bounds.height - Constants.Height.mainCell
-        case .calculator:
-            return Constants.Height.calculatorCell
-        default:
-            return 0
-        }
-    }
-    
+ 
 //MARK: Setup
     
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.delaysContentTouches = false
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
 
         tableView.register(UINib(nibName: "ESStakeCoinDetailsMainCell",
                                  bundle: ESUtilities.shared.bundle),
@@ -85,42 +80,61 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
                                  bundle: ESUtilities.shared.bundle),
                            forCellReuseIdentifier: Constants.ReuseIdentifier.calculatorCell)
         
-        
+        tableView.register(UINib(nibName: "ESStakeCoinDetailsStakedCell",
+                                 bundle: ESUtilities.shared.bundle),
+                           forCellReuseIdentifier: Constants.ReuseIdentifier.steakedCell)
+
+        tableView.register(UINib(nibName: "ESStakeCoinDetailsClaimCell",
+                                 bundle: ESUtilities.shared.bundle),
+                           forCellReuseIdentifier: Constants.ReuseIdentifier.claimCell)
     }
     
     private struct Constants {
         
         struct ReuseIdentifier {
             static let mainCell = "mainCell"
-            static let aboutCell = "aboutCell"
             static let calculatorCell = "calculatorCell"
+            static let steakedCell = "steakedCell"
+            static let claimCell = "claimCell"
+            static let aboutCell = "aboutCell"
         }
         
         struct Height {
             static let mainCell = 164 as CGFloat
             static let calculatorCell = 64 as CGFloat
+            static let stakedCell = 130 as CGFloat
+            static let claimCell = 100 as CGFloat
         }
 
     }
     
-    private enum CellType: Int {
-        case main, calculator, about
+    enum CellType: Int {
+        case main, calculator, staked, claim, about
         
         var reuseIdentifier: String {
             switch self {
             case .main:
                 return Constants.ReuseIdentifier.mainCell
-            case .about:
-                return Constants.ReuseIdentifier.aboutCell
             case .calculator:
                 return Constants.ReuseIdentifier.calculatorCell
+            case .staked:
+                return Constants.ReuseIdentifier.steakedCell
+            case .claim:
+                return Constants.ReuseIdentifier.claimCell
+            case .about:
+                return Constants.ReuseIdentifier.aboutCell
             }
         }
     }
 }
 
 extension ESStakeCoinDetailsDisplayDataManager: ESStakeCoinDetailsCalculatorCellDelegate,
-                                                ESStakeCoinDetailsMainCellDelegate {
+                                                ESStakeCoinDetailsMainCellDelegate,
+                                                ESStakeCoinDetailsStakedCellDelegate {
+    func unstakeButtonPressed() {
+        //TODO: Implement
+    }
+    
     func stakeButtonPressed() {
         //TODO: Implement
     }

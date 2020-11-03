@@ -13,7 +13,7 @@ struct ESSharedModel {
     
     struct Combined {
         let coin: Coin
-        let stake: Stake
+        let stake: Stake?
     }
             
     struct Stake: Codable {
@@ -22,19 +22,20 @@ struct ESSharedModel {
         let coinId: String?
         let amountToClaim: String?
         
-    //        let validator: Validator?
-    //
-    //        struct Validator: Codable {
-    //            let id: String?
-    //            let validatorName: String?
-    //            let fee: String?
-    //            let isReliable: Bool?
-    //        }
-        
+        let validator: Validator?
+
         enum CodingKeys: String, CodingKey {
             case _amount = "amount"
             case coinId
             case amountToClaim
+            case validator
+        }
+
+        struct Validator: Codable {
+            let id: String?
+            let name: String?
+            let fee: String?
+            let isReliable: Bool?
         }
         
         var amount: Double {
