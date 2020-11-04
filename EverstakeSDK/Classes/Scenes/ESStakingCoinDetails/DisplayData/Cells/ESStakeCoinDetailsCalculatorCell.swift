@@ -8,15 +8,15 @@
 import UIKit
 
 protocol ESStakeCoinDetailsCalculatorCellDelegate {
-    func openCalculatorPressed()
+    func openCalculatorButtonPressed()
 }
 
 class ESStakeCoinDetailsCalculatorCell: UITableViewCell {
 
     var delegate: ESStakeCoinDetailsCalculatorCellDelegate?
     
-    @IBAction func openCalculatorPressed() {
-        delegate?.openCalculatorPressed()
+    @IBAction func openCalculatorButtonPressed() {
+        delegate?.openCalculatorButtonPressed()
     }
     
 }

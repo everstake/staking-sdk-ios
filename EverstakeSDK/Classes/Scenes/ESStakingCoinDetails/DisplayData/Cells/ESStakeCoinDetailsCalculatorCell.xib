@@ -24,7 +24,7 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
-                            <action selector="openCalculatorPressed" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hx9-Wn-WGO"/>
+                            <action selector="openCalculatorButtonPressed" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hx9-Wn-WGO"/>
                         </connections>
                     </button>
                 </subviews>

@@ -24,6 +24,7 @@ enum ESStakeCoinDetails {
         let about: String!
         let symbol: String!
         let amount: Double!
+        let amountToClaim: Double!
         let validator: String!
         let isStaked: Bool!
         
@@ -38,6 +39,7 @@ enum ESStakeCoinDetails {
             isStaked = model.stake != nil && model.stake!.amount > 0
             amount = model.stake?.amount ?? 0
             validator = model.stake?.validator?.name ?? ""
+            amountToClaim = model.stake?.amountToClaim ?? 0
         }
         
         var displayApr: String {
@@ -62,6 +64,16 @@ enum ESStakeCoinDetails {
             }
         }
         
+        var displayAmountToClaim: String {
+            if let amount = amountToClaim,
+               let symbol = symbol,
+               amount > 0 {
+                return "\(amount) " + symbol
+            } else {
+                return ""
+            }
+        }
+        
         var visibleCells: [ESStakeCoinDetailsDisplayDataManager.CellType] {
             
             var result = [ESStakeCoinDetailsDisplayDataManager.CellType]()
@@ -71,6 +83,9 @@ enum ESStakeCoinDetails {
             
             if isStaked {
                 result.append(.staked)
+            }
+            if amountToClaim > 0 {
+                result.append(.claim)
             }
             if !about.isEmpty {
                 result.append(.about)

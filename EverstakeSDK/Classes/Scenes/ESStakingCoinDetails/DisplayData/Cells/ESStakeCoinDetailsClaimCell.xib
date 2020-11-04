@@ -11,14 +11,61 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="claimCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="claimCell" id="KGk-i7-Jjw" customClass="ESStakeCoinDetailsClaimCell" customModule="EverstakeSDK" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yct-y6-Ffa">
+                        <rect key="frame" x="16" y="0.0" width="288" height="42"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="ahb-Ro-37s"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <state key="normal" title="Claim rewards">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="claimButtonPressed" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Mqk-DE-iVT"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available rewards:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jc-68-TC1">
+                        <rect key="frame" x="16" y="54" width="109.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.70185869510475429" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.024 ICX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgt-xW-nCm">
+                        <rect key="frame" x="129.5" y="54" width="61.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Yct-y6-Ffa" secondAttribute="trailing" constant="16" id="6uF-n7-fEs"/>
+                    <constraint firstItem="Yct-y6-Ffa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IUc-c9-3ji"/>
+                    <constraint firstItem="hgt-xW-nCm" firstAttribute="leading" secondItem="6jc-68-TC1" secondAttribute="trailing" constant="4" id="Ke8-eV-Cqm"/>
+                    <constraint firstItem="Yct-y6-Ffa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NC7-Jq-eMJ"/>
+                    <constraint firstAttribute="bottom" secondItem="6jc-68-TC1" secondAttribute="bottom" constant="16" id="SO0-sc-Wo3"/>
+                    <constraint firstItem="6jc-68-TC1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="j6d-Y8-CpI"/>
+                    <constraint firstItem="hgt-xW-nCm" firstAttribute="top" secondItem="Yct-y6-Ffa" secondAttribute="bottom" constant="12" id="ycG-76-Vct"/>
+                    <constraint firstItem="6jc-68-TC1" firstAttribute="top" secondItem="Yct-y6-Ffa" secondAttribute="bottom" constant="12" id="yw2-aa-IO0"/>
+                    <constraint firstAttribute="bottom" secondItem="hgt-xW-nCm" secondAttribute="bottom" constant="16" id="zg8-ap-bcP"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="139" y="99"/>
+            <connections>
+                <outlet property="availableRewardsValueLabel" destination="hgt-xW-nCm" id="m5b-bK-TxO"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="117.85714285714285"/>
         </tableViewCell>
     </objects>
 </document>

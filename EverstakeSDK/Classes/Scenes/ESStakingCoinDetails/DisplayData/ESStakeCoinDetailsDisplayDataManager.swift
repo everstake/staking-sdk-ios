@@ -56,6 +56,9 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             cell.validatorValueLabel.text = viewModel.validator
             cell.yearlyIncomeValueLabel.text = viewModel.displayApr
             cell.delegate = self
+        } else if let cell = cell as? ESStakeCoinDetailsClaimCell {
+            cell.availableRewardsValueLabel.text = viewModel.displayAmountToClaim
+            cell.delegate = self
         }
     }
  
@@ -130,7 +133,8 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
 
 extension ESStakeCoinDetailsDisplayDataManager: ESStakeCoinDetailsCalculatorCellDelegate,
                                                 ESStakeCoinDetailsMainCellDelegate,
-                                                ESStakeCoinDetailsStakedCellDelegate {
+                                                ESStakeCoinDetailsStakedCellDelegate,
+                                                ESStakeCoinDetailsClaimCellDelegate {
     func unstakeButtonPressed() {
         //TODO: Implement
     }
@@ -139,9 +143,12 @@ extension ESStakeCoinDetailsDisplayDataManager: ESStakeCoinDetailsCalculatorCell
         //TODO: Implement
     }
     
-    func openCalculatorPressed() {
+    func openCalculatorButtonPressed() {
         //TODO: Implement
     }
     
+    func claimButtonPressed() {
+        //TODO: Implement
+    }
 }
 

@@ -19,15 +19,15 @@ struct ESSharedModel {
     struct Stake: Codable {
         
         let _amount: String?
+        let _amountToClaim: String?
         let coinId: String?
-        let amountToClaim: String?
         
         let validator: Validator?
 
         enum CodingKeys: String, CodingKey {
             case _amount = "amount"
+            case _amountToClaim = "amountToClaim"
             case coinId
-            case amountToClaim
             case validator
         }
 
@@ -40,6 +40,10 @@ struct ESSharedModel {
         
         var amount: Double {
             return Double(_amount ?? "") ?? 0
+        }
+        
+        var amountToClaim: Double {
+            return Double(_amountToClaim ?? "") ?? 0
         }
         
     }
