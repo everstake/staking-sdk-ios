@@ -14,9 +14,12 @@ import UIKit
 
 protocol ESStakeCoinDetailsDisplayLogic: class {
     func updateWith(_ viewModel: ESStakeCoinDetails.ViewModel)
+    func preparedShared(_ model: ESSharedModel.Combined, action: ESStakeCoinDetails.Action)
 }
 
-class ESStakeCoinDetailsViewController: UIViewController, ESStakeCoinDetailsDisplayLogic {
+class ESStakeCoinDetailsViewController: UIViewController,
+                                        ESStakeCoinDetailsDisplayLogic,
+                                        ESStakeCoinDetailsDisplayDataManagerDelegate {
 
     var interactor: ESStakeCoinDetailsBusinessLogic?
     var router: (NSObjectProtocol & ESStakeCoinDetailsRoutingLogic & ESStakeCoinDetailsDataPassing)?
@@ -42,8 +45,10 @@ class ESStakeCoinDetailsViewController: UIViewController, ESStakeCoinDetailsDisp
       
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         displayDataManager.tableView = tableView
         displayDataManager.titleLabel = titleLabel
+        displayDataManager.delegate = self
         
         interactor?.getDisplayData()
     }
@@ -58,5 +63,31 @@ class ESStakeCoinDetailsViewController: UIViewController, ESStakeCoinDetailsDisp
         displayDataManager.viewModel = viewModel
     }
     
+    func preparedShared(_ model: ESSharedModel.Combined, action: ESStakeCoinDetails.Action) {
+        switch action {
+        case .newStake:
+            router?.routeToNewStake(model)
+        }
+    }
+    
+//MARK: - ESStakeCoinDetailsDisplayDataManagerDelegate
+    
+    func unstakeButtonPressed() {
+        //TODO: Implement
+    }
+    
+    func stakeButtonPressed() {
+        interactor?.prepareSharedModelFor(.newStake)
+    }
+    
+    func openCalculatorButtonPressed() {
+        //TODO: Implement
+
+    }
+    
+    func claimButtonPressed() {
+        //TODO: Implement
+
+    }
     
 }

@@ -1,9 +1,11 @@
 PODS:
   - EverstakeSDK (0.1.0):
     - Kingfisher (~> 5.15)
+    - SliderController (~> 1.0)
   - Kingfisher (5.15.0):
     - Kingfisher/Core (= 5.15.0)
   - Kingfisher/Core (5.15.0)
+  - SliderController (1.0.6)
 
 DEPENDENCIES:
   - EverstakeSDK (from `../`)
@@ -11,15 +13,17 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Kingfisher
+    - SliderController
 
 EXTERNAL SOURCES:
   EverstakeSDK:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EverstakeSDK: 820ca9fd908eb7bcc05a25531552403cabec85c7
+  EverstakeSDK: 8d2169c7eaacc416ba2c86e7698a31b17fb7eb45
   Kingfisher: 1acb67597a520c2d0310677e66d6e0af455ef757
+  SliderController: 4b9e8545fefe9770c7470396488cbe9bb2700518
 
 PODFILE CHECKSUM: 7ca35c2b025129a487adcaf21fd4e681f88c5631
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

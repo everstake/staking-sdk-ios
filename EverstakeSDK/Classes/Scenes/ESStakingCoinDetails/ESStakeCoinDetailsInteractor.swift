@@ -13,7 +13,8 @@
 import UIKit
 
 protocol ESStakeCoinDetailsBusinessLogic {
-    func getDisplayData() 
+    func getDisplayData()
+    func prepareSharedModelFor(_ action: ESStakeCoinDetails.Action)
 }
 
 protocol ESStakeCoinDetailsDataStore {
@@ -37,11 +38,8 @@ class ESStakeCoinDetailsInteractor: ESStakeCoinDetailsBusinessLogic, ESStakeCoin
         presenter?.present(model)
     }
     
-// MARK: ESStakeCoinDetailsDataStore
-    
-    func doSomething() {
-//        worker = ESStakeCoinDetailsWorker()
-//        worker?.doSomeWork()
-//
+    func prepareSharedModelFor(_ action: ESStakeCoinDetails.Action) {
+        presenter?.preparedShared(model, action: action)
     }
+    
 }

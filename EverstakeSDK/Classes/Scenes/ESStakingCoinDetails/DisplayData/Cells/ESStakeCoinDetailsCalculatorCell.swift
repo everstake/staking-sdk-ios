@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol ESStakeCoinDetailsCalculatorCellDelegate {
+protocol ESStakeCoinDetailsCalculatorCellDelegate: AnyObject {
     func openCalculatorButtonPressed()
 }
 
 class ESStakeCoinDetailsCalculatorCell: UITableViewCell {
 
-    var delegate: ESStakeCoinDetailsCalculatorCellDelegate?
+    weak var delegate: ESStakeCoinDetailsCalculatorCellDelegate?
     
     @IBAction func openCalculatorButtonPressed() {
         delegate?.openCalculatorButtonPressed()

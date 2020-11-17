@@ -13,25 +13,27 @@
 import UIKit
 
 protocol ESNewStakeBusinessLogic {
-    func doSomething(request: ESNewStake.Something.Request)
+    func loadData()
 }
 
 protocol ESNewStakeDataStore {
-    //var name: String { get set }
+    var model: ESSharedModel.Combined { get set }
 }
 
 class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
+    
     var presenter: ESNewStakePresentationLogic?
     var worker: ESNewStakeWorker?
-    //var name: String = ""
-  
+    
+    var model: ESSharedModel.Combined
+    
+    init(model: ESSharedModel.Combined) {
+        self.model = model
+    }
+
 // MARK: Do something
   
-    func doSomething(request: ESNewStake.Something.Request) {
-        worker = ESNewStakeWorker()
-        worker?.doSomeWork()
-    
-        let response = ESNewStake.Something.Response()
-        presenter?.presentSomething(response: response)
+    func loadData() {
+        presenter?.present(model)
     }
 }

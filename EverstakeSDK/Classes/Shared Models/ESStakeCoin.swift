@@ -58,11 +58,10 @@ struct ESSharedModel {
         let symbol: String?
         let order: String?
         let about: String?
+        let precision: String?
 
         let fee: Fee?
 
-
-    //        let precision: Int?
     //        let yieldInterval: Int?
     //        let yieldPercent: String?
     //        let needsClaiming: Bool?

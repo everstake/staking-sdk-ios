@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol ESStakeCoinDetailsStakedCellDelegate {
+protocol ESStakeCoinDetailsStakedCellDelegate: AnyObject {
     func unstakeButtonPressed()
 }
 
 class ESStakeCoinDetailsStakedCell: UITableViewCell {
 
-    var delegate: ESStakeCoinDetailsStakedCellDelegate?
+    weak var delegate: ESStakeCoinDetailsStakedCellDelegate?
     
     @IBOutlet weak var stakedValueLabel: UILabel!
     @IBOutlet weak var validatorValueLabel: UILabel!

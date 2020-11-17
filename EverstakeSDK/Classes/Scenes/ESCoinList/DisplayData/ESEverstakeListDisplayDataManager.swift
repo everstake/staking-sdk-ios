@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Kingfisher
 
-protocol ESEverstakeListDisplayDataManagerDelegate {
+protocol ESEverstakeListDisplayDataManagerDelegate: AnyObject {
     func didSelected(_ coin: ESEverstakeList.Coin)
 }
 
@@ -32,7 +32,7 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
         }
     }
     
-    var delegate: ESEverstakeListDisplayDataManagerDelegate?
+    weak var delegate: ESEverstakeListDisplayDataManagerDelegate?
     
 //MARK: Private
     

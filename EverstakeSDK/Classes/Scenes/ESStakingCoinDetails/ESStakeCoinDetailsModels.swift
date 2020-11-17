@@ -13,6 +13,10 @@
 import UIKit
 
 enum ESStakeCoinDetails {
+    
+    enum Action {
+        case newStake
+    }
   
     struct ViewModel {
         

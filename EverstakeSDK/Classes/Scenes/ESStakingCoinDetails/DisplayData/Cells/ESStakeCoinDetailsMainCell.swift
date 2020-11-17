@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol ESStakeCoinDetailsMainCellDelegate {
+protocol ESStakeCoinDetailsMainCellDelegate: AnyObject {
     func stakeButtonPressed()
 }
 
 class ESStakeCoinDetailsMainCell: UITableViewCell {
 
-    var delegate: ESStakeCoinDetailsMainCellDelegate?
+    weak var delegate: ESStakeCoinDetailsMainCellDelegate?
     
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

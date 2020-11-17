@@ -8,6 +8,13 @@
 import Foundation
 import Kingfisher
 
+protocol ESStakeCoinDetailsDisplayDataManagerDelegate: AnyObject {
+    func unstakeButtonPressed()
+    func stakeButtonPressed()
+    func openCalculatorButtonPressed()
+    func claimButtonPressed()
+}
+
 class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     weak var titleLabel: UILabel!
@@ -23,6 +30,8 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             titleLabel.text = viewModel.title
         }
     }
+    
+    weak var delegate: ESStakeCoinDetailsDisplayDataManagerDelegate?
         
 //MARK: UITableViewDelegate
     
@@ -136,19 +145,19 @@ extension ESStakeCoinDetailsDisplayDataManager: ESStakeCoinDetailsCalculatorCell
                                                 ESStakeCoinDetailsStakedCellDelegate,
                                                 ESStakeCoinDetailsClaimCellDelegate {
     func unstakeButtonPressed() {
-        //TODO: Implement
+        delegate?.unstakeButtonPressed()
     }
     
     func stakeButtonPressed() {
-        //TODO: Implement
+        delegate?.stakeButtonPressed()
     }
     
     func openCalculatorButtonPressed() {
-        //TODO: Implement
+        delegate?.openCalculatorButtonPressed()
     }
     
     func claimButtonPressed() {
-        //TODO: Implement
+        delegate?.claimButtonPressed()
     }
 }
 

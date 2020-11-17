@@ -13,16 +13,16 @@
 import UIKit
 
 protocol ESNewStakePresentationLogic {
-    func presentSomething(response: ESNewStake.Something.Response)
+    func present(_ model: ESSharedModel.Combined)
 }
 
 class ESNewStakePresenter: ESNewStakePresentationLogic {
+
     weak var viewController: ESNewStakeDisplayLogic?
-  
-// MARK: Do something
-  
-    func presentSomething(response: ESNewStake.Something.Response) {
-        let viewModel = ESNewStake.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    
+    func present(_ model: ESSharedModel.Combined) {
+        let viewModel = ESNewStake.ViewModel(model: model)
+        viewController?.display(viewModel: viewModel)
     }
+    
 }

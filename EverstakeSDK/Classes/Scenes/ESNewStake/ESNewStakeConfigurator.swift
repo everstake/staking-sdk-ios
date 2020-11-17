@@ -10,9 +10,9 @@ import Foundation
 class ESNewStakeConfigurator {
     
     public static func viewControllerWith(_ model: ESSharedModel.Combined) -> UIViewController {
-        let viewController = ESStakeCoinDetailsViewController(nibName: "ESNewStakeViewController",
-                                                              bundle: ESUtilities.shared.bundle)
-        let interactor = ESNewStakeInteractor()
+        let viewController = ESNewStakeViewController(nibName: "ESNewStakeViewController",
+                                                      bundle: ESUtilities.shared.bundle)
+        let interactor = ESNewStakeInteractor(model: model)
         let presenter = ESNewStakePresenter()
         let router = ESNewStakeRouter()
         viewController.interactor = interactor
@@ -21,6 +21,8 @@ class ESNewStakeConfigurator {
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
+        
+        return viewController
     }
 
     

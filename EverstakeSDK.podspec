@@ -39,4 +39,6 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
    s.dependency 'Kingfisher', '~> 5.15'
+   s.dependency 'SliderController', '~> 1.0'
+   
 end

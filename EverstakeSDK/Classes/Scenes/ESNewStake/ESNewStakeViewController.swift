@@ -11,12 +11,14 @@
 //
 
 import UIKit
+import SliderController
 
 protocol ESNewStakeDisplayLogic: class {
-    func displaySomething(viewModel: ESNewStake.Something.ViewModel)
+    func display(viewModel: ESNewStake.ViewModel)
 }
 
-class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic {
+class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, SliderControllerDelegate {
+  
     var interactor: ESNewStakeBusinessLogic?
     var router: (NSObjectProtocol & ESNewStakeRoutingLogic & ESNewStakeDataPassing)?
 
@@ -28,12 +30,15 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var validatorNameLabel: UILabel!
-    @IBOutlet weak var feeLabel: UILabel!
     @IBOutlet weak var reliableContainer: UIView!
     @IBOutlet weak var dailyIncomeValueLabel: UILabel!
     @IBOutlet weak var monthlyValueLabel: UILabel!
     @IBOutlet weak var yearlyValueLabel: UILabel!
+    @IBOutlet weak var sliderContainerView: UIView!
+    @IBOutlet weak var sliderLastAnchorView: UIView!
     
+    let sliderController = SliderController()
+    var viewModel: ESNewStake.ViewModel? = nil
     
 //MARK: Actions
     
@@ -45,19 +50,71 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        addDoneButtonOnKeyboard()
+        sliderController.embedSliderIn(targetView: sliderContainerView,
+                                       targetViewController: self)
+        sliderController.setupSlider()
+        sliderController.delegate = self
+        sliderLastAnchorView.backgroundColor = UIColor(hex: "#CCCCCC")
+        interactor?.loadData()
     }
   
-  // MARK: Do something
   
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-    func doSomething() {
-        let request = ESNewStake.Something.Request()
-        interactor?.doSomething(request: request)
+    func display(viewModel: ESNewStake.ViewModel) {
+        self.viewModel = viewModel
+        yearlyIncomValueLabel.text = viewModel.apr
+        balanceValueLabel.text = viewModel.displayStakedAmount
+        symbolLabel.text = viewModel.symbol
     }
-  
-    func displaySomething(viewModel: ESNewStake.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    
+//MARK: - SliderControllerDelegate
+    
+    func sliderDidTap(atValue value: Float) {
+        sliderValueDidChange(value: value)
+    }
+    
+    func sliderValueDidChange(value: Float) {
+        guard let amount = viewModel?.amount else { return }
+        amountTextField.text = String(format: "%.2f", amount * Double(value))
+    }
+    
+    func sliderDidStartSwiping() { }
+    func sliderDidEndSwiping() {  }
+    
+//MARK: - Private
+    
+    func updateWithNewAmount() {
+        guard let newAmountText = amountTextField.text,
+              let newAmount = Float(newAmountText),
+              let viewModel = viewModel else { return }
+        
+        let maxAmount = Float(viewModel.amount)
+        let amount = min(newAmount, maxAmount)
+        let val = amount / maxAmount
+        sliderController.setSlider(value: val, animated: true)
+        sliderValueDidChange(value: val)
+    }
+    
+    func addDoneButtonOnKeyboard() {
+        let doneToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+        doneToolbar.barStyle = UIBarStyle.default
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace,
+                                        target: nil, action: nil)
+        let done = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done,
+                                   target: self, action: #selector(ESNewStakeViewController.doneButtonAction))
+
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+
+        amountTextField.inputAccessoryView = doneToolbar
+    }
+    
+    @objc func doneButtonAction() {
+        amountTextField.resignFirstResponder()
+        updateWithNewAmount()
     }
 }

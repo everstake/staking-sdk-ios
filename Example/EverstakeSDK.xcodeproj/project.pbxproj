@@ -295,11 +295,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-EverstakeSDK_Example/Pods-EverstakeSDK_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/EverstakeSDK/EverstakeSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SliderController/SliderController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EverstakeSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SliderController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
