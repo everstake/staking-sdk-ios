@@ -62,7 +62,7 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             cell.delegate = self
         } else if let cell = cell as? ESStakeCoinDetailsStakedCell {
             cell.stakedValueLabel.text = viewModel.displayStakedAmount
-            cell.validatorValueLabel.text = viewModel.validator
+            cell.validatorValueLabel.text = "TODO" //TODO viewModel.validator
             cell.yearlyIncomeValueLabel.text = viewModel.displayApr
             cell.delegate = self
         } else if let cell = cell as? ESStakeCoinDetailsClaimCell {

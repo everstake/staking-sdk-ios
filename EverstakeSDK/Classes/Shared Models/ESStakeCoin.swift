@@ -21,14 +21,13 @@ struct ESSharedModel {
         let _amount: String?
         let _amountToClaim: String?
         let coinId: String?
-        
-        let validator: Validator?
+        let validators: [Validator]?
 
         enum CodingKeys: String, CodingKey {
             case _amount = "amount"
             case _amountToClaim = "amountToClaim"
             case coinId
-            case validator
+            case validators
         }
 
         struct Validator: Codable {
@@ -62,8 +61,12 @@ struct ESSharedModel {
 
         let fee: Fee?
 
-    //        let yieldInterval: Int?
-    //        let yieldPercent: String?
+        let yieldInterval: String?
+        let yieldPercent: String?
+        
+        let validators: [Validator]?
+
+        
     //        let needsClaiming: Bool?
     //        let intervalStake: Int?
     //        let intervalUnstake: Int?
@@ -73,6 +76,13 @@ struct ESSharedModel {
         struct Fee: Codable {
             let min: String?
             let max: String?
+        }
+        
+        struct Validator: Codable {
+            let id: String?
+            let name: String?
+            let fee: String?
+            let isReliable: Bool?
         }
     
     }

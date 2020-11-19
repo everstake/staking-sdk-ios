@@ -12,8 +12,8 @@
 
 import UIKit
 
-@objc protocol ESNewStakeRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+protocol ESNewStakeRoutingLogic {
+    func selectValidator()
 }
 
 protocol ESNewStakeDataPassing {
@@ -21,37 +21,26 @@ protocol ESNewStakeDataPassing {
 }
 
 class ESNewStakeRouter: NSObject, ESNewStakeRoutingLogic, ESNewStakeDataPassing {
+    
     weak var viewController: ESNewStakeViewController?
     var dataStore: ESNewStakeDataStore?
 
     // MARK: Routing
-
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
-
-    // MARK: Navigation
-
-    //func navigateToSomewhere(source: ESNewStakeViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
-
-    // MARK: Passing data
-
-    //func passDataToSomewhere(source: ESNewStakeDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    
+    func selectValidator() {
+        
+        guard let validators = dataStore?.model.coin.validators,
+              let selectedValidators = dataStore?.selectedValidators else {
+            return
+        }
+        
+        let selectorController = ESValidatorSelectorViewController.createViewController()
+        selectorController.validators = validators
+        selectorController.selectedIds = Set<String>(selectedValidators.map({ ($0.id ?? "") }))
+        selectorController.completedWith = { [weak self] selectedIds in
+            self?.dataStore?.selectedValidators = validators.filter({ selectedIds.contains($0.id ?? "") })
+        }
+        
+        viewController?.navigationController?.pushViewController(selectorController, animated: true)
+    }
 }

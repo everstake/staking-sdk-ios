@@ -29,7 +29,7 @@ enum ESStakeCoinDetails {
         let symbol: String!
         let amount: Double!
         let amountToClaim: Double!
-        let validator: String!
+        let validators: String!
         let isStaked: Bool!
         
         init(model: ESSharedModel.Combined) {
@@ -42,7 +42,7 @@ enum ESStakeCoinDetails {
             symbol = model.coin.symbol ?? ""
             isStaked = model.stake != nil && model.stake!.amount > 0
             amount = model.stake?.amount ?? 0
-            validator = model.stake?.validator?.name ?? ""
+            validators = "" //TODO model.stake?.validator?.name ?? ""
             amountToClaim = model.stake?.amountToClaim ?? 0
         }
         
