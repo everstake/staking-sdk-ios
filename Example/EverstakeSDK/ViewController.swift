@@ -19,7 +19,10 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let vc = EverstakeSDK.createViewController()
+        let coins = [ESCoin(symbol: "xtz", address: "tz1LLNkQK4UQV6QcFShiXJ2vT2ELw449MzAA", balance: "0.8"),
+                     ESCoin(symbol: "ATOM", address: "cosmos1gdmscydnyl0pj6lcjzmeuhr6g5g68u97z3jm8l", balance: "40.44099")]
+        
+        let vc = EverstakeSDK.createViewControllerWith(coins: coins)
         self.present(vc, animated: true)
     }
 

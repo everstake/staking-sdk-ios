@@ -42,7 +42,7 @@ enum ESNewStake {
             perDay = 0
             amountToStake = 0
             validators = selectedValidators.map({ ($0.name ?? "")} ).joined(separator: ", ")
-            isReliable = selectedValidators.contains(where: { $0.isReliable ?? true }) //allSatisfy({ ($0.isReliable ?? true) })
+            isReliable = selectedValidators.contains(where: { $0.isReliable ?? true })
         }
 
         var amountToStake: Double {

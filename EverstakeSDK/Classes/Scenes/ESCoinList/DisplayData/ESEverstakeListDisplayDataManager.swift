@@ -86,7 +86,7 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
         cell.titleLabel.text = coin.title
         cell.subTitleLabel.text = coin.displayApr
         cell.steakedLabel.text = coin.displayAmount
-        cell.coinContentView.alpha = coin.comingSoon ? 0 : 0.7
+        cell.coinContentView.alpha = coin.comingSoon ? 0.7 : 0
         
         return cell
     }
@@ -107,7 +107,9 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let coin = itemsFor(indexPath.section)[indexPath.row]
-        delegate?.didSelected(coin)
+        if !coin.comingSoon {
+            delegate?.didSelected(coin)
+        }
     }
     
 //MARK: Setup

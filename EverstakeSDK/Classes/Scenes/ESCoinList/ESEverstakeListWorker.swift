@@ -15,13 +15,13 @@ class ESEverstakeListWorker {
     }
     
     func loadCoinList(successWith: @escaping (Data) -> Void) {
-        ESNetworkManager.loadDataWith(path: Constants.coinList, httpMethod: .get, cache: true) { (data) in
+        ESNetworkManager.loadDataWith(path: Constants.coinList, httpMethod: .get) { (data) in
             successWith(data)
         }
     }
     
-    func loadStakeList(successWith: @escaping (Data) -> Void) {
-        ESNetworkManager.loadDataWith(path: Constants.stake, httpMethod: .put, cache: true) { (data) in
+    func loadStakeList(request: ESEverstakeList.StakeRequest, successWith: @escaping (Data) -> Void) {
+        ESNetworkManager.loadDataWith(path: Constants.stake, httpMethod: .put, queryParameters: request.asParameters) { (data) in
             successWith(data)
         }
     }

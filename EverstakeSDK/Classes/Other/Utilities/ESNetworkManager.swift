@@ -17,13 +17,15 @@ class ESNetworkManager {
     }
     
     private struct Constants {
-        static let baseURL = "https://wallet-sdk-static.herokuapp.com/"
+        static let baseURL = "https://wallet-sdk.everstake.one/"
     }
     
-    static func loadDataWith(path: String, httpMethod: HTTPMethod, cache: Bool = false, successWith: @escaping (Data) -> Void) {
+    static func loadDataWith(path: String, httpMethod: HTTPMethod, queryParameters: [[String: String]]? = nil, successWith: @escaping (Data) -> Void) {
         let url = URL(string: Constants.baseURL + path)!
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
+        request.httpBody = queryParameters?.asJSONData
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "application/json")
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
 
@@ -31,9 +33,7 @@ class ESNetworkManager {
                     DispatchQueue.main.async {
                         successWith(data)
                     }
-                    if (cache) {
-                        ESCache.shared.save(data, for: path)
-                    }
+                    ESCache.shared.save(data, for: path)
                 } else {
                     print(error ?? "ESNetworkManager: Unknown Error \n\(String(describing: response?.description))")
                 }
@@ -41,8 +41,17 @@ class ESNetworkManager {
             })
         task.resume()
     
-        if (cache) {
-            ESCache.shared.getDataFor(path, successWith: successWith)
+        ESCache.shared.getDataFor(path, successWith: successWith)
+    }
+}
+
+extension Array {
+    var asJSONData: Data? {
+        do {
+            return try JSONSerialization.data(withJSONObject: self)
+        } catch {
+            print("Failed to create JSON: \(error.localizedDescription)")
+            return nil
         }
     }
 }

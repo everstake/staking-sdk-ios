@@ -10,10 +10,25 @@ import UIKit
 
 public class EverstakeSDK {
     
-    public static func createViewController() -> UIViewController {
-        let viewController = ESEverstakeListConfigurator.setup()
+    public static func createViewControllerWith(coins: [ESCoin]) -> UIViewController {
+        let viewController = ESEverstakeListConfigurator.setup(userCoins: coins)
         viewController.modalPresentationStyle = .fullScreen
         return viewController
+    }
+}
+
+public struct ESCoin {
+    
+    let symbol: String!
+    let address: String!
+    let balance: String!
+    
+    public init(symbol: String,
+                address: String,
+                balance: String) {
+        self.symbol = symbol
+        self.address = address
+        self.balance = balance
     }
     
 }
