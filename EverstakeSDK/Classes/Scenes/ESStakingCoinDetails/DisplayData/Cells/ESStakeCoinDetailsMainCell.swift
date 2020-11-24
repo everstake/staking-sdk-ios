@@ -19,6 +19,7 @@ class ESStakeCoinDetailsMainCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var aprLabel: UILabel!
     @IBOutlet weak var serviceFeeLabel: UILabel!
+    @IBOutlet weak var serviceFeeContainer: UIView!
     
     @IBAction func stakeButtonPressed() {
         delegate?.stakeButtonPressed()

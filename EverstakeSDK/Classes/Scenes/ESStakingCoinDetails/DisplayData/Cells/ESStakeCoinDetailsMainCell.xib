@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,18 +42,32 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service fee:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efW-jt-7Pf">
-                        <rect key="frame" x="175" y="53" width="71.5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="0.70243471746575337" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-3%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9e-q2-M3F">
-                        <rect key="frame" x="250.5" y="53" width="33.5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ert-dX-4f8" userLabel="Service fee container">
+                        <rect key="frame" x="175" y="53" width="109" height="16"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service fee:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efW-jt-7Pf">
+                                <rect key="frame" x="0.0" y="0.0" width="71.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.70243471746575337" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-3%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9e-q2-M3F">
+                                <rect key="frame" x="75.5" y="0.0" width="33.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="G9e-q2-M3F" firstAttribute="centerY" secondItem="ert-dX-4f8" secondAttribute="centerY" id="7GE-Kd-wzJ"/>
+                            <constraint firstItem="efW-jt-7Pf" firstAttribute="top" secondItem="ert-dX-4f8" secondAttribute="top" id="9HV-7z-i6j"/>
+                            <constraint firstAttribute="bottom" secondItem="efW-jt-7Pf" secondAttribute="bottom" id="ENP-EV-3RR"/>
+                            <constraint firstItem="G9e-q2-M3F" firstAttribute="leading" secondItem="efW-jt-7Pf" secondAttribute="trailing" constant="4" id="EPl-9C-hco"/>
+                            <constraint firstItem="efW-jt-7Pf" firstAttribute="leading" secondItem="ert-dX-4f8" secondAttribute="leading" id="bg7-NT-TEv"/>
+                            <constraint firstAttribute="trailing" secondItem="G9e-q2-M3F" secondAttribute="trailing" id="vHY-nF-O8i"/>
+                        </constraints>
+                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdD-0d-7zv">
                         <rect key="frame" x="16" y="94" width="288" height="42"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,16 +95,14 @@
                     <constraint firstItem="bfK-SB-Vc8" firstAttribute="top" secondItem="wBq-QJ-gY2" secondAttribute="bottom" constant="4" id="Crt-jx-f9W"/>
                     <constraint firstItem="bfK-SB-Vc8" firstAttribute="leading" secondItem="2FU-yv-gN3" secondAttribute="trailing" constant="4" id="KWX-Wp-bY8"/>
                     <constraint firstAttribute="trailing" secondItem="wBq-QJ-gY2" secondAttribute="trailing" constant="16" id="SJl-QQ-058"/>
-                    <constraint firstItem="G9e-q2-M3F" firstAttribute="leading" secondItem="efW-jt-7Pf" secondAttribute="trailing" constant="4" id="So7-VA-b8D"/>
-                    <constraint firstItem="G9e-q2-M3F" firstAttribute="top" secondItem="wBq-QJ-gY2" secondAttribute="bottom" constant="4" id="Swv-9Q-tXY"/>
                     <constraint firstItem="xJN-6J-1TM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="UA6-xV-KV7"/>
-                    <constraint firstItem="efW-jt-7Pf" firstAttribute="leading" secondItem="bfK-SB-Vc8" secondAttribute="trailing" constant="24" id="VfB-DH-Jpn"/>
                     <constraint firstItem="wBq-QJ-gY2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="X56-t6-cdx"/>
                     <constraint firstItem="fdD-0d-7zv" firstAttribute="top" secondItem="xJN-6J-1TM" secondAttribute="bottom" constant="20" id="Y4X-y0-S3Q"/>
                     <constraint firstItem="fdD-0d-7zv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Z1V-md-wzT"/>
+                    <constraint firstItem="ert-dX-4f8" firstAttribute="top" secondItem="wBq-QJ-gY2" secondAttribute="bottom" constant="4" id="aIE-kU-G5f"/>
                     <constraint firstItem="wBq-QJ-gY2" firstAttribute="leading" secondItem="xJN-6J-1TM" secondAttribute="trailing" constant="16" id="aY1-Bd-pha"/>
+                    <constraint firstItem="ert-dX-4f8" firstAttribute="leading" secondItem="bfK-SB-Vc8" secondAttribute="trailing" constant="24" id="eAg-l8-jP4"/>
                     <constraint firstAttribute="bottom" secondItem="fdD-0d-7zv" secondAttribute="bottom" constant="30" id="gaZ-jI-NzJ"/>
-                    <constraint firstItem="efW-jt-7Pf" firstAttribute="top" secondItem="wBq-QJ-gY2" secondAttribute="bottom" constant="4" id="oeS-rW-t8d"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -98,6 +110,7 @@
             <connections>
                 <outlet property="aprLabel" destination="bfK-SB-Vc8" id="Rd3-8Y-oxr"/>
                 <outlet property="logoImageView" destination="xJN-6J-1TM" id="DUX-Rf-Hn1"/>
+                <outlet property="serviceFeeContainer" destination="ert-dX-4f8" id="Jxa-La-t1b"/>
                 <outlet property="serviceFeeLabel" destination="G9e-q2-M3F" id="mqZ-xH-9TC"/>
                 <outlet property="titleLabel" destination="wBq-QJ-gY2" id="lS5-78-Etp"/>
             </connections>

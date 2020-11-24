@@ -20,7 +20,6 @@ protocol ESStakeCoinDetailsDisplayLogic: class {
 class ESStakeCoinDetailsViewController: UIViewController,
                                         ESStakeCoinDetailsDisplayLogic,
                                         ESStakeCoinDetailsDisplayDataManagerDelegate {
-
     var interactor: ESStakeCoinDetailsBusinessLogic?
     var router: (NSObjectProtocol & ESStakeCoinDetailsRoutingLogic & ESStakeCoinDetailsDataPassing)?
    
@@ -53,12 +52,6 @@ class ESStakeCoinDetailsViewController: UIViewController,
         interactor?.getDisplayData()
     }
   
-    
-    func doSomething() {
-//        let request = ESStakeCoinDetails.Something.Request()
-//        interactor?.doSomething(request: request)
-    }
-  
     func updateWith(_ viewModel: ESStakeCoinDetails.ViewModel) {
         displayDataManager.viewModel = viewModel
     }
@@ -72,7 +65,7 @@ class ESStakeCoinDetailsViewController: UIViewController,
     
 //MARK: - ESStakeCoinDetailsDisplayDataManagerDelegate
     
-    func unstakeButtonPressed() {
+    func unstakeButtonPressedFor(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
         //TODO: Implement
     }
     

@@ -35,6 +35,7 @@ struct ESSharedModel {
             let name: String?
             let fee: String?
             let isReliable: Bool?
+            let amount: String?
         }
         
         var amount: Double {

@@ -9,7 +9,7 @@ import Foundation
 import Kingfisher
 
 protocol ESStakeCoinDetailsDisplayDataManagerDelegate: AnyObject {
-    func unstakeButtonPressed()
+    func unstakeButtonPressedFor(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
     func stakeButtonPressed()
     func openCalculatorButtonPressed()
     func claimButtonPressed()
@@ -44,29 +44,28 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
         let cellType = viewModel.visibleCells[indexPath.row]
         let reuseIdentifier = cellType.reuseIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
-        setup(cell)
+        setup(cell, index: indexPath.row)
         
         return cell
     }
     
-    private func setup(_ cell: UITableViewCell) {
+    private func setup(_ cell: UITableViewCell, index: Int) {
         if let cell = cell as? ESStakeCoinDetailsMainCell {
             cell.titleLabel.text = viewModel.title
             cell.logoImageView.kf.setImage(with: viewModel.iconURL)
             cell.aprLabel.text = viewModel.displayApr
             cell.serviceFeeLabel.text = viewModel.displayServiceFee
+            cell.serviceFeeContainer.isHidden = viewModel.hideServiceFee
             cell.delegate = self
         } else if let cell = cell as? ESStakeCoinDetailsAboutCell  {
             cell.aboutCoinTextView.text = viewModel.about
         } else if let cell = cell as? ESStakeCoinDetailsCalculatorCell {
             cell.delegate = self
         } else if let cell = cell as? ESStakeCoinDetailsStakedCell {
-            cell.stakedValueLabel.text = viewModel.displayStakedAmount
-            cell.validatorValueLabel.text = "TODO" //TODO viewModel.validator
-            cell.yearlyIncomeValueLabel.text = viewModel.displayApr
+            let validator = viewModel.validatorAtRow(index)
+            cell.stakedValueLabel.text = validator?.amount
+            cell.validatorValueLabel.text = validator?.title
             cell.delegate = self
-            //TODO: if last & claim not shown hide separator (or if next is about)
-            
         } else if let cell = cell as? ESStakeCoinDetailsClaimCell {
             cell.availableRewardsValueLabel.text = viewModel.displayAmountToClaim
             cell.delegate = self
@@ -131,8 +130,11 @@ extension ESStakeCoinDetailsDisplayDataManager: ESStakeCoinDetailsCalculatorCell
                                                 ESStakeCoinDetailsMainCellDelegate,
                                                 ESStakeCoinDetailsStakedCellDelegate,
                                                 ESStakeCoinDetailsClaimCellDelegate {
-    func unstakeButtonPressed() {
-        delegate?.unstakeButtonPressed()
+    func unstakeButtonPressed(cell: ESStakeCoinDetailsStakedCell) {
+        if let index = tableView.indexPath(for: cell),
+           let validator = viewModel.validatorAtRow(index.row) {
+            delegate?.unstakeButtonPressedFor(validator)
+        }
     }
     
     func stakeButtonPressed() {
