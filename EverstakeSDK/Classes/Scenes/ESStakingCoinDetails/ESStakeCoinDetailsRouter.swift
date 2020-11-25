@@ -13,7 +13,8 @@
 import UIKit
 
 protocol ESStakeCoinDetailsRoutingLogic {
-    func routeToNewStake(_ model: ESSharedModel.Combined)
+    func stakePressed()
+    func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
 }
 
 protocol ESStakeCoinDetailsDataPassing {
@@ -27,10 +28,27 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
 
     // MARK: Routing
 
-    func routeToNewStake(_ model: ESSharedModel.Combined) {
+    func stakePressed()  {
+        
+        guard let model = dataStore?.model else { return }
+
+        if model.stake == nil {
+            routeToNewStakeWith(model)
+        } else {
+            viewController?.presentAlertWith(title: "Stake", message: "Please unstake your funds first.")
+        }
+    }
+    
+    func routeToNewStakeWith(_ model: ESSharedModel.Combined) {
         let newStakeViewController = ESNewStakeConfigurator.viewControllerWith(model)
         viewController?.navigationController?.pushViewController(newStakeViewController,
                                                                  animated: true)
+    }
+    
+    func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
+        //TODO: complete ESStake model
+        let stake = ESStake(symbol: validator.symbol)
+        EverstakeSDK.shared.onUnstake?(stake)
     }
     
 }

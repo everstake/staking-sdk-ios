@@ -29,14 +29,6 @@ struct ESSharedModel {
             case coinId
             case validators
         }
-
-        struct Validator: Codable {
-            let id: String?
-            let name: String?
-            let fee: String?
-            let isReliable: Bool?
-            let amount: String?
-        }
         
         var amount: Double {
             return Double(_amount ?? "") ?? 0
@@ -59,7 +51,7 @@ struct ESSharedModel {
         let order: String?
         let about: String?
         let precision: String?
-
+        let stakeType: StakeType?
         let fee: Fee?
 
         let yieldInterval: String?
@@ -67,25 +59,38 @@ struct ESSharedModel {
         
         let validators: [Validator]?
 
-        
-    //        let needsClaiming: Bool?
-    //        let intervalStake: Int?
-    //        let intervalUnstake: Int?
-    //        let toUsd: String?
-    //        let aboutUrl: URL?
+        enum StakeType: String, Codable {
+            case oneToOne = "1to1"
+            case manyToOne = "Nto1"
+            case oneToMany = "1toN"
+            case other
+            
+            init(from decoder: Decoder) throws {
+                let label = try decoder.singleValueContainer().decode(String.self)
+                self = StakeType(rawValue: label) ?? .other
+            }
+        }
         
         struct Fee: Codable {
             let min: String?
             let max: String?
         }
         
-        struct Validator: Codable {
-            let id: String?
-            let name: String?
-            let fee: String?
-            let isReliable: Bool?
-        }
+//        struct Validator: Codable {
+//            let id: String?
+//            let name: String?
+//            let fee: String?
+//            let isReliable: Bool?
+//        }
     
+    }
+    
+    struct Validator: Codable {
+        let id: String?
+        let name: String?
+        let fee: String?
+        let isReliable: Bool?
+        let amount: String?
     }
         
 }

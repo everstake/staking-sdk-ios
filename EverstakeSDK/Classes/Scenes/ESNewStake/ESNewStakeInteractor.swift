@@ -18,7 +18,7 @@ protocol ESNewStakeBusinessLogic {
 
 protocol ESNewStakeDataStore {
     var model: ESSharedModel.Combined { get set }
-    var selectedValidators: [ESSharedModel.Coin.Validator] { get set }
+    var selectedValidators: [ESSharedModel.Validator] { get set }
 }
 
 class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
@@ -27,16 +27,17 @@ class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
     var worker: ESNewStakeWorker?
     
     var model: ESSharedModel.Combined
-    var selectedValidators = [ESSharedModel.Coin.Validator]()
+    var selectedValidators = [ESSharedModel.Validator]()
     
     init(model: ESSharedModel.Combined) {
         self.model = model
         
-        // Set default validator
-        guard let validator = model.coin.validators?.first else {
-            return
+        // Set default validators
+        if let validator = model.stake?.validators?.first {
+            self.selectedValidators.append(validator)
+        } else if let validator = model.coin.validators?.first {
+            self.selectedValidators.append(validator)
         }
-        self.selectedValidators.append(validator)
     }
   
     func loadData() {

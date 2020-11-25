@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.124 XTZ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="vJu-vb-yBo">
-                        <rect key="frame" x="16" y="17" width="184" height="33"/>
+                        <rect key="frame" x="16" y="21" width="184" height="29"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -47,13 +47,12 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="vJu-vb-yBo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="05e-Y0-01Q"/>
+                    <constraint firstItem="5HA-gB-mGj" firstAttribute="top" secondItem="7ti-dl-YnS" secondAttribute="bottom" constant="23" id="351-cZ-EE0"/>
                     <constraint firstItem="HXy-oi-DyA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="5g5-39-vs8"/>
                     <constraint firstItem="7ti-dl-YnS" firstAttribute="leading" secondItem="vJu-vb-yBo" secondAttribute="trailing" constant="8" id="8wZ-m3-IlR"/>
                     <constraint firstAttribute="trailing" secondItem="7ti-dl-YnS" secondAttribute="trailing" constant="49" id="IMC-yc-TRe"/>
                     <constraint firstItem="HXy-oi-DyA" firstAttribute="top" secondItem="vJu-vb-yBo" secondAttribute="bottom" constant="16" id="JRB-h9-7hV"/>
                     <constraint firstAttribute="bottom" secondItem="HXy-oi-DyA" secondAttribute="bottom" constant="16" id="YKH-sj-vxI"/>
-                    <constraint firstItem="7ti-dl-YnS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cAe-WU-NbH"/>
                     <constraint firstItem="vJu-vb-yBo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="fDi-f4-hPs"/>
                     <constraint firstItem="5HA-gB-mGj" firstAttribute="leading" secondItem="HXy-oi-DyA" secondAttribute="trailing" constant="4" id="oXT-BX-xTJ"/>
                     <constraint firstAttribute="trailing" secondItem="5HA-gB-mGj" secondAttribute="trailing" constant="16" id="pKN-wM-Bnw"/>

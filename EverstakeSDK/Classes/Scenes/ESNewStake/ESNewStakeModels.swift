@@ -27,11 +27,13 @@ enum ESNewStake {
         var perMonth: Double!
         var perDay: Double!
 
-        var validators: String!
-        var isReliable: Bool!
+        var validatorTitleLabel: String!
+        
+        var currentValidators: [ESSharedModel.Validator]?
+        var selectedValidators: [ESSharedModel.Validator]!
 
         init(model: ESSharedModel.Combined,
-             selectedValidators: [ESSharedModel.Coin.Validator]) {
+             selectedValidators: [ESSharedModel.Validator]) {
             apr = (model.coin.apr ?? "0") + "%"
             symbol = model.coin.symbol ?? ""
             balance = model.stake?.amount ?? 0 // TODO: Use balance from SDK interface
@@ -41,8 +43,26 @@ enum ESNewStake {
             perMonth = 0
             perDay = 0
             amountToStake = 0
-            validators = selectedValidators.map({ ($0.name ?? "")} ).joined(separator: ", ")
-            isReliable = selectedValidators.contains(where: { $0.isReliable ?? true })
+            validatorTitleLabel = (model.coin.stakeType == .oneToMany) ? "Select validators" : "Select validator"
+
+            currentValidators = model.stake?.validators
+            self.selectedValidators = selectedValidators
+        }
+        
+        var stakeAllowed: Bool {
+            guard let currentId = currentValidators?.first?.id,
+                  let newId = selectedValidators.first?.id else {
+                return true
+            }
+            return currentId == newId
+        }
+        
+        var validators: String {
+            return selectedValidators.map({ ($0.name ?? "")} ).joined(separator: ", ")
+        }
+        
+        var isReliable: Bool {
+            return selectedValidators.contains(where: { $0.isReliable ?? true })
         }
 
         var amountToStake: Double {

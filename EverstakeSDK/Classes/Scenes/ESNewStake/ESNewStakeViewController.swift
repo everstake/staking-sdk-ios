@@ -29,6 +29,7 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
     @IBOutlet weak var balanceValueLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var symbolLabel: UILabel!
+    @IBOutlet weak var validatorTitleLabel: UILabel!
     @IBOutlet weak var validatorsLabel: UILabel!
     @IBOutlet weak var reliableContainer: UIView!
     @IBOutlet weak var dailyIncomeValueLabel: UILabel!
@@ -44,7 +45,14 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
 //MARK: Actions
     
     @IBAction func stakeButtonPressed() {
-        //TODO
+        if let viewModel = viewModel {
+            if viewModel.stakeAllowed {
+                let stake = ESStake(symbol: viewModel.symbol)
+                EverstakeSDK.shared.onStake?(stake)
+            } else {
+                presentAlertWith(title: "New Stake", message: "Cannot stake for a different validator. Unstake your funds first.")
+            }
+        }
     }
     
     @IBAction func selectValidatorPressed() {
@@ -99,6 +107,7 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
     private func updateView() {
         guard let viewModel = viewModel else { return }
 
+        validatorTitleLabel.text = viewModel.validatorTitleLabel
         yearlyIncomValueLabel.text = viewModel.apr
         balanceValueLabel.text = viewModel.displayBalance
         symbolLabel.text = viewModel.symbol

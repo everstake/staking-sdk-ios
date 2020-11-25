@@ -12,7 +12,8 @@ class ESValidatorSelectorViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     
-    var validators = [ESSharedModel.Coin.Validator]()
+    var validators = [ESSharedModel.Validator]()
+    var multipleSelection: Bool!
     var selectedIds = Set<String>()
     var completedWith: ((Set<String>) -> ())?
     
@@ -52,6 +53,7 @@ class ESValidatorSelectorViewController: UIViewController, UITableViewDataSource
         
         cell.titleLabel.text = validator.name
         cell.feeLabel.text = "Fee: \(validator.fee ?? "0")%"
+        cell.feeLabel.isHidden = (validator.fee == nil || validator.fee! == "0" )
         cell.reliableContainerView.isHidden = !(validator.isReliable ?? false)
         cell.gradientView.isHidden = !(validator.isReliable ?? false)
         cell.checkImageView.isHidden = !selectedIds.contains(validator.id ?? "")
@@ -65,6 +67,10 @@ class ESValidatorSelectorViewController: UIViewController, UITableViewDataSource
         
         guard let id = validators[indexPath.item].id  else {
             return
+        }
+        
+        if !multipleSelection {
+            selectedIds.removeAll()
         }
         
         if (selectedIds.contains(id)) {

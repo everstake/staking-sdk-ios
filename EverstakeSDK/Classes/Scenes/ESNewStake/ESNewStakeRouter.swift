@@ -30,13 +30,15 @@ class ESNewStakeRouter: NSObject, ESNewStakeRoutingLogic, ESNewStakeDataPassing 
     func selectValidator() {
         
         guard let validators = dataStore?.model.coin.validators,
-              let selectedValidators = dataStore?.selectedValidators else {
+              let selectedValidators = dataStore?.selectedValidators,
+              let type = dataStore?.model.coin.stakeType else {
             return
         }
         
         let selectorController = ESValidatorSelectorViewController.createViewController()
         selectorController.validators = validators
         selectorController.selectedIds = Set<String>(selectedValidators.map({ ($0.id ?? "") }))
+        selectorController.multipleSelection = (type == .oneToMany)
         selectorController.completedWith = { [weak self] selectedIds in
             self?.dataStore?.selectedValidators = validators.filter({ selectedIds.contains($0.id ?? "") })
         }

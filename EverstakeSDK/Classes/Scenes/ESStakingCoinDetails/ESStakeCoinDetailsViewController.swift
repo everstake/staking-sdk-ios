@@ -14,7 +14,6 @@ import UIKit
 
 protocol ESStakeCoinDetailsDisplayLogic: class {
     func updateWith(_ viewModel: ESStakeCoinDetails.ViewModel)
-    func preparedShared(_ model: ESSharedModel.Combined, action: ESStakeCoinDetails.Action)
 }
 
 class ESStakeCoinDetailsViewController: UIViewController,
@@ -56,21 +55,14 @@ class ESStakeCoinDetailsViewController: UIViewController,
         displayDataManager.viewModel = viewModel
     }
     
-    func preparedShared(_ model: ESSharedModel.Combined, action: ESStakeCoinDetails.Action) {
-        switch action {
-        case .newStake:
-            router?.routeToNewStake(model)
-        }
-    }
-    
 //MARK: - ESStakeCoinDetailsDisplayDataManagerDelegate
     
     func unstakeButtonPressedFor(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
-        //TODO: Implement
+        router?.unstakeValidator(validator)
     }
     
     func stakeButtonPressed() {
-        interactor?.prepareSharedModelFor(.newStake)
+        router?.stakePressed()
     }
     
     func openCalculatorButtonPressed() {

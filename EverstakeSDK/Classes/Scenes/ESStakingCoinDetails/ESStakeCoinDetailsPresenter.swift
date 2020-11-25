@@ -14,15 +14,9 @@ import UIKit
 
 protocol ESStakeCoinDetailsPresentationLogic {
     func present(_ coin: ESSharedModel.Combined)
-    func preparedShared(_ model: ESSharedModel.Combined, action: ESStakeCoinDetails.Action)
 }
 
-class ESStakeCoinDetailsPresenter: ESStakeCoinDetailsPresentationLogic {
-    func preparedShared(_ model: ESSharedModel.Combined, action: ESStakeCoinDetails.Action) {
-        viewController?.preparedShared(model, action: action)
-    }
-    
-    
+class ESStakeCoinDetailsPresenter: ESStakeCoinDetailsPresentationLogic {    
     weak var viewController: ESStakeCoinDetailsDisplayLogic?
   
 // MARK: ESStakeCoinDetailsPresentationLogic
@@ -32,7 +26,5 @@ class ESStakeCoinDetailsPresenter: ESStakeCoinDetailsPresentationLogic {
         viewController?.updateWith(viewModel)
     }
     
-//    func preparedShared(_ model: ESSharedModel.Combined) {
-//        viewController?.preparedShared(model)
-//    }
+
 }

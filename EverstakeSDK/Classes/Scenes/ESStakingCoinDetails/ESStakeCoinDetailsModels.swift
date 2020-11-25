@@ -13,10 +13,6 @@
 import UIKit
 
 enum ESStakeCoinDetails {
-    
-    enum Action {
-        case newStake
-    }
   
     struct ViewModel {
         
@@ -31,6 +27,7 @@ enum ESStakeCoinDetails {
         let amountToClaim: Double!
         let validators: [ValidatorStake]!
         let isStaked: Bool!
+        let type: ESSharedModel.Coin.StakeType!
         
         init(model: ESSharedModel.Combined) {
             title = model.coin.name
@@ -44,6 +41,7 @@ enum ESStakeCoinDetails {
             amount = model.stake?.amount.rounded(toPlaces: 5) ?? 0
             amountToClaim = model.stake?.amountToClaim.rounded(toPlaces: 5) ?? 0
             validators = model.stake?.validators?.asViewModelWith(symbol) ?? []
+            type = model.coin.stakeType ?? .other
         }
         
         var displayApr: String {
@@ -87,7 +85,7 @@ enum ESStakeCoinDetails {
             result.append(.calculator)
             
             if isStaked {
-                result.append(.steakedHeader)
+                result.append(.stakedHeader)
                 
                 validators.forEach { _ in
                     result.append(.staked)
@@ -103,22 +101,40 @@ enum ESStakeCoinDetails {
             return result
         }
         
+        var stakedHeaderTitle: String {
+            return type == .manyToOne ? "List of stakes" : "Steaked"
+        }
+        
+        var stakedCellHeaderHeight: CGFloat {
+            return type == .manyToOne ? 44 : 34
+        }
+        
+        var stakedHeaderSeparatorInset: CGFloat {
+            return type == .manyToOne ? 0 : 10000
+        }
+        
+        var stakedCellHeight: CGFloat {
+            return type == .manyToOne ? 92 : 82
+        }
+        
         struct ValidatorStake {
             let title: String!
             let amount: String!
             let id: String!
+            let symbol: String!
             
-            init(validator: ESSharedModel.Stake.Validator, symbol: String) {
+            init(validator: ESSharedModel.Validator, _symbol: String) {
                 title = validator.name ?? ""
-                amount = (validator.amount ?? "0") + " " + symbol.uppercased()
+                amount = (validator.amount ?? "0") + " " + _symbol.uppercased()
                 id = validator.id ?? ""
+                symbol = _symbol
             }
         }
     }
 }
 
-private extension Array where Element == ESSharedModel.Stake.Validator{
+private extension Array where Element == ESSharedModel.Validator {
     func asViewModelWith(_ symbol: String) -> [ESStakeCoinDetails.ViewModel.ValidatorStake] {
-        return self.map { ESStakeCoinDetails.ViewModel.ValidatorStake(validator: $0, symbol: symbol) }
+        return self.map { ESStakeCoinDetails.ViewModel.ValidatorStake(validator: $0, _symbol: symbol) }
     }
 }

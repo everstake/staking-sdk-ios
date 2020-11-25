@@ -10,11 +10,30 @@ import UIKit
 
 public class EverstakeSDK {
     
-    public static func createViewControllerWith(coins: [ESCoin]) -> UIViewController {
+    public static let shared = EverstakeSDK()
+    
+    public var onStake: ((ESStake)->())?
+    public var onUnstake: ((ESStake)->())?
+    
+    public func createViewControllerWith(coins: [ESCoin]) -> UIViewController {
         let viewController = ESEverstakeListConfigurator.setup(userCoins: coins)
         viewController.modalPresentationStyle = .fullScreen
         return viewController
     }
+    
+}
+
+public struct ESStake {
+    let symbol: String!
+    
+    //TODO: Implement
+//    let address: String!
+//    let validators: [ESValidator]
+//
+//    struct ESValidator {
+//        var title: String!
+//        var id: String!
+//    }
 }
 
 public struct ESCoin {

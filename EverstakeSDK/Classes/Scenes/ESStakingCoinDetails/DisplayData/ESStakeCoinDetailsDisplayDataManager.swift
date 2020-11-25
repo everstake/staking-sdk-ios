@@ -61,6 +61,9 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             cell.aboutCoinTextView.text = viewModel.about
         } else if let cell = cell as? ESStakeCoinDetailsCalculatorCell {
             cell.delegate = self
+        } else if let cell = cell as? ESStakeCoinDetailsStakedHeaderCell  {
+            cell.titleLabel.text = viewModel.stakedHeaderTitle
+            cell.separatorInset.left = viewModel.stakedHeaderSeparatorInset
         } else if let cell = cell as? ESStakeCoinDetailsStakedCell {
             let validator = viewModel.validatorAtRow(index)
             cell.stakedValueLabel.text = validator?.amount
@@ -69,6 +72,18 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
         } else if let cell = cell as? ESStakeCoinDetailsClaimCell {
             cell.availableRewardsValueLabel.text = viewModel.displayAmountToClaim
             cell.delegate = self
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellType = viewModel.visibleCells[indexPath.row]
+        switch cellType {
+        case .staked:
+            return viewModel.stakedCellHeight
+        case .stakedHeader:
+            return viewModel.stakedCellHeaderHeight
+        default:
+            return UITableViewAutomaticDimension
         }
     }
  
@@ -88,7 +103,7 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
     }
     
     enum CellType: Int, CaseIterable {
-        case main, calculator, steakedHeader, staked, claim, about
+        case main, calculator, stakedHeader, staked, claim, about
         
         var reuseIdentifier: String {
             switch self {
@@ -96,7 +111,7 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
                 return "mainCell"
             case .calculator:
                 return "calculatorCell"
-            case .steakedHeader:
+            case .stakedHeader:
                 return "steakedHeaderCell"
             case .staked:
                 return "steakedCell"
@@ -113,7 +128,7 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
                 return "ESStakeCoinDetailsMainCell"
             case .calculator:
                 return "ESStakeCoinDetailsCalculatorCell"
-            case .steakedHeader:
+            case .stakedHeader:
                 return "ESStakeCoinDetailsStakedHeaderCell"
             case .staked:
                 return "ESStakeCoinDetailsStakedCell"
