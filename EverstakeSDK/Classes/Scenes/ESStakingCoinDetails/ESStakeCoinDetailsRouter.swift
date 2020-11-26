@@ -14,6 +14,7 @@ import UIKit
 
 protocol ESStakeCoinDetailsRoutingLogic {
     func stakePressed()
+    func openCalculator()
     func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
 }
 
@@ -29,7 +30,6 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
     // MARK: Routing
 
     func stakePressed()  {
-        
         guard let model = dataStore?.model else { return }
 
         if model.stake == nil {
@@ -49,6 +49,13 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
         //TODO: complete ESStake model
         let stake = ESStake(symbol: validator.symbol)
         EverstakeSDK.shared.onUnstake?(stake)
+    }
+    
+    func openCalculator() {
+        guard let model = dataStore?.model else { return }
+        let calculatorViewController = ESCalculatorConfigurator.viewControllerWith(model)
+        viewController?.navigationController?.pushViewController(calculatorViewController,
+                                                                 animated: true)
     }
     
 }

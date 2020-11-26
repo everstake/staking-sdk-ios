@@ -23,6 +23,7 @@ class ESValidatorSelectorViewController: UIViewController, UITableViewDataSource
         tableView.register(UINib(nibName: "ESValidatorSelectorTableViewCell",
                                  bundle: ESUtilities.shared.bundle),
                            forCellReuseIdentifier: Constants.ReuseIdentifier.mainCell)
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         tableView.reloadData()
     }
 

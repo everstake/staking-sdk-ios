@@ -84,7 +84,7 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
         let coin = itemsFor(indexPath.section)[indexPath.row]
         cell.logoImageView.kf.setImage(with: coin.iconUrl)
         cell.titleLabel.text = coin.title
-        cell.subTitleLabel.text = coin.displayApr
+        cell.subtitleLabel.text = coin.displayApr
         cell.steakedLabel.text = coin.displayAmount
         cell.coinContentView.alpha = coin.comingSoon ? 0.7 : 0
         

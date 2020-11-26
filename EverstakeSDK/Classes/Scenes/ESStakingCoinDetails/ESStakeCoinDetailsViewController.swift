@@ -66,8 +66,7 @@ class ESStakeCoinDetailsViewController: UIViewController,
     }
     
     func openCalculatorButtonPressed() {
-        //TODO: Implement
-
+        router?.openCalculator()
     }
     
     func claimButtonPressed() {

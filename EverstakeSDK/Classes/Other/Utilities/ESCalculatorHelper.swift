@@ -30,7 +30,8 @@ class ESCalculatorHelper {
 
     public static func getCalculations(model: ESSharedModel.Coin,
                                        amount: Double,
-                                       includeValidatorFee: Bool = false, // TODO: Add validator info
+                                       includeValidatorFee: Bool = false,
+                                       // TODO: Add validator info
                                        includeReinvestment: Bool = false) -> ESCalculatorHelper.Result {
         
         guard let yieldPercent = Double(model.yieldPercent ?? "0"),

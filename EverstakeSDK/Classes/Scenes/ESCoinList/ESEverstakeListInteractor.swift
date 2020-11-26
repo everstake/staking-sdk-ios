@@ -79,6 +79,9 @@ class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDa
         } ?? [String: ESSharedModel.Stake]()
         
         presenter?.updateWith(coins: coinsMap, stakes: stakesMap)
+        
+        //Save data in shared data manager
+        ESDataManager.shared.set(coins: coins, stakes: stakes)
     }
     
     private var stakeRequestCoins: [ESEverstakeList.StakeRequest.Coin]? {

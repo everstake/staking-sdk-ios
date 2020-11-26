@@ -67,7 +67,8 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        addDoneButtonOnKeyboard()
+        amountTextField.addDoneButtonWith(width: view.frame.width,
+                                          selector: #selector(ESNewStakeViewController.doneButtonAction))
         sliderController.embedSliderIn(targetView: sliderContainerView,
                                        targetViewController: self)
         validatorContainerView.setGradientColors(one: UIColor(hex: "#C4C4C4")!.withAlphaComponent(0),
@@ -130,24 +131,6 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
         let val = amount / maxAmount
         sliderController.setSlider(value: val, animated: true)
         sliderValueDidChange(value: val)
-    }
-    
-    func addDoneButtonOnKeyboard() {
-        let doneToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-        doneToolbar.barStyle = UIBarStyle.default
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace,
-                                        target: nil, action: nil)
-        let done = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done,
-                                   target: self, action: #selector(ESNewStakeViewController.doneButtonAction))
-
-        var items = [UIBarButtonItem]()
-        items.append(flexSpace)
-        items.append(done)
-
-        doneToolbar.items = items
-        doneToolbar.sizeToFit()
-
-        amountTextField.inputAccessoryView = doneToolbar
     }
     
     @objc func doneButtonAction() {

@@ -11,7 +11,7 @@ class ESCoinTableViewCell: UITableViewCell {
 
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var disclosureImageView: UIImageView!
     @IBOutlet weak var coinContentView: UIView!
     @IBOutlet weak var steakedLabel: UILabel!
