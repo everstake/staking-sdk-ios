@@ -22,7 +22,7 @@ class ESCalculatorPresenter: ESCalculatorPresentationLogic {
     func present(_ model: ESSharedModel.Combined, validator: ESSharedModel.Validator?) {
         let viewModel = ESCalculator.ViewModel(model: model,
                                                selectedValidator: validator)
-        viewController?.display(viewModel: viewModel)
+        viewController?.display(newViewModel: viewModel)
     }
 
 }

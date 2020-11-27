@@ -10,13 +10,13 @@ import UIKit
 
 extension UITextField {
     
-    func addDoneButtonWith(width: CGFloat, selector: Selector) {
+    func addDoneButtonWith(width: CGFloat, target: Any, selector: Selector) {
         let doneToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: width, height: 50))
         doneToolbar.barStyle = UIBarStyle.default
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace,
                                         target: nil, action: nil)
         let done = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done,
-                                   target: self, action: selector)
+                                   target: target, action: selector)
 
         var items = [UIBarButtonItem]()
         items.append(flexSpace)

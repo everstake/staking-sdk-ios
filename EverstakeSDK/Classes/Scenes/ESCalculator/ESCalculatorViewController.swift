@@ -13,12 +13,14 @@
 import UIKit
 
 protocol ESCalculatorDisplayLogic: class {
-    func display(viewModel: ESCalculator.ViewModel)
+    func display(newViewModel: ESCalculator.ViewModel)
 }
 
 class ESCalculatorViewController: UIViewController, ESCalculatorDisplayLogic {
     var interactor: ESCalculatorBusinessLogic?
     var router: (NSObjectProtocol & ESCalculatorRoutingLogic & ESCalculatorDataPassing)?
+
+    var viewModel: ESCalculator.ViewModel?
 
 //MARK: Outlets
 
@@ -31,6 +33,8 @@ class ESCalculatorViewController: UIViewController, ESCalculatorDisplayLogic {
     @IBOutlet weak var dailyIncomeValueLabel: UILabel!
     @IBOutlet weak var mounthlyIncomeValueLabel: UILabel!
     @IBOutlet weak var yearlyIncomeValueLabel: UILabel!
+    @IBOutlet weak var includeValidatorFeeSwitch: UISwitch!
+    @IBOutlet weak var reinvestEarningsSwitch: UISwitch!
     
 //MARK: Actions
     
@@ -47,28 +51,28 @@ class ESCalculatorViewController: UIViewController, ESCalculatorDisplayLogic {
     }
     
     @IBAction func proceedToStakingButtonPressed() {
-        //TODO: open stake with current settings
+        router?.proceedToStakingWith(amount: viewModel?.amountToStake ?? 0)
     }
     
-    @IBAction func reinvestEarningsSwitchValueChanged(_ sender: UISwitch) {
-        //TODO: update calculation
+    @IBAction func reinvestEarningsSwitchValueChanged() {
+        update()
     }
     
-    @IBAction func includeValidatorFeeSwitchValueChanged(_ sender: UISwitch) {
-        //TODO: update calculation
+    @IBAction func includeValidatorFeeSwitchValueChanged() {
+        update()
     }
     
     //Required by keyboard done button
     @objc func doneButtonAction() {
         amountTextField.resignFirstResponder()
-        //TODO: update calculation
+        update()
     }
     
-    // MARK: View lifecycle
+// MARK: View lifecycle
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        amountTextField.addDoneButtonWith(width: view.frame.width,
+        amountTextField.addDoneButtonWith(width: view.frame.width, target: self,
                                           selector: #selector(ESCalculatorViewController.doneButtonAction))
     }
     
@@ -77,13 +81,35 @@ class ESCalculatorViewController: UIViewController, ESCalculatorDisplayLogic {
         interactor?.getData()
     }
     
-    func display(viewModel: ESCalculator.ViewModel) {
+    
+//MARK: - ESCalculatorDisplayLogic
+    
+    func display(newViewModel: ESCalculator.ViewModel) {
+        viewModel = newViewModel
+        update()
+    }
+    
+
+//MARK: - Update UI
+    
+    private func update() {
+        
+        self.viewModel?.includeValidatorFee = includeValidatorFeeSwitch.isOn
+        self.viewModel?.includeReinvestment = reinvestEarningsSwitch.isOn
+        self.viewModel?.amountToStake = Double(amountTextField.text ?? "0") ?? 0
+        self.viewModel?.updateCalculations()
+        
+        guard let viewModel = viewModel else { return }
+
         symbolLabel.text = viewModel.symbol
         validatorValueLabel.text = viewModel.validatorName
         yearlyIncomeLabel.text = viewModel.yearlyIncom
         currencyValueLabel.text = viewModel.currency
-        feeLabel.text = viewModel.validatorFee
         feeLabel.isHidden = !viewModel.showFee
+        feeLabel.text = viewModel.displayValidatorFee
+        dailyIncomeValueLabel.text = viewModel.displayPerDayAmount
+        mounthlyIncomeValueLabel.text = viewModel.displayPerMonthAmount
+        yearlyIncomeValueLabel.text = viewModel.displayPerYearAmount
     }
     
 }

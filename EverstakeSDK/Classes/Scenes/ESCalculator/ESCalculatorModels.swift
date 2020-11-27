@@ -13,8 +13,6 @@
 import UIKit
 
 enum ESCalculator {
-
-// MARK: Use cases
   
     struct ViewModel {
         
@@ -22,16 +20,73 @@ enum ESCalculator {
         let currency: String!
         let yearlyIncom: String!
         let validatorName: String!
-        let validatorFee: String?
         let showFee: Bool
+        let validatorFee: Double!
+        
+        var perYear: Double!
+        var perMonth: Double!
+        var perDay: Double!
+        
+        var coin: ESSharedModel.Coin
+        var validator: ESSharedModel.Validator?
+        var amountToStake: Double!
+        var includeValidatorFee: Bool!
+        var includeReinvestment: Bool!
         
         init(model: ESSharedModel.Combined, selectedValidator: ESSharedModel.Validator?) {
             symbol = (model.coin.symbol ?? "").uppercased()
             currency = model.coin.name ?? ""
             yearlyIncom = "Yearly incom: " + (model.coin.apr ?? "") + "%"
             validatorName = selectedValidator?.name ?? ""
-            showFee = !(selectedValidator?.fee != nil && selectedValidator!.fee == "0")
-            validatorFee = "Fee: " + (selectedValidator?.fee ?? "") + "%"
+            showFee = !(selectedValidator?.fee != nil && selectedValidator?.fee == "0")
+            validatorFee = Double(selectedValidator?.fee ?? "0") ?? 0
+                        
+            amountToStake = 0
+            perYear = 0
+            perMonth = 0
+            perDay = 0
+            
+            includeValidatorFee = true
+            includeReinvestment = true
+
+            coin = model.coin
+        }
+        
+        
+        mutating func updateCalculations() {
+            let calculation = ESCalculatorHelper.getCalculations(model: coin,
+                                                                 amount: amountToStake,
+                                                                 includeValidatorFee: includeValidatorFee,
+                                                                 includeReinvestment: includeReinvestment,
+                                                                 validatorFee: validatorFee)
+            perYear = calculation.perYear
+            perMonth = calculation.perMonth
+            perDay = calculation.perDay
+        }
+        
+        var displayValidatorFee: String {
+            return "Fee: \(validatorFee ?? 0)%"
+        }
+        
+        var displayPerYearAmount: String {
+            return format(amount: perYear)
+        }
+        
+        var displayPerMonthAmount: String {
+            return format(amount: perMonth)
+        }
+        
+        var displayPerDayAmount: String {
+            return format(amount: perDay)
+        }
+        
+        private func format(amount: Double?) -> String {
+            if let amount = amount,
+               let symbol = symbol {
+                return amount.clean + " " + symbol
+            } else {
+                return ""
+            }
         }
     }
 }

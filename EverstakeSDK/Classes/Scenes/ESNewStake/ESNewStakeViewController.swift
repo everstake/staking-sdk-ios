@@ -67,7 +67,7 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        amountTextField.addDoneButtonWith(width: view.frame.width,
+        amountTextField.addDoneButtonWith(width: view.frame.width, target: self,
                                           selector: #selector(ESNewStakeViewController.doneButtonAction))
         sliderController.embedSliderIn(targetView: sliderContainerView,
                                        targetViewController: self)
@@ -85,7 +85,7 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
   
     func display(viewModel: ESNewStake.ViewModel) {
         self.viewModel = viewModel
-        updateView()
+        updateWithNewAmount()
     }
     
 //MARK: - SliderControllerDelegate
@@ -120,21 +120,22 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
         validatorContainerView.showGradient(viewModel.isReliable)
         reliableContainer.isHidden = !viewModel.isReliable
     }
-    
+
     func updateWithNewAmount() {
-        guard let newAmountText = amountTextField.text,
-              let newAmount = Float(newAmountText),
-              let viewModel = viewModel else { return }
-        
-        let maxAmount = Float(viewModel.balance)
-        let amount = min(newAmount, maxAmount)
-        let val = amount / maxAmount
-        sliderController.setSlider(value: val, animated: true)
-        sliderValueDidChange(value: val)
+        if let viewModel = viewModel,
+           let maxAmount = viewModel.balance,
+           maxAmount > 0 {
+            let newAmount = viewModel.amountToStake
+            let amount = min(newAmount, maxAmount)
+            let val = amount / maxAmount
+            sliderController.setSlider(value: Float(val), animated: true)
+            sliderValueDidChange(value: Float(val))
+        }
     }
     
     @objc func doneButtonAction() {
         amountTextField.resignFirstResponder()
+        viewModel?.amountToStake = Double(amountTextField.text ?? "0") ?? 0
         updateWithNewAmount()
     }
 }

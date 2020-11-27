@@ -14,7 +14,8 @@ import UIKit
 
 protocol ESNewStakePresentationLogic {
     func present(_ model: ESSharedModel.Combined,
-                 selectedValidators: [ESSharedModel.Validator])
+                 selectedValidators: [ESSharedModel.Validator],
+                 prefilledAmount: Double?)
 }
 
 class ESNewStakePresenter: ESNewStakePresentationLogic {
@@ -22,9 +23,12 @@ class ESNewStakePresenter: ESNewStakePresentationLogic {
     weak var viewController: ESNewStakeDisplayLogic?
     
     func present(_ model: ESSharedModel.Combined,
-                 selectedValidators: [ESSharedModel.Validator]) {
+                 selectedValidators: [ESSharedModel.Validator],
+                 prefilledAmount: Double?) {
+        
         let viewModel = ESNewStake.ViewModel(model: model,
-                                             selectedValidators: selectedValidators)
+                                             selectedValidators: selectedValidators,
+                                             amount: prefilledAmount)
         viewController?.display(viewModel: viewModel)
     }
     

@@ -32,15 +32,15 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
     func stakePressed()  {
         guard let model = dataStore?.model else { return }
 
-        if model.stake == nil {
-            routeToNewStakeWith(model)
-        } else {
+        if model.stake != nil && model.coin.stakeType == .oneToMany {
             viewController?.presentAlertWith(title: "Stake", message: "Please unstake your funds first.")
+        } else {
+            routeToNewStakeWith(model)
         }
     }
     
     func routeToNewStakeWith(_ model: ESSharedModel.Combined) {
-        let newStakeViewController = ESNewStakeConfigurator.viewControllerWith(model)
+        let newStakeViewController = ESNewStakeConfigurator.viewControllerWith(model: model)
         viewController?.navigationController?.pushViewController(newStakeViewController,
                                                                  animated: true)
     }

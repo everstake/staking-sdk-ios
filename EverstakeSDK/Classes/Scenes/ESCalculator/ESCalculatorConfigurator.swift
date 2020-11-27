@@ -12,7 +12,9 @@ class ESCalculatorConfigurator {
     public static func viewControllerWith(_ model: ESSharedModel.Combined) -> UIViewController {
         let viewController = ESCalculatorViewController(nibName: "ESCalculatorViewController",
                                                         bundle: ESUtilities.shared.bundle)
-        let interactor = ESCalculatorInteractor(model: model)
+        let interactor = ESCalculatorInteractor()
+        interactor.model = model
+        
         let presenter = ESCalculatorPresenter()
         let router = ESCalculatorRouter()
         viewController.interactor = interactor

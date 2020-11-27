@@ -15,6 +15,7 @@ import UIKit
 @objc protocol ESCalculatorRoutingLogic {
     func selectValidator()
     func selectCurrency()
+    func proceedToStakingWith(amount: Double)
 }
 
 protocol ESCalculatorDataPassing {
@@ -26,6 +27,20 @@ class ESCalculatorRouter: NSObject, ESCalculatorRoutingLogic, ESCalculatorDataPa
     var dataStore: ESCalculatorDataStore?
 
     // MARK: Routing
+    
+    func proceedToStakingWith(amount: Double) {
+        guard let model = dataStore?.model else { return }
+        
+        if model.stake != nil && model.coin.stakeType == .oneToMany {
+            viewController?.presentAlertWith(title: "Stake", message: "Please unstake your funds first.")
+        } else {
+            let newStakeViewController = ESNewStakeConfigurator.viewControllerWith(model: model,
+                                                                                   validator: dataStore?.selectedValidator,
+                                                                                   amount: amount)
+            viewController?.navigationController?.pushViewController(newStakeViewController,
+                                                                     animated: true)
+        }
+    }
     
     func selectValidator() {
         guard let validators = dataStore?.model.coin.validators,

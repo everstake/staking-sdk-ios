@@ -28,13 +28,20 @@ class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
     
     var model: ESSharedModel.Combined
     var selectedValidators = [ESSharedModel.Validator]()
+    var prefilledAmount: Double?
     
-    init(model: ESSharedModel.Combined) {
+    init(model: ESSharedModel.Combined,
+         validator: ESSharedModel.Validator? = nil,
+         amount: Double? = nil) {
+        
         self.model = model
+        self.prefilledAmount = amount
         
         // Set default validators
-        if let validator = model.stake?.validators?.first {
+        if let validator = validator {
             self.selectedValidators.append(validator)
+        } else if let validators = model.stake?.validators {
+            self.selectedValidators = validators
         } else if let validator = model.coin.validators?.first {
             self.selectedValidators.append(validator)
         }
@@ -42,6 +49,7 @@ class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
   
     func loadData() {
         presenter?.present(model,
-                           selectedValidators: selectedValidators)
+                           selectedValidators: selectedValidators,
+                           prefilledAmount: prefilledAmount)
     }
 }

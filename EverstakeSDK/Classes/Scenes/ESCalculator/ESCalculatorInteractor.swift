@@ -17,26 +17,20 @@ protocol ESCalculatorBusinessLogic {
 }
 
 protocol ESCalculatorDataStore {
-    var model: ESSharedModel.Combined { get set }
+    var model: ESSharedModel.Combined! { get set }
     var selectedValidator: ESSharedModel.Validator? { get set }
 }
 
 class ESCalculatorInteractor: ESCalculatorBusinessLogic, ESCalculatorDataStore {
     var presenter: ESCalculatorPresentationLogic?
     var worker: ESCalculatorWorker?
-    var model: ESSharedModel.Combined {
+    var model: ESSharedModel.Combined! {
         didSet {
-            selectedValidator = model.stake?.validators?.first
+            selectedValidator = model.coin.validators?.first
         }
     }
     var selectedValidator: ESSharedModel.Validator?
-
-    init(model: ESSharedModel.Combined) {
-        self.model = model
-    }
-    
-// MARK: Do something
-    
+        
     func getData() {
         presenter?.present(model, validator: selectedValidator)
     }

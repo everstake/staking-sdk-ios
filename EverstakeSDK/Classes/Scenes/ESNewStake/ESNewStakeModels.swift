@@ -33,16 +33,17 @@ enum ESNewStake {
         var selectedValidators: [ESSharedModel.Validator]!
 
         init(model: ESSharedModel.Combined,
-             selectedValidators: [ESSharedModel.Validator]) {
+             selectedValidators: [ESSharedModel.Validator],
+             amount: Double?) {
             apr = (model.coin.apr ?? "0") + "%"
-            symbol = model.coin.symbol ?? ""
+            symbol = model.coin.symbol?.uppercased() ?? ""
             balance = model.stake?.amount ?? 0 // TODO: Use balance from SDK interface
             precision = Int(model.coin.precision ?? "5")
             coin = model.coin
             perYear = 0
             perMonth = 0
             perDay = 0
-            amountToStake = 0
+            amountToStake = amount ?? 0
             validatorTitleLabel = (model.coin.stakeType == .oneToMany) ? "Select validators" : "Select validator"
 
             currentValidators = model.stake?.validators

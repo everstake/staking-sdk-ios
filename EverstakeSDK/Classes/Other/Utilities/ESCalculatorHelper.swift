@@ -31,16 +31,15 @@ class ESCalculatorHelper {
     public static func getCalculations(model: ESSharedModel.Coin,
                                        amount: Double,
                                        includeValidatorFee: Bool = false,
-                                       // TODO: Add validator info
-                                       includeReinvestment: Bool = false) -> ESCalculatorHelper.Result {
+                                       includeReinvestment: Bool = false,
+                                       validatorFee: Double = 0) -> ESCalculatorHelper.Result {
         
         guard let yieldPercent = Double(model.yieldPercent ?? "0"),
               let periodSeconds = Int(model.yieldInterval ?? "0") else {
             return Result(perYear: 0, perMonth: 0, perDay: 0)
         }
         
-        // TODO: includeValidatorFee == true case
-        let periodScale = (includeValidatorFee ? 0 : yieldPercent) * pow(10, -2)
+        let periodScale = (includeValidatorFee ? (yieldPercent * (1 - validatorFee * pow(10, -2))) : yieldPercent) * pow(10, -2)
 
         let calcHelper = ESCalculatorHelper(amount: amount,
                                             periodScale: periodScale,
@@ -78,7 +77,7 @@ class ESCalculatorHelper {
             periodIncome = amount * periodScale * periodCount
         }
         
-        return periodIncome.rounded(toPlaces: 5)
+        return periodIncome.rounded(toPlaces: 6)
     }
 
     private struct Constants {
