@@ -9,7 +9,7 @@ import Foundation
 
 class ESCalculatorConfigurator {
     
-    public static func viewControllerWith(_ model: ESSharedModel.Combined) -> UIViewController {
+    public static func viewControllerWith(_ model: ESServerModel.Combined) -> UIViewController {
         let viewController = ESCalculatorViewController(nibName: "ESCalculatorViewController",
                                                         bundle: ESUtilities.shared.bundle)
         let interactor = ESCalculatorInteractor()

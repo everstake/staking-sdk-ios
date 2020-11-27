@@ -11,10 +11,10 @@ class ESCurrencySelectorViewController: UIViewController, UITableViewDelegate, U
 
     @IBOutlet weak var tableView: UITableView!
 
-    var models: [ESSharedModel.Combined]!
+    var models: [ESServerModel.Combined]!
     var selectedId: String!
     
-    var completedWith: ((ESSharedModel.Combined?) -> ())?
+    var completedWith: ((ESServerModel.Combined?) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -28,7 +28,7 @@ class ESCalculatorHelper {
         self.includeReinvestment = includeReinvestment
     }
 
-    public static func getCalculations(model: ESSharedModel.Coin,
+    public static func getCalculations(model: ESServerModel.Coin,
                                        amount: Double,
                                        includeValidatorFee: Bool = false,
                                        includeReinvestment: Bool = false,

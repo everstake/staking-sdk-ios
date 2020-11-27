@@ -27,9 +27,9 @@ enum ESStakeCoinDetails {
         let amountToClaim: Double!
         let validators: [ValidatorStake]!
         let isStaked: Bool!
-        let type: ESSharedModel.Coin.StakeType!
+        let type: ESServerModel.Coin.StakeType!
         
-        init(model: ESSharedModel.Combined) {
+        init(model: ESServerModel.Combined) {
             title = model.coin.name
             iconURL = model.coin.iconUrl
             apr = model.coin.apr
@@ -123,7 +123,7 @@ enum ESStakeCoinDetails {
             let id: String!
             let symbol: String!
             
-            init(validator: ESSharedModel.Validator, _symbol: String) {
+            init(validator: ESServerModel.Validator, _symbol: String) {
                 title = validator.name ?? ""
                 amount = (validator.amount ?? "0") + " " + _symbol.uppercased()
                 id = validator.id ?? ""
@@ -133,7 +133,7 @@ enum ESStakeCoinDetails {
     }
 }
 
-private extension Array where Element == ESSharedModel.Validator {
+private extension Array where Element == ESServerModel.Validator {
     func asViewModelWith(_ symbol: String) -> [ESStakeCoinDetails.ViewModel.ValidatorStake] {
         return self.map { ESStakeCoinDetails.ViewModel.ValidatorStake(validator: $0, _symbol: symbol) }
     }

@@ -8,17 +8,17 @@
 import UIKit
 
 protocol ESEverstakeListPresentationLogic {
-    func updateWith(coins: [String: ESSharedModel.Coin],
-                    stakes: [String: ESSharedModel.Stake])
-    func preparedShared(model: ESSharedModel.Combined, action: ESEverstakeList.Action)
+    func updateWith(coins: [String: ESServerModel.Coin],
+                    stakes: [String: ESServerModel.Stake])
+    func preparedShared(model: ESServerModel.Combined, action: ESEverstakeList.Action)
 }
 
 class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
     
     weak var viewController: ESEverstakeListDisplayLogic?
     
-    func updateWith(coins: [String: ESSharedModel.Coin],
-                    stakes: [String: ESSharedModel.Stake]) {
+    func updateWith(coins: [String: ESServerModel.Coin],
+                    stakes: [String: ESServerModel.Stake]) {
                   
         var viewModel = convertToViewModel(coins: coins, stakes: stakes)
         
@@ -28,7 +28,7 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
         viewController?.updateWith(viewModel: viewModel)
     }
     
-    func preparedShared(model: ESSharedModel.Combined, action: ESEverstakeList.Action) {
+    func preparedShared(model: ESServerModel.Combined, action: ESEverstakeList.Action) {
         viewController?.preparedShared(model, action: action)
     }
     
@@ -43,8 +43,8 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
     
 //MARK: Private
     
-    private func convertToViewModel(coins: [String: ESSharedModel.Coin],
-                                    stakes: [String: ESSharedModel.Stake]) -> ESEverstakeList.ViewModel {
+    private func convertToViewModel(coins: [String: ESServerModel.Coin],
+                                    stakes: [String: ESServerModel.Stake]) -> ESEverstakeList.ViewModel {
         
         var result = ([ESEverstakeList.Coin](),
                       [ESEverstakeList.Coin]())

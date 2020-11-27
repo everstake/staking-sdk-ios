@@ -11,16 +11,16 @@ class ESDataManager {
     
     static let shared = ESDataManager()
     
-    var models = [ESSharedModel.Combined]()
+    var models = [ESServerModel.Combined]()
     
-    func set(coins: [ESSharedModel.Coin], stakes: [ESSharedModel.Stake]?) {
+    func set(coins: [ESServerModel.Coin], stakes: [ESServerModel.Stake]?) {
         
         models.removeAll()
         
-        let stakesMap = stakes?.asMap() ?? [String: ESSharedModel.Stake]()
+        let stakesMap = stakes?.asMap() ?? [String: ESServerModel.Stake]()
         
         for coin in coins {
-            let model = ESSharedModel.Combined(coin: coin,
+            let model = ESServerModel.Combined(coin: coin,
                                                stake: stakesMap[coin.id ?? ""])
             models.append(model)
         }
@@ -28,8 +28,8 @@ class ESDataManager {
     
 }
 
-private extension Array where Element == ESSharedModel.Stake {
-    func asMap() -> [String: ESSharedModel.Stake] {
+private extension Array where Element == ESServerModel.Stake {
+    func asMap() -> [String: ESServerModel.Stake] {
         return self.reduce(into: [:]) { result, model in
             result[model.coinId!] = model
         }

@@ -41,7 +41,7 @@ enum ESEverstakeList {
             }
         }
         
-        init(coin: ESSharedModel.Coin, stake: ESSharedModel.Stake?) {
+        init(coin: ESServerModel.Coin, stake: ESServerModel.Stake?) {
             id = coin.id
             title = coin.name ?? ""
             iconUrl = coin.iconUrl

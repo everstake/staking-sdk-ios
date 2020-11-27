@@ -17,7 +17,7 @@ protocol ESStakeCoinDetailsBusinessLogic {
 }
 
 protocol ESStakeCoinDetailsDataStore {
-    var model: ESSharedModel.Combined! { get set }
+    var model: ESServerModel.Combined! { get set }
 }
 
 class ESStakeCoinDetailsInteractor: ESStakeCoinDetailsBusinessLogic, ESStakeCoinDetailsDataStore {
@@ -25,9 +25,9 @@ class ESStakeCoinDetailsInteractor: ESStakeCoinDetailsBusinessLogic, ESStakeCoin
     var presenter: ESStakeCoinDetailsPresentationLogic?
     var worker: ESStakeCoinDetailsWorker?
     
-    var model: ESSharedModel.Combined!
+    var model: ESServerModel.Combined!
     
-    init(_ model: ESSharedModel.Combined) {
+    init(_ model: ESServerModel.Combined) {
         self.model = model
     }
     

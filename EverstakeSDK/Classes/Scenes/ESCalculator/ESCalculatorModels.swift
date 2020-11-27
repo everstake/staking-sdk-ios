@@ -27,13 +27,13 @@ enum ESCalculator {
         var perMonth: Double!
         var perDay: Double!
         
-        var coin: ESSharedModel.Coin
-        var validator: ESSharedModel.Validator?
+        var coin: ESServerModel.Coin
+        var validator: ESServerModel.Validator?
         var amountToStake: Double!
         var includeValidatorFee: Bool!
         var includeReinvestment: Bool!
         
-        init(model: ESSharedModel.Combined, selectedValidator: ESSharedModel.Validator?) {
+        init(model: ESServerModel.Combined, selectedValidator: ESServerModel.Validator?) {
             symbol = (model.coin.symbol ?? "").uppercased()
             currency = model.coin.name ?? ""
             yearlyIncom = "Yearly incom: " + (model.coin.apr ?? "") + "%"

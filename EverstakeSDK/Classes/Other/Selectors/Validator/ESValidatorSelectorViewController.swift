@@ -12,7 +12,7 @@ class ESValidatorSelectorViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     
-    var validators = [ESSharedModel.Validator]()
+    var validators = [ESServerModel.Validator]()
     var multipleSelection: Bool!
     var selectedIds = Set<String>()
     var completedWith: ((Set<String>) -> ())?

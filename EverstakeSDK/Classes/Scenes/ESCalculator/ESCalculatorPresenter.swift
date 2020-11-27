@@ -13,13 +13,13 @@
 import UIKit
 
 protocol ESCalculatorPresentationLogic {
-    func present(_ model: ESSharedModel.Combined, validator: ESSharedModel.Validator?)
+    func present(_ model: ESServerModel.Combined, validator: ESServerModel.Validator?)
 }
 
 class ESCalculatorPresenter: ESCalculatorPresentationLogic {
     weak var viewController: ESCalculatorDisplayLogic?
     
-    func present(_ model: ESSharedModel.Combined, validator: ESSharedModel.Validator?) {
+    func present(_ model: ESServerModel.Combined, validator: ESServerModel.Validator?) {
         let viewModel = ESCalculator.ViewModel(model: model,
                                                selectedValidator: validator)
         viewController?.display(newViewModel: viewModel)

@@ -10,7 +10,7 @@ import UIKit
 
 class ESStakingCoinDetailsConfigurator {
        
-    public static func viewControllerWith(_ model: ESSharedModel.Combined) -> UIViewController {
+    public static func viewControllerWith(_ model: ESServerModel.Combined) -> UIViewController {
         let viewController = ESStakeCoinDetailsViewController(nibName: "ESStakeCoinDetailsViewController",
                                                               bundle: ESUtilities.shared.bundle)
         let interactor = ESStakeCoinDetailsInteractor(model)

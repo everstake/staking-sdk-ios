@@ -39,7 +39,7 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
         }
     }
     
-    func routeToNewStakeWith(_ model: ESSharedModel.Combined) {
+    func routeToNewStakeWith(_ model: ESServerModel.Combined) {
         let newStakeViewController = ESNewStakeConfigurator.viewControllerWith(model: model)
         viewController?.navigationController?.pushViewController(newStakeViewController,
                                                                  animated: true)

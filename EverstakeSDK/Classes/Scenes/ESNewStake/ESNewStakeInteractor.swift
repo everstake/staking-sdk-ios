@@ -17,8 +17,8 @@ protocol ESNewStakeBusinessLogic {
 }
 
 protocol ESNewStakeDataStore {
-    var model: ESSharedModel.Combined { get set }
-    var selectedValidators: [ESSharedModel.Validator] { get set }
+    var model: ESServerModel.Combined { get set }
+    var selectedValidators: [ESServerModel.Validator] { get set }
 }
 
 class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
@@ -26,12 +26,12 @@ class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
     var presenter: ESNewStakePresentationLogic?
     var worker: ESNewStakeWorker?
     
-    var model: ESSharedModel.Combined
-    var selectedValidators = [ESSharedModel.Validator]()
+    var model: ESServerModel.Combined
+    var selectedValidators = [ESServerModel.Validator]()
     var prefilledAmount: Double?
     
-    init(model: ESSharedModel.Combined,
-         validator: ESSharedModel.Validator? = nil,
+    init(model: ESServerModel.Combined,
+         validator: ESServerModel.Validator? = nil,
          amount: Double? = nil) {
         
         self.model = model

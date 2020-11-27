@@ -21,7 +21,7 @@ enum ESNewStake {
         let balance: Double!
         let precision: Int!
         
-        let coin: ESSharedModel.Coin!
+        let coin: ESServerModel.Coin!
 
         var perYear: Double!
         var perMonth: Double!
@@ -29,11 +29,11 @@ enum ESNewStake {
 
         var validatorTitleLabel: String!
         
-        var currentValidators: [ESSharedModel.Validator]?
-        var selectedValidators: [ESSharedModel.Validator]!
+        var currentValidators: [ESServerModel.Validator]?
+        var selectedValidators: [ESServerModel.Validator]!
 
-        init(model: ESSharedModel.Combined,
-             selectedValidators: [ESSharedModel.Validator],
+        init(model: ESServerModel.Combined,
+             selectedValidators: [ESServerModel.Validator],
              amount: Double?) {
             apr = (model.coin.apr ?? "0") + "%"
             symbol = model.coin.symbol?.uppercased() ?? ""

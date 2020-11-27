@@ -9,8 +9,8 @@ import Foundation
 
 class ESNewStakeConfigurator {
     
-    public static func viewControllerWith(model: ESSharedModel.Combined,
-                                          validator: ESSharedModel.Validator? = nil,
+    public static func viewControllerWith(model: ESServerModel.Combined,
+                                          validator: ESServerModel.Validator? = nil,
                                           amount: Double? = nil) -> UIViewController {
         
         let viewController = ESNewStakeViewController(nibName: "ESNewStakeViewController",

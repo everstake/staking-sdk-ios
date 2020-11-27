@@ -9,7 +9,7 @@ import Foundation
 
 class ESEverstakeListConfigurator {
     
-    static func setup(userCoins: [ESCoin]) -> UIViewController {
+    static func setup(userCoins: [ESUserCoin]) -> UIViewController {
         
         let viewController = ESEverstakeListViewController(nibName: "ESEverstakeListViewController",
                                                            bundle: ESUtilities.shared.bundle)

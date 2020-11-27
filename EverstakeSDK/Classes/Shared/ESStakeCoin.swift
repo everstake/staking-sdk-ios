@@ -9,7 +9,7 @@ import Foundation
 
 //MARK: - Server Models
 
-struct ESSharedModel {
+struct ESServerModel {
     
     struct Combined {
         let coin: Coin
