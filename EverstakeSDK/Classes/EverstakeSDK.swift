@@ -45,7 +45,7 @@ public struct ESUserCoin {
     public init(symbol: String,
                 address: String,
                 balance: String) {
-        self.symbol = symbol
+        self.symbol = symbol.lowercased()
         self.address = address
         self.balance = balance
     }

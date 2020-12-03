@@ -122,15 +122,16 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
     }
 
     func updateWithNewAmount() {
+        var val = 0 as Float
         if let viewModel = viewModel,
            let maxAmount = viewModel.balance,
            maxAmount > 0 {
             let newAmount = viewModel.amountToStake
             let amount = min(newAmount, maxAmount)
-            let val = amount / maxAmount
+            val = Float(amount / maxAmount)
             sliderController.setSlider(value: Float(val), animated: true)
-            sliderValueDidChange(value: Float(val))
         }
+        sliderValueDidChange(value: val)
     }
     
     @objc func doneButtonAction() {

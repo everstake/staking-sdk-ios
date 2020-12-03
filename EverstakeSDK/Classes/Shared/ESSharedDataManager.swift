@@ -18,11 +18,12 @@ class ESDataManager {
         models.removeAll()
         
         let stakesMap = stakes?.asMap() ?? [String: ESServerModel.Stake]()
+        let userCoinsMap = userCoins.asMap()
         
         for coin in coins {
             let model = ESServerModel.Combined(coin: coin,
                                                stake: stakesMap[coin.id ?? ""],
-                                               userBalance: nil) // TODO: Refactor
+                                               userBalance: userCoinsMap[coin.id ?? ""]?.balance)
             models.append(model)
         }
     }
@@ -36,7 +37,15 @@ class ESDataManager {
 private extension Array where Element == ESServerModel.Stake {
     func asMap() -> [String: ESServerModel.Stake] {
         return self.reduce(into: [:]) { result, model in
-            result[model.coinId!] = model
+            result[model.coinId ?? ""] = model
+        }
+    }
+}
+
+private extension Array where Element == ESUserCoin {
+    func asMap() -> [String: ESUserCoin] {
+        return self.reduce(into: [:]) { result, model in
+            result[model.symbol ?? ""] = model
         }
     }
 }

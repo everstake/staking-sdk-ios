@@ -18,7 +18,7 @@ enum ESNewStake {
         
         let apr: String!
         let symbol: String!
-        let balance: Double!
+        let balance: Double?
         let precision: Int!
         
         let coin: ESServerModel.Coin!
@@ -37,7 +37,7 @@ enum ESNewStake {
              amount: Double?) {
             apr = (model.coin.apr ?? "0") + "%"
             symbol = model.coin.symbol?.uppercased() ?? ""
-            balance = model.stake?.amount ?? 0 // TODO: Use balance from SDK interface
+            balance = Double(model.userBalance ?? "0")
             precision = Int(model.coin.precision ?? "5")
             coin = model.coin
             perYear = 0
