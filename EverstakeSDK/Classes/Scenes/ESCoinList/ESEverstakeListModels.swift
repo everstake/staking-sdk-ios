@@ -53,13 +53,7 @@ enum ESEverstakeList {
         }
         
     }
-    
-//MARK: Action
 
-    enum Action  {
-        case openCoinDetail
-    }
-    
 //MARK: - Server Models
     
     struct StakeRequest {

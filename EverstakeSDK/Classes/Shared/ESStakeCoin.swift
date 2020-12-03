@@ -14,6 +14,7 @@ struct ESServerModel {
     struct Combined {
         let coin: Coin
         let stake: Stake?
+        let userBalance: String?
     }
             
     struct Stake: Codable {

@@ -9,7 +9,6 @@ import UIKit
 
 protocol ESEverstakeListBusinessLogic {
     func loadDataList()
-    func getCoinStakeWith(_ id: String, with action: ESEverstakeList.Action)
 }
 
 protocol ESEverstakeListDataStore {
@@ -48,39 +47,11 @@ class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDa
         let request = ESEverstakeList.StakeRequest(coins: stakeRequestCoins)
         worker.loadStakeList(request: request, successWith: { data in
             self.stakes = ESUtilities.decode([ESServerModel.Stake].self, from: data)
-            self.addUserBalancesToStakes()
             self.completedDataLoad()
         })
     }
     
-    func getCoinStakeWith(_ id: String, with action: ESEverstakeList.Action) {
-        guard let coin = coins?.filter({ $0.id == id }).first else {
-            return
-        }
-
-        let stake = stakes?.filter({ $0.coinId == id }).first
-        
-        let sharedModel = ESServerModel.Combined(coin: coin, stake: stake)
-        presenter?.preparedShared(model: sharedModel, action: action)
-    }
-    
 //MARK: Private
-    
-    private func addUserBalancesToStakes() {
-
-        //TODO: Implement
-//        guard let mapSymbolCoin = mapSymbolCoin else {
-//            return
-//        }
-//
-//        let balances = userCoins.reduce(into: [:]) {
-//            $0[$1.symbol] = $1.balance
-//        }
-//
-//        stakes?.forEach {
-//            $0.balance = balances[$0.coinId]
-//        }
-    }
     
     private func completedDataLoad() {
         guard let coins = coins else {
@@ -96,11 +67,9 @@ class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDa
         } ?? [String: ESServerModel.Stake]()
         
         presenter?.updateWith(coins: coinsMap, stakes: stakesMap)
-        
-        //Add user coins
-        
+                
         //Save data in shared data manager
-        ESDataManager.shared.set(coins: coins, stakes: stakes)
+        ESDataManager.shared.set(coins: coins, stakes: stakes, userCoins: userCoins)
     }
     
     private var stakeRequestCoins: [ESEverstakeList.StakeRequest.Coin]? {

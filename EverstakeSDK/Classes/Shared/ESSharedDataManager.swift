@@ -13,7 +13,7 @@ class ESDataManager {
     
     var models = [ESServerModel.Combined]()
     
-    func set(coins: [ESServerModel.Coin], stakes: [ESServerModel.Stake]?) {
+    func set(coins: [ESServerModel.Coin], stakes: [ESServerModel.Stake]?, userCoins: [ESUserCoin]) {
         
         models.removeAll()
         
@@ -21,9 +21,14 @@ class ESDataManager {
         
         for coin in coins {
             let model = ESServerModel.Combined(coin: coin,
-                                               stake: stakesMap[coin.id ?? ""])
+                                               stake: stakesMap[coin.id ?? ""],
+                                               userBalance: nil) // TODO: Refactor
             models.append(model)
         }
+    }
+    
+    func getModelWith(id: String) -> ESServerModel.Combined? {
+        return models.filter({ $0.coin.id == id }).first
     }
     
 }

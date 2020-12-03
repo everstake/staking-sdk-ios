@@ -10,7 +10,6 @@ import UIKit
 protocol ESEverstakeListPresentationLogic {
     func updateWith(coins: [String: ESServerModel.Coin],
                     stakes: [String: ESServerModel.Stake])
-    func preparedShared(model: ESServerModel.Combined, action: ESEverstakeList.Action)
 }
 
 class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
@@ -26,10 +25,6 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
         viewModel.steakedList.sort(by: sortLogic)
         
         viewController?.updateWith(viewModel: viewModel)
-    }
-    
-    func preparedShared(model: ESServerModel.Combined, action: ESEverstakeList.Action) {
-        viewController?.preparedShared(model, action: action)
     }
     
     private func sortLogic(this: ESEverstakeList.Coin,
