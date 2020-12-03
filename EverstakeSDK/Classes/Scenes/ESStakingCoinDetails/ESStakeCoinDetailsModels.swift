@@ -19,8 +19,8 @@ enum ESStakeCoinDetails {
         let title: String!
         let iconURL: URL!
         let apr: String!
-        let serviceFeeMin: String!
-        let serviceFeeMax: String!
+        let serviceFeeMin: String?
+        let serviceFeeMax: String?
         let about: String!
         let symbol: String!
         let amount: Double!
@@ -33,8 +33,9 @@ enum ESStakeCoinDetails {
             title = model.coin.name
             iconURL = model.coin.iconUrl
             apr = model.coin.apr
-            serviceFeeMin = model.coin.fee?.min ?? "0"
-            serviceFeeMax = model.coin.fee?.max ?? "0"
+            let feeArray = model.coin.validators?.map{ $0.fee ?? "0" }
+            serviceFeeMin = feeArray?.min()
+            serviceFeeMax = feeArray?.max()
             about = model.coin.about ?? ""
             symbol = model.coin.symbol ?? ""
             isStaked = model.stake != nil && model.stake!.amount > 0
@@ -56,15 +57,19 @@ enum ESStakeCoinDetails {
         }
         
         var displayServiceFee: String {
-            if (serviceFeeMin == serviceFeeMax) {
-                return serviceFeeMin + "%"
-            } else {
-                return serviceFeeMin + "-" + serviceFeeMax + "%"
+            if let serviceFeeMin = serviceFeeMin,
+               let serviceFeeMax = serviceFeeMax {
+                if  (serviceFeeMin == serviceFeeMax) {
+                    return serviceFeeMin + "%"
+                } else {
+                    return serviceFeeMin + "-" + serviceFeeMax + "%"
+                }
             }
+            return ""
         }
         
         var hideServiceFee: Bool {
-            return serviceFeeMax == "0"
+            return serviceFeeMax == nil || serviceFeeMax! == "0"
         }
         
         var displayAmountToClaim: String {
