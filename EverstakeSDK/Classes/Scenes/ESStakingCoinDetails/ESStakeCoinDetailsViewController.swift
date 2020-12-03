@@ -16,8 +16,9 @@ protocol ESStakeCoinDetailsDisplayLogic: class {
     func updateWith(_ viewModel: ESStakeCoinDetails.ViewModel)
 }
 
-class ESStakeCoinDetailsViewController: UIViewController, ESStakeCoinDetailsDisplayLogic {
-
+class ESStakeCoinDetailsViewController: UIViewController,
+                                        ESStakeCoinDetailsDisplayLogic,
+                                        ESStakeCoinDetailsDisplayDataManagerDelegate {
     var interactor: ESStakeCoinDetailsBusinessLogic?
     var router: (NSObjectProtocol & ESStakeCoinDetailsRoutingLogic & ESStakeCoinDetailsDataPassing)?
    
@@ -42,21 +43,35 @@ class ESStakeCoinDetailsViewController: UIViewController, ESStakeCoinDetailsDisp
       
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         displayDataManager.tableView = tableView
         displayDataManager.titleLabel = titleLabel
+        displayDataManager.delegate = self
         
         interactor?.getDisplayData()
-    }
-  
-    
-    func doSomething() {
-//        let request = ESStakeCoinDetails.Something.Request()
-//        interactor?.doSomething(request: request)
     }
   
     func updateWith(_ viewModel: ESStakeCoinDetails.ViewModel) {
         displayDataManager.viewModel = viewModel
     }
     
+//MARK: - ESStakeCoinDetailsDisplayDataManagerDelegate
+    
+    func unstakeButtonPressedFor(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
+        router?.unstakeValidator(validator)
+    }
+    
+    func stakeButtonPressed() {
+        router?.stakePressed()
+    }
+    
+    func openCalculatorButtonPressed() {
+        router?.openCalculator()
+    }
+    
+    func claimButtonPressed() {
+        //TODO: Implement
+
+    }
     
 }

@@ -33,7 +33,7 @@ enum ESEverstakeList {
         
         var displayAmount: String {
             if let amount = amount,
-               let symbol = symbol,
+               let symbol = symbol?.uppercased(),
                amount > 0 {
                 return "\(amount) " + symbol
             } else {
@@ -41,23 +41,36 @@ enum ESEverstakeList {
             }
         }
         
-        init(coin: ESSharedModel.Coin, stake: ESSharedModel.Stake?) {
+        init(coin: ESServerModel.Coin, stake: ESServerModel.Stake?) {
             id = coin.id
             title = coin.name ?? ""
             iconUrl = coin.iconUrl
             apr = coin.apr
-            comingSoon = coin.isActive ?? true
+            comingSoon = !(coin.isActive ?? false)
             symbol = coin.symbol
             order = Int(coin.order ?? "0") ?? 0
-            amount = stake?.amount
+            amount = stake?.amount.rounded(toPlaces: 5)
         }
         
     }
-    
-//MARK: Action
 
-    enum Action  {
-        case openCoinDetail
+//MARK: - Server Models
+    
+    struct StakeRequest {
+        
+        let coins: [Coin]!
+        
+        var asParameters: [[String: String]] {
+            return coins.reduce(into: []) { (result, coin) in
+                result.append(["coinId": coin.coinId,
+                               "address": coin.address])
+            }
+        }
+        
+        struct Coin {
+            let coinId: String!
+            let address: String!
+        }
     }
 
 }

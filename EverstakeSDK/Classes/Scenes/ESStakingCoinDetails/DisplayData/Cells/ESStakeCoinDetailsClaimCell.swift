@@ -7,18 +7,18 @@
 
 import UIKit
 
-protocol ESStakeCoinDetailsClaimCellDelegate {
+protocol ESStakeCoinDetailsClaimCellDelegate: AnyObject {
     func claimButtonPressed()
 }
 
 class ESStakeCoinDetailsClaimCell: UITableViewCell {
     
-    var delegate: ESStakeCoinDetailsClaimCellDelegate?
+    weak var delegate: ESStakeCoinDetailsClaimCellDelegate?
     
     @IBOutlet weak var availableRewardsValueLabel: UILabel!
     
     @IBAction func claimButtonPressed() {
-        
+        delegate?.claimButtonPressed()
     }
     
 }

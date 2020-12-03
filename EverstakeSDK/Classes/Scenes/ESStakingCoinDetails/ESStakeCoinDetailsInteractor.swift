@@ -13,11 +13,11 @@
 import UIKit
 
 protocol ESStakeCoinDetailsBusinessLogic {
-    func getDisplayData() 
+    func getDisplayData()
 }
 
 protocol ESStakeCoinDetailsDataStore {
-    //var name: String { get set }
+    var model: ESServerModel.Combined! { get set }
 }
 
 class ESStakeCoinDetailsInteractor: ESStakeCoinDetailsBusinessLogic, ESStakeCoinDetailsDataStore {
@@ -25,9 +25,9 @@ class ESStakeCoinDetailsInteractor: ESStakeCoinDetailsBusinessLogic, ESStakeCoin
     var presenter: ESStakeCoinDetailsPresentationLogic?
     var worker: ESStakeCoinDetailsWorker?
     
-    var model: ESSharedModel.Combined!
+    var model: ESServerModel.Combined!
     
-    init(_ model: ESSharedModel.Combined) {
+    init(_ model: ESServerModel.Combined) {
         self.model = model
     }
     
@@ -37,11 +37,4 @@ class ESStakeCoinDetailsInteractor: ESStakeCoinDetailsBusinessLogic, ESStakeCoin
         presenter?.present(model)
     }
     
-// MARK: ESStakeCoinDetailsDataStore
-    
-    func doSomething() {
-//        worker = ESStakeCoinDetailsWorker()
-//        worker?.doSomeWork()
-//
-    }
 }

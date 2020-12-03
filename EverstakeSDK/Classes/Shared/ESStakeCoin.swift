@@ -9,11 +9,12 @@ import Foundation
 
 //MARK: - Server Models
 
-struct ESSharedModel {
+struct ESServerModel {
     
     struct Combined {
         let coin: Coin
         let stake: Stake?
+        let userBalance: String?
     }
             
     struct Stake: Codable {
@@ -21,21 +22,13 @@ struct ESSharedModel {
         let _amount: String?
         let _amountToClaim: String?
         let coinId: String?
-        
-        let validator: Validator?
+        let validators: [Validator]?
 
         enum CodingKeys: String, CodingKey {
             case _amount = "amount"
             case _amountToClaim = "amountToClaim"
             case coinId
-            case validator
-        }
-
-        struct Validator: Codable {
-            let id: String?
-            let name: String?
-            let fee: String?
-            let isReliable: Bool?
+            case validators
         }
         
         var amount: Double {
@@ -58,24 +51,47 @@ struct ESSharedModel {
         let symbol: String?
         let order: String?
         let about: String?
-
+        let precision: String?
+        let stakeType: StakeType?
         let fee: Fee?
 
+        let yieldInterval: String?
+        let yieldPercent: String?
+        
+        let validators: [Validator]?
 
-    //        let precision: Int?
-    //        let yieldInterval: Int?
-    //        let yieldPercent: String?
-    //        let needsClaiming: Bool?
-    //        let intervalStake: Int?
-    //        let intervalUnstake: Int?
-    //        let toUsd: String?
-    //        let aboutUrl: URL?
+        enum StakeType: String, Codable {
+            case oneToOne = "1to1"
+            case manyToOne = "Nto1"
+            case oneToMany = "1toN"
+            case other
+            
+            init(from decoder: Decoder) throws {
+                let label = try decoder.singleValueContainer().decode(String.self)
+                self = StakeType(rawValue: label) ?? .other
+            }
+        }
         
         struct Fee: Codable {
             let min: String?
             let max: String?
         }
+        
+//        struct Validator: Codable {
+//            let id: String?
+//            let name: String?
+//            let fee: String?
+//            let isReliable: Bool?
+//        }
     
+    }
+    
+    struct Validator: Codable {
+        let id: String?
+        let name: String?
+        let fee: String?
+        let isReliable: Bool?
+        let amount: String?
     }
         
 }

@@ -12,8 +12,10 @@
 
 import UIKit
 
-@objc protocol ESStakeCoinDetailsRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+protocol ESStakeCoinDetailsRoutingLogic {
+    func stakePressed()
+    func openCalculator()
+    func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
 }
 
 protocol ESStakeCoinDetailsDataPassing {
@@ -21,37 +23,39 @@ protocol ESStakeCoinDetailsDataPassing {
 }
 
 class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStakeCoinDetailsDataPassing {
+    
     weak var viewController: ESStakeCoinDetailsViewController?
     var dataStore: ESStakeCoinDetailsDataStore?
 
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func stakePressed()  {
+        guard let model = dataStore?.model else { return }
 
-    // MARK: Navigation
-
-    //func navigateToSomewhere(source: ESStakeCoinDetailsViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
-
-    // MARK: Passing data
-
-    //func passDataToSomewhere(source: ESStakeCoinDetailsDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+        if model.stake != nil && model.coin.stakeType == .oneToMany {
+            viewController?.presentAlertWith(title: "Stake", message: "Please unstake your funds first.")
+        } else {
+            routeToNewStakeWith(model)
+        }
+    }
+    
+    func routeToNewStakeWith(_ model: ESServerModel.Combined) {
+        let newStakeViewController = ESNewStakeConfigurator.viewControllerWith(model: model)
+        viewController?.navigationController?.pushViewController(newStakeViewController,
+                                                                 animated: true)
+    }
+    
+    func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
+        //TODO: complete ESStake model
+        let stake = ESStake(symbol: validator.symbol)
+        EverstakeSDK.shared.onUnstake?(stake)
+    }
+    
+    func openCalculator() {
+        guard let model = dataStore?.model else { return }
+        let calculatorViewController = ESCalculatorConfigurator.viewControllerWith(model)
+        viewController?.navigationController?.pushViewController(calculatorViewController,
+                                                                 animated: true)
+    }
+    
 }

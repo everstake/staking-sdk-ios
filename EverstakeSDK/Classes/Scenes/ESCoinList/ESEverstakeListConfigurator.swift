@@ -9,14 +9,14 @@ import Foundation
 
 class ESEverstakeListConfigurator {
     
-    static func setup() -> UIViewController {
+    static func setup(userCoins: [ESUserCoin]) -> UIViewController {
         
         let viewController = ESEverstakeListViewController(nibName: "ESEverstakeListViewController",
                                                            bundle: ESUtilities.shared.bundle)
         let navigationViewController = UINavigationController(rootViewController: viewController)
         navigationViewController.isNavigationBarHidden = true
         
-        let interactor = ESEverstakeListInteractor()
+        let interactor = ESEverstakeListInteractor(userCoins: userCoins)
         let presenter = ESEverstakeListPresenter()
         let router = ESEverstakeListRouter()
         viewController.interactor = interactor

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Kingfisher
 
-protocol ESEverstakeListDisplayDataManagerDelegate {
+protocol ESEverstakeListDisplayDataManagerDelegate: AnyObject {
     func didSelected(_ coin: ESEverstakeList.Coin)
 }
 
@@ -32,7 +32,7 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
         }
     }
     
-    var delegate: ESEverstakeListDisplayDataManagerDelegate?
+    weak var delegate: ESEverstakeListDisplayDataManagerDelegate?
     
 //MARK: Private
     
@@ -84,9 +84,9 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
         let coin = itemsFor(indexPath.section)[indexPath.row]
         cell.logoImageView.kf.setImage(with: coin.iconUrl)
         cell.titleLabel.text = coin.title
-        cell.subTitleLabel.text = coin.displayApr
+        cell.subtitleLabel.text = coin.displayApr
         cell.steakedLabel.text = coin.displayAmount
-        cell.coinContentView.alpha = coin.comingSoon ? 0 : 0.7
+        cell.coinContentView.alpha = coin.comingSoon ? 0.7 : 0
         
         return cell
     }
@@ -107,7 +107,9 @@ class ESEverstakeListDisplayDataManager: NSObject, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let coin = itemsFor(indexPath.section)[indexPath.row]
-        delegate?.didSelected(coin)
+        if !coin.comingSoon {
+            delegate?.didSelected(coin)
+        }
     }
     
 //MARK: Setup

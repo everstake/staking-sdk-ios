@@ -19,49 +19,57 @@ enum ESStakeCoinDetails {
         let title: String!
         let iconURL: URL!
         let apr: String!
-        let serviceFeeMin: String!
-        let serviceFeeMax: String!
+        let serviceFeeMin: String?
+        let serviceFeeMax: String?
         let about: String!
         let symbol: String!
         let amount: Double!
         let amountToClaim: Double!
-        let validator: String!
+        let validators: [ValidatorStake]!
         let isStaked: Bool!
+        let type: ESServerModel.Coin.StakeType!
         
-        init(model: ESSharedModel.Combined) {
+        init(model: ESServerModel.Combined) {
             title = model.coin.name
             iconURL = model.coin.iconUrl
             apr = model.coin.apr
-            serviceFeeMin = model.coin.fee?.min ?? "0"
-            serviceFeeMax = model.coin.fee?.max ?? "0"
+            let feeArray = model.coin.validators?.map{ $0.fee ?? "0" }
+            serviceFeeMin = feeArray?.min()
+            serviceFeeMax = feeArray?.max()
             about = model.coin.about ?? ""
             symbol = model.coin.symbol ?? ""
             isStaked = model.stake != nil && model.stake!.amount > 0
-            amount = model.stake?.amount ?? 0
-            validator = model.stake?.validator?.name ?? ""
-            amountToClaim = model.stake?.amountToClaim ?? 0
+            amount = model.stake?.amount.rounded(toPlaces: 5) ?? 0
+            amountToClaim = model.stake?.amountToClaim.rounded(toPlaces: 5) ?? 0
+            validators = model.stake?.validators?.asViewModelWith(symbol) ?? []
+            type = model.coin.stakeType ?? .other
         }
         
         var displayApr: String {
             return apr + "%"
         }
         
-        var displayStakedAmount: String {
-            if let amount = amount,
-               let symbol = symbol,
-               amount > 0 {
-                return "\(amount) " + symbol
-            } else {
-                return ""
+        func validatorAtRow(_ row: Int) -> ValidatorStake? {
+            if let startIndex = visibleCells.firstIndex(where: { $0 == .staked }) {
+                return validators[row - startIndex]
             }
+            return nil
         }
         
         var displayServiceFee: String {
-            if (serviceFeeMin == serviceFeeMax) {
-                return serviceFeeMin + "%"
-            } else {
-                return serviceFeeMin + "-" + serviceFeeMax + "%"
+            if let serviceFeeMin = serviceFeeMin,
+               let serviceFeeMax = serviceFeeMax {
+                if  (serviceFeeMin == serviceFeeMax) {
+                    return serviceFeeMin + "%"
+                } else {
+                    return serviceFeeMin + "-" + serviceFeeMax + "%"
+                }
             }
+            return ""
+        }
+        
+        var hideServiceFee: Bool {
+            return serviceFeeMax == nil || serviceFeeMax! == "0"
         }
         
         var displayAmountToClaim: String {
@@ -82,7 +90,11 @@ enum ESStakeCoinDetails {
             result.append(.calculator)
             
             if isStaked {
-                result.append(.staked)
+                result.append(.stakedHeader)
+                
+                validators.forEach { _ in
+                    result.append(.staked)
+                }
             }
             if amountToClaim > 0 {
                 result.append(.claim)
@@ -93,5 +105,41 @@ enum ESStakeCoinDetails {
 
             return result
         }
+        
+        var stakedHeaderTitle: String {
+            return type == .manyToOne ? "List of stakes" : "Steaked"
+        }
+        
+        var stakedCellHeaderHeight: CGFloat {
+            return type == .manyToOne ? 44 : 34
+        }
+        
+        var stakedHeaderSeparatorInset: CGFloat {
+            return type == .manyToOne ? 0 : 10000
+        }
+        
+        var stakedCellHeight: CGFloat {
+            return type == .manyToOne ? 92 : 82
+        }
+        
+        struct ValidatorStake {
+            let title: String!
+            let amount: String!
+            let id: String!
+            let symbol: String!
+            
+            init(validator: ESServerModel.Validator, _symbol: String) {
+                title = validator.name ?? ""
+                amount = (validator.amount ?? "0") + " " + _symbol.uppercased()
+                id = validator.id ?? ""
+                symbol = _symbol
+            }
+        }
+    }
+}
+
+private extension Array where Element == ESServerModel.Validator {
+    func asViewModelWith(_ symbol: String) -> [ESStakeCoinDetails.ViewModel.ValidatorStake] {
+        return self.map { ESStakeCoinDetails.ViewModel.ValidatorStake(validator: $0, _symbol: symbol) }
     }
 }

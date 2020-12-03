@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzo-pq-gZS">
-                        <rect key="frame" x="12" y="51" width="296" height="320.5"/>
+                        <rect key="frame" x="12" y="41" width="296" height="326"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <color key="textColor" systemColor="labelColor"/>
@@ -44,15 +44,16 @@
                     <constraint firstItem="IOl-aO-3gv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9qT-wx-JNl"/>
                     <constraint firstItem="Nzo-pq-gZS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="DJO-un-plX"/>
                     <constraint firstItem="eiu-92-gPB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="S6C-az-4Wh"/>
-                    <constraint firstAttribute="bottom" secondItem="Nzo-pq-gZS" secondAttribute="bottom" constant="11.5" id="aXv-Ih-laf"/>
+                    <constraint firstAttribute="bottom" secondItem="Nzo-pq-gZS" secondAttribute="bottom" constant="16" id="aXv-Ih-laf"/>
                     <constraint firstAttribute="trailing" secondItem="IOl-aO-3gv" secondAttribute="trailing" id="brd-zW-STt"/>
                     <constraint firstItem="IOl-aO-3gv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dM2-jn-CK8"/>
                     <constraint firstItem="eiu-92-gPB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="gao-DD-2Qz"/>
                     <constraint firstAttribute="trailing" secondItem="Nzo-pq-gZS" secondAttribute="trailing" constant="12" id="heg-Q8-xuW"/>
-                    <constraint firstItem="Nzo-pq-gZS" firstAttribute="top" secondItem="eiu-92-gPB" secondAttribute="bottom" constant="10" id="m33-sN-IS0"/>
+                    <constraint firstItem="Nzo-pq-gZS" firstAttribute="top" secondItem="eiu-92-gPB" secondAttribute="bottom" id="m33-sN-IS0"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="10000" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="aboutCoinTextView" destination="Nzo-pq-gZS" id="ZPl-mv-uT6"/>
                 <outlet property="separatorHeightConstraint" destination="iCk-FF-jIh" id="Xgc-rZ-g1C"/>

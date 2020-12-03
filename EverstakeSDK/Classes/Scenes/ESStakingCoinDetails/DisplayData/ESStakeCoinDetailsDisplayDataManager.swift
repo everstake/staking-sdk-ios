@@ -8,6 +8,13 @@
 import Foundation
 import Kingfisher
 
+protocol ESStakeCoinDetailsDisplayDataManagerDelegate: AnyObject {
+    func unstakeButtonPressedFor(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
+    func stakeButtonPressed()
+    func openCalculatorButtonPressed()
+    func claimButtonPressed()
+}
+
 class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     weak var titleLabel: UILabel!
@@ -23,6 +30,8 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
             titleLabel.text = viewModel.title
         }
     }
+    
+    weak var delegate: ESStakeCoinDetailsDisplayDataManagerDelegate?
         
 //MARK: UITableViewDelegate
     
@@ -35,30 +44,46 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
         let cellType = viewModel.visibleCells[indexPath.row]
         let reuseIdentifier = cellType.reuseIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
-        setup(cell)
+        setup(cell, index: indexPath.row)
         
         return cell
     }
     
-    private func setup(_ cell: UITableViewCell) {
+    private func setup(_ cell: UITableViewCell, index: Int) {
         if let cell = cell as? ESStakeCoinDetailsMainCell {
             cell.titleLabel.text = viewModel.title
             cell.logoImageView.kf.setImage(with: viewModel.iconURL)
             cell.aprLabel.text = viewModel.displayApr
             cell.serviceFeeLabel.text = viewModel.displayServiceFee
+            cell.serviceFeeContainer.isHidden = viewModel.hideServiceFee
             cell.delegate = self
         } else if let cell = cell as? ESStakeCoinDetailsAboutCell  {
             cell.aboutCoinTextView.text = viewModel.about
         } else if let cell = cell as? ESStakeCoinDetailsCalculatorCell {
             cell.delegate = self
+        } else if let cell = cell as? ESStakeCoinDetailsStakedHeaderCell  {
+            cell.titleLabel.text = viewModel.stakedHeaderTitle
+            cell.separatorInset.left = viewModel.stakedHeaderSeparatorInset
         } else if let cell = cell as? ESStakeCoinDetailsStakedCell {
-            cell.stakedValueLabel.text = viewModel.displayStakedAmount
-            cell.validatorValueLabel.text = viewModel.validator
-            cell.yearlyIncomeValueLabel.text = viewModel.displayApr
+            let validator = viewModel.validatorAtRow(index)
+            cell.stakedValueLabel.text = validator?.amount
+            cell.validatorValueLabel.text = validator?.title
             cell.delegate = self
         } else if let cell = cell as? ESStakeCoinDetailsClaimCell {
             cell.availableRewardsValueLabel.text = viewModel.displayAmountToClaim
             cell.delegate = self
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellType = viewModel.visibleCells[indexPath.row]
+        switch cellType {
+        case .staked:
+            return viewModel.stakedCellHeight
+        case .stakedHeader:
+            return viewModel.stakedCellHeaderHeight
+        default:
+            return UITableViewAutomaticDimension
         }
     }
  
@@ -71,61 +96,46 @@ class ESStakeCoinDetailsDisplayDataManager: NSObject, UITableViewDataSource, UIT
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
 
-        tableView.register(UINib(nibName: "ESStakeCoinDetailsMainCell",
-                                 bundle: ESUtilities.shared.bundle),
-                           forCellReuseIdentifier: Constants.ReuseIdentifier.mainCell)
-        
-        tableView.register(UINib(nibName: "ESStakeCoinDetailsAboutCell",
-                                 bundle: ESUtilities.shared.bundle),
-                           forCellReuseIdentifier: Constants.ReuseIdentifier.aboutCell)
-        
-        tableView.register(UINib(nibName: "ESStakeCoinDetailsCalculatorCell",
-                                 bundle: ESUtilities.shared.bundle),
-                           forCellReuseIdentifier: Constants.ReuseIdentifier.calculatorCell)
-        
-        tableView.register(UINib(nibName: "ESStakeCoinDetailsStakedCell",
-                                 bundle: ESUtilities.shared.bundle),
-                           forCellReuseIdentifier: Constants.ReuseIdentifier.steakedCell)
-
-        tableView.register(UINib(nibName: "ESStakeCoinDetailsClaimCell",
-                                 bundle: ESUtilities.shared.bundle),
-                           forCellReuseIdentifier: Constants.ReuseIdentifier.claimCell)
+        CellType.allCases.forEach({
+            tableView.register(UINib(nibName: $0.nibName, bundle: ESUtilities.shared.bundle),
+                               forCellReuseIdentifier: $0.reuseIdentifier)
+        })
     }
     
-    private struct Constants {
-        
-        struct ReuseIdentifier {
-            static let mainCell = "mainCell"
-            static let calculatorCell = "calculatorCell"
-            static let steakedCell = "steakedCell"
-            static let claimCell = "claimCell"
-            static let aboutCell = "aboutCell"
-        }
-        
-        struct Height {
-            static let mainCell = 164 as CGFloat
-            static let calculatorCell = 64 as CGFloat
-            static let stakedCell = 130 as CGFloat
-            static let claimCell = 100 as CGFloat
-        }
-
-    }
-    
-    enum CellType: Int {
-        case main, calculator, staked, claim, about
+    enum CellType: Int, CaseIterable {
+        case main, calculator, stakedHeader, staked, claim, about
         
         var reuseIdentifier: String {
             switch self {
             case .main:
-                return Constants.ReuseIdentifier.mainCell
+                return "mainCell"
             case .calculator:
-                return Constants.ReuseIdentifier.calculatorCell
+                return "calculatorCell"
+            case .stakedHeader:
+                return "steakedHeaderCell"
             case .staked:
-                return Constants.ReuseIdentifier.steakedCell
+                return "steakedCell"
             case .claim:
-                return Constants.ReuseIdentifier.claimCell
+                return "claimCell"
             case .about:
-                return Constants.ReuseIdentifier.aboutCell
+                return "aboutCell"
+            }
+        }
+        
+        var nibName: String {
+            switch self {
+            case .main:
+                return "ESStakeCoinDetailsMainCell"
+            case .calculator:
+                return "ESStakeCoinDetailsCalculatorCell"
+            case .stakedHeader:
+                return "ESStakeCoinDetailsStakedHeaderCell"
+            case .staked:
+                return "ESStakeCoinDetailsStakedCell"
+            case .claim:
+                return "ESStakeCoinDetailsClaimCell"
+            case .about:
+                return "ESStakeCoinDetailsAboutCell"
             }
         }
     }
@@ -135,20 +145,23 @@ extension ESStakeCoinDetailsDisplayDataManager: ESStakeCoinDetailsCalculatorCell
                                                 ESStakeCoinDetailsMainCellDelegate,
                                                 ESStakeCoinDetailsStakedCellDelegate,
                                                 ESStakeCoinDetailsClaimCellDelegate {
-    func unstakeButtonPressed() {
-        //TODO: Implement
+    func unstakeButtonPressed(cell: ESStakeCoinDetailsStakedCell) {
+        if let index = tableView.indexPath(for: cell),
+           let validator = viewModel.validatorAtRow(index.row) {
+            delegate?.unstakeButtonPressedFor(validator)
+        }
     }
     
     func stakeButtonPressed() {
-        //TODO: Implement
+        delegate?.stakeButtonPressed()
     }
     
     func openCalculatorButtonPressed() {
-        //TODO: Implement
+        delegate?.openCalculatorButtonPressed()
     }
     
     func claimButtonPressed() {
-        //TODO: Implement
+        delegate?.claimButtonPressed()
     }
 }
 

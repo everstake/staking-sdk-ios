@@ -9,49 +9,51 @@ import UIKit
 
 protocol ESEverstakeListBusinessLogic {
     func loadDataList()
-    func getCoinStakeWith(_ id: String, with action: ESEverstakeList.Action)
 }
 
 protocol ESEverstakeListDataStore {
-    var coins: [ESSharedModel.Coin]? { get set }
-    var stakes: [ESSharedModel.Stake]? { get set }
+    var coins: [ESServerModel.Coin]? { get set }
+    var stakes: [ESServerModel.Stake]? { get set }
+    var userCoins: [ESUserCoin]! { get }
 }
 
 class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDataStore {
     
-    var coins: [ESSharedModel.Coin]?
-    var stakes: [ESSharedModel.Stake]?
+    let userCoins: [ESUserCoin]!
+    
+    var coins: [ESServerModel.Coin]?
+    var stakes: [ESServerModel.Stake]?
     
     var presenter: ESEverstakeListPresentationLogic?
     var worker = ESEverstakeListWorker()
     
+    init(userCoins: [ESUserCoin]) {
+        self.userCoins = userCoins
+    }
+    
     func loadDataList() {
         worker.loadCoinList(successWith: { data in
-            self.coins = ESUtilities.decode([ESSharedModel.Coin].self, from: data)
+            self.coins = ESUtilities.decode([ESServerModel.Coin].self, from: data)
             self.completedDataLoad()
-        })
-        
-        worker.loadStakeList(successWith: { data in
-            self.stakes = ESUtilities.decode([ESSharedModel.Stake].self, from: data)
-            self.completedDataLoad()
+            self.loadStakeList()
         })
     }
     
-    func getCoinStakeWith(_ id: String, with action: ESEverstakeList.Action) {
-                
-        guard let coin = coins?.filter({ $0.id == id }).first,
-              let stake = stakes?.filter({ $0.coinId == id }).first  else {
+    func loadStakeList() {
+        guard let stakeRequestCoins = stakeRequestCoins else {
             return
         }
-
-        let sharedModel = ESSharedModel.Combined(coin: coin, stake: stake)
-        presenter?.preparedShared(model: sharedModel, action: action)
+        
+        let request = ESEverstakeList.StakeRequest(coins: stakeRequestCoins)
+        worker.loadStakeList(request: request, successWith: { data in
+            self.stakes = ESUtilities.decode([ESServerModel.Stake].self, from: data)
+            self.completedDataLoad()
+        })
     }
     
 //MARK: Private
     
     private func completedDataLoad() {
-        
         guard let coins = coins else {
             return
         }
@@ -62,9 +64,33 @@ class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDa
         
         let stakesMap = stakes?.reduce(into: [:]) { result, model in
             result[model.coinId!] = model
-        } ?? [String: ESSharedModel.Stake]()
+        } ?? [String: ESServerModel.Stake]()
         
         presenter?.updateWith(coins: coinsMap, stakes: stakesMap)
+                
+        //Save data in shared data manager
+        ESDataManager.shared.set(coins: coins, stakes: stakes, userCoins: userCoins)
     }
     
+    private var stakeRequestCoins: [ESEverstakeList.StakeRequest.Coin]? {
+        guard let mapSymbolCoin = mapSymbolCoin else {
+            return nil
+        }
+        let result: [ESEverstakeList.StakeRequest.Coin] = userCoins.reduce(into: []) { result, userCoin in
+            if let serverCoin = mapSymbolCoin[userCoin.symbol.lowercased()] {
+                result.append(ESEverstakeList.StakeRequest.Coin(coinId: serverCoin.id,
+                                                                address: userCoin.address))
+            }
+        }
+        return result
+    }
+    
+    private var mapSymbolCoin: [String: ESServerModel.Coin]? {
+        return coins?.reduce(into: [:]) { result, model in
+            if let symbol = model.symbol {
+                result?[symbol.lowercased()] = model
+            }
+        }
+    }
+
 }
