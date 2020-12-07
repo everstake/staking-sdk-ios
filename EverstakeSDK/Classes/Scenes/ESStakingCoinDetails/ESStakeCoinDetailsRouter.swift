@@ -47,8 +47,8 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
     
     func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
         //TODO: complete ESStake model
-        let stake = ESStake(symbol: validator.symbol)
-        EverstakeSDK.shared.onUnstake?(stake)
+//        let validator = ESValidatorInfo(name: validator.title, address: validator.)
+//        EverstakeSDK.shared.onAction(.unstake, nil, nil, )
     }
     
     func openCalculator() {

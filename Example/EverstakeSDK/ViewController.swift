@@ -25,13 +25,15 @@ class ViewController: UIViewController {
         let vc = EverstakeSDK.shared.createViewControllerWith(coins: coins)
         self.present(vc, animated: true)
         
-        EverstakeSDK.shared.onStake = { stake in
-            self.showAlertWith(message: "Stake Pressed!")
+        EverstakeSDK.shared.onAction = { (action: ESAction,
+                                          symbol: String,
+                                          amount: String,
+                                          validators: [ESValidatorInfo]) in
+            
+            self.showAlertWith(message: "\(action.description) \(amount) \(symbol))")
+
         }
         
-        EverstakeSDK.shared.onUnstake = { stake in
-            self.showAlertWith(message: "Unstake Pressed!")
-        }
     }
     
     func showAlertWith(message: String) {
@@ -65,3 +67,12 @@ class ViewController: UIViewController {
 
 }
 
+extension ESAction {
+    var description: String {
+        switch self {
+            case .stake: return "STAKE"
+            case .unstake: return "UNSTAKE"
+            case .claim: return "CLAIM"
+        }
+    }
+}

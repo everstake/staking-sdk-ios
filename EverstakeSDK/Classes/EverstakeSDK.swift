@@ -12,8 +12,7 @@ public class EverstakeSDK {
     
     public static let shared = EverstakeSDK()
     
-    public var onStake: ((ESStake)->())?
-    public var onUnstake: ((ESStake)->())?
+    public var onAction: ESActionHandler?
     
     public func createViewControllerWith(coins: [ESUserCoin]) -> UIViewController {
         let viewController = ESEverstakeListConfigurator.setup(userCoins: coins)
@@ -23,17 +22,18 @@ public class EverstakeSDK {
     
 }
 
-public struct ESStake {
-    let symbol: String!
-    
-    //TODO: Implement
-//    let address: String!
-//    let validators: [ESValidator]
-//
-//    struct ESValidator {
-//        var title: String!
-//        var id: String!
-//    }
+public typealias ESActionHandler = ((_ action: ESAction,
+                                     _ symbol: String,
+                                     _ amount: String?,
+                                     _ validators: [ESValidatorInfo])->())
+
+public enum ESAction {
+    case stake, unstake, claim
+}
+
+public struct ESValidatorInfo {
+    let name: String!
+    let address: String!
 }
 
 public struct ESUserCoin {

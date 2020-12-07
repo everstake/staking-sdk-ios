@@ -47,8 +47,8 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
     @IBAction func stakeButtonPressed() {
         if let viewModel = viewModel {
             if viewModel.stakeAllowed {
-                let stake = ESStake(symbol: viewModel.symbol)
-                EverstakeSDK.shared.onStake?(stake)
+//                let stake = ESStake(symbol: viewModel.symbol)
+//                EverstakeSDK.shared.onStake?(stake)
             } else {
                 presentAlertWith(title: "New Stake", message: "Cannot stake for a different validator. Unstake your funds first.")
             }
