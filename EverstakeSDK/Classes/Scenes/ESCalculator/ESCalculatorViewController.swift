@@ -35,6 +35,7 @@ class ESCalculatorViewController: UIViewController, ESCalculatorDisplayLogic {
     @IBOutlet weak var yearlyIncomeValueLabel: UILabel!
     @IBOutlet weak var includeValidatorFeeSwitch: UISwitch!
     @IBOutlet weak var reinvestEarningsSwitch: UISwitch!
+    @IBOutlet weak var validatorContainer: ESGradientView!
     
 //MARK: Actions
     
@@ -110,6 +111,7 @@ class ESCalculatorViewController: UIViewController, ESCalculatorDisplayLogic {
         dailyIncomeValueLabel.text = viewModel.displayPerDayAmount
         mounthlyIncomeValueLabel.text = viewModel.displayPerMonthAmount
         yearlyIncomeValueLabel.text = viewModel.displayPerYearAmount
+        validatorContainer.isHidden = viewModel.validatorSelectorIsHidden
     }
     
 }

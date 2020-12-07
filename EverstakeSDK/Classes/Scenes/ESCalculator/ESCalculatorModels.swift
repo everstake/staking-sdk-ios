@@ -22,6 +22,7 @@ enum ESCalculator {
         let validatorName: String!
         let showFee: Bool
         let validatorFee: Double!
+        let validatorSelectorIsHidden: Bool!
         
         var perYear: Double!
         var perMonth: Double!
@@ -40,6 +41,7 @@ enum ESCalculator {
             validatorName = selectedValidator?.name ?? ""
             showFee = !(selectedValidator?.fee != nil && selectedValidator?.fee == "0")
             validatorFee = Double(selectedValidator?.fee ?? "0") ?? 0
+            validatorSelectorIsHidden = (model.coin.stakeType == .oneToMany)
                         
             amountToStake = 0
             perYear = 0
