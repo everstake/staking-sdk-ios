@@ -40,9 +40,7 @@ class ESNewStakeInteractor: ESNewStakeBusinessLogic, ESNewStakeDataStore {
         // Set default validators
         if let validator = validator {
             self.selectedValidators.append(validator)
-        } else if let validators = model.stake?.validators {
-            self.selectedValidators = validators
-        } else if let validator = model.coin.validators?.first {
+        } else if let validator = model.coin.validators?.filter({ $0.name == "Everstake" }).first {
             self.selectedValidators.append(validator)
         }
     }
