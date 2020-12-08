@@ -127,11 +127,13 @@ enum ESStakeCoinDetails {
             let amount: String!
             let id: String!
             let symbol: String!
+            let address: String!
             
             init(validator: ESServerModel.Validator, _symbol: String) {
                 title = validator.name ?? ""
                 amount = (validator.amount ?? "0") + " " + _symbol.uppercased()
                 id = validator.id ?? ""
+                address = validator.address ?? ""
                 symbol = _symbol
             }
         }

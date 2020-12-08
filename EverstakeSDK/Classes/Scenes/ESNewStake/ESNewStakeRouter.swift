@@ -14,6 +14,7 @@ import UIKit
 
 protocol ESNewStakeRoutingLogic {
     func selectValidator()
+    func stake(amount: String)
 }
 
 protocol ESNewStakeDataPassing {
@@ -45,4 +46,19 @@ class ESNewStakeRouter: NSObject, ESNewStakeRoutingLogic, ESNewStakeDataPassing 
         
         viewController?.navigationController?.pushViewController(selectorController, animated: true)
     }
+    
+    func stake(amount: String) {
+        guard let model = dataStore?.model.coin,
+              let validators = dataStore?.selectedValidators.asValidatorsInfo
+              else { return }
+        
+        EverstakeSDK.shared.onAction?(.stake, model.symbol ?? "", amount, validators)
+    }
 }
+
+private extension Array where Element == ESServerModel.Validator {
+    var asValidatorsInfo: [ESValidatorInfo] {
+        return self.map { ESValidatorInfo(name: $0.name, address: $0.address) }
+    }
+}
+

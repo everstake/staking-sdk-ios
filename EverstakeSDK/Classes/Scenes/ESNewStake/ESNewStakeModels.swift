@@ -51,7 +51,8 @@ enum ESNewStake {
         }
         
         var stakeAllowed: Bool {
-            guard let currentId = currentValidators?.first?.id,
+            guard coin.stakeType == .oneToOne,
+                  let currentId = currentValidators?.first?.id,
                   let newId = selectedValidators.first?.id else {
                 return true
             }

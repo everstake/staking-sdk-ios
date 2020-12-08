@@ -77,13 +77,6 @@ struct ESServerModel {
             let max: String?
         }
         
-//        struct Validator: Codable {
-//            let id: String?
-//            let name: String?
-//            let fee: String?
-//            let isReliable: Bool?
-//        }
-    
     }
     
     struct Validator: Codable {
@@ -92,6 +85,7 @@ struct ESServerModel {
         let fee: String?
         let isReliable: Bool?
         let amount: String?
+        let address: String?
     }
         
 }

@@ -22,18 +22,12 @@ class ViewController: UIViewController {
         let coins = [ESUserCoin(symbol: "xtz", address: "tz1LLNkQK4UQV6QcFShiXJ2vT2ELw449MzAA", balance: "0.8"),
                      ESUserCoin(symbol: "ATOM", address: "cosmos1gdmscydnyl0pj6lcjzmeuhr6g5g68u97z3jm8l", balance: "40.44099")]
         
-        let vc = EverstakeSDK.shared.createViewControllerWith(coins: coins)
-        self.present(vc, animated: true)
-        
-        EverstakeSDK.shared.onAction = { (action: ESAction,
-                                          symbol: String,
-                                          amount: String,
-                                          validators: [ESValidatorInfo]) in
-            
-            self.showAlertWith(message: "\(action.description) \(amount) \(symbol))")
-
+        let vc = EverstakeSDK.shared.createViewControllerWith(coins: coins) { (action, symbol, amount, validators) in
+            self.showAlertWith(message: "\(action.description) \(amount ?? "") \(symbol.uppercased())")
         }
         
+        self.present(vc, animated: true)
+
     }
     
     func showAlertWith(message: String) {

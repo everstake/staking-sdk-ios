@@ -70,8 +70,7 @@ class ESStakeCoinDetailsViewController: UIViewController,
     }
     
     func claimButtonPressed() {
-        //TODO: Implement
-
+        router?.claim()
     }
     
 }

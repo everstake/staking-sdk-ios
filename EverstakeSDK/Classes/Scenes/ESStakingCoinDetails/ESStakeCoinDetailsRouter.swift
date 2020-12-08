@@ -16,6 +16,7 @@ protocol ESStakeCoinDetailsRoutingLogic {
     func stakePressed()
     func openCalculator()
     func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
+    func claim()
 }
 
 protocol ESStakeCoinDetailsDataPassing {
@@ -46,9 +47,13 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
     }
     
     func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
-        //TODO: complete ESStake model
-//        let validator = ESValidatorInfo(name: validator.title, address: validator.)
-//        EverstakeSDK.shared.onAction(.unstake, nil, nil, )
+        EverstakeSDK.shared.onAction?(.unstake, validator.symbol, nil,
+                                      [ESValidatorInfo(name: validator.title, address: validator.address)])
+    }
+    
+    func claim() {
+        guard let model = dataStore?.model else { return }
+        EverstakeSDK.shared.onAction?(.claim, model.coin.symbol ?? "", nil, [ESValidatorInfo(name: "", address: "")])
     }
     
     func openCalculator() {

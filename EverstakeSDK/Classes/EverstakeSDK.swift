@@ -12,11 +12,15 @@ public class EverstakeSDK {
     
     public static let shared = EverstakeSDK()
     
-    public var onAction: ESActionHandler?
+    var onAction: ESActionHandler?
     
-    public func createViewControllerWith(coins: [ESUserCoin]) -> UIViewController {
+    public func createViewControllerWith(coins: [ESUserCoin], action: @escaping ESActionHandler) -> UIViewController {
+        
+        self.onAction = action
+        
         let viewController = ESEverstakeListConfigurator.setup(userCoins: coins)
         viewController.modalPresentationStyle = .fullScreen
+        
         return viewController
     }
     

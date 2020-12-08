@@ -53,7 +53,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IH5-wL-ewC">
-                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="LoV-MW-WG7"/>
@@ -67,7 +67,7 @@
                 <constraint firstItem="WqW-x2-vBf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="14n-OH-fxy"/>
                 <constraint firstItem="WqW-x2-vBf" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="6fq-s7-spc"/>
                 <constraint firstItem="WqW-x2-vBf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9hR-AM-xeN"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="IH5-wL-ewC" secondAttribute="bottom" id="hnb-Aj-abe"/>
+                <constraint firstAttribute="bottom" secondItem="IH5-wL-ewC" secondAttribute="bottom" id="hnb-Aj-abe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IH5-wL-ewC" secondAttribute="trailing" id="iXb-O5-thR"/>
                 <constraint firstItem="IH5-wL-ewC" firstAttribute="top" secondItem="WqW-x2-vBf" secondAttribute="bottom" id="nhD-NQ-BNF"/>
                 <constraint firstItem="IH5-wL-ewC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="td6-XC-vR0"/>
