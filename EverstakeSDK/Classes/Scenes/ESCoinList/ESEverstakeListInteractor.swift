@@ -33,9 +33,13 @@ class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDa
     
     func loadDataList() {
         worker.loadCoinList(successWith: { data in
-            self.coins = ESUtilities.decode([ESServerModel.Coin].self, from: data)
-            self.completedDataLoad()
-            self.loadStakeList()
+            if let data = data {
+                self.coins = ESUtilities.decode([ESServerModel.Coin].self, from: data)
+                self.completedDataLoad()
+                self.loadStakeList()
+            } else if self.coins == nil {
+                self.presenter?.unableToLoadData()
+            }
         })
     }
     
@@ -46,8 +50,10 @@ class ESEverstakeListInteractor: ESEverstakeListBusinessLogic, ESEverstakeListDa
         
         let request = ESEverstakeList.StakeRequest(coins: stakeRequestCoins)
         worker.loadStakeList(request: request, successWith: { data in
-            self.stakes = ESUtilities.decode([ESServerModel.Stake].self, from: data)
-            self.completedDataLoad()
+            if let data = data {
+                self.stakes = ESUtilities.decode([ESServerModel.Stake].self, from: data)
+                self.completedDataLoad()
+            }
         })
     }
     

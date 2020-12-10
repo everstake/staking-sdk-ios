@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ESEverstakeListViewController" customModule="EverstakeSDK" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="bWa-Ys-HOZ" id="Xcx-FC-89w"/>
+                <outlet property="emptyStateView" destination="5HM-VB-3Ri" id="lDV-Vu-heb"/>
                 <outlet property="tableView" destination="n6p-T4-Xpx" id="CTR-hd-wK3"/>
                 <outlet property="view" destination="iN0-l3-epB" id="NKC-Vt-JSS"/>
             </connections>
@@ -39,6 +41,27 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HM-VB-3Ri" userLabel="Empty State View">
+                    <rect key="frame" x="0.0" y="138" width="414" height="724"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_state.png" translatesAutoresizingMaskIntoConstraints="NO" id="XR7-3c-yfm">
+                            <rect key="frame" x="159.5" y="274" width="95.5" height="76"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unable to retrieve data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgp-5p-bZK">
+                            <rect key="frame" x="94" y="362" width="226" height="26.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="Dgp-5p-bZK" firstAttribute="centerX" secondItem="5HM-VB-3Ri" secondAttribute="centerX" id="aIt-DD-XSY"/>
+                        <constraint firstItem="XR7-3c-yfm" firstAttribute="centerY" secondItem="5HM-VB-3Ri" secondAttribute="centerY" constant="-50" id="esK-Bx-NtO"/>
+                        <constraint firstItem="Dgp-5p-bZK" firstAttribute="top" secondItem="XR7-3c-yfm" secondAttribute="bottom" constant="12" id="pz5-xL-YEl"/>
+                        <constraint firstItem="XR7-3c-yfm" firstAttribute="centerX" secondItem="5HM-VB-3Ri" secondAttribute="centerX" id="zAR-4e-8kC"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n6p-T4-Xpx">
                     <rect key="frame" x="0.0" y="146" width="414" height="750"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,13 +71,17 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5HM-VB-3Ri" secondAttribute="trailing" id="Eoj-kN-Bco"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="n6p-T4-Xpx" secondAttribute="trailing" id="ItZ-Vo-B9B"/>
                 <constraint firstItem="n6p-T4-Xpx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="K95-eo-qe8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zzF-KV-Dds" secondAttribute="trailing" constant="26" id="MA8-wY-vw5"/>
                 <constraint firstItem="n6p-T4-Xpx" firstAttribute="top" secondItem="SSK-MU-Q0M" secondAttribute="bottom" constant="8" symbolic="YES" id="R8t-UE-NhZ"/>
                 <constraint firstItem="zzF-KV-Dds" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="VNC-i8-N1s"/>
                 <constraint firstAttribute="bottom" secondItem="n6p-T4-Xpx" secondAttribute="bottom" id="Xy5-t0-KN3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5HM-VB-3Ri" secondAttribute="bottom" id="ZD4-f1-jTn"/>
                 <constraint firstItem="bWa-Ys-HOZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="aDL-1D-HUX"/>
+                <constraint firstItem="5HM-VB-3Ri" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bRb-EB-73b"/>
+                <constraint firstItem="5HM-VB-3Ri" firstAttribute="top" secondItem="SSK-MU-Q0M" secondAttribute="bottom" id="eru-Tz-jii"/>
                 <constraint firstItem="FsS-mf-MYb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="hR2-NB-oko"/>
                 <constraint firstItem="FsS-mf-MYb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="26" id="hfs-mw-qCQ"/>
                 <constraint firstItem="bWa-Ys-HOZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iaZ-cW-8bf"/>
@@ -66,5 +93,9 @@
     </objects>
     <resources>
         <image name="close.png" width="14" height="14"/>
+        <image name="empty_state.png" width="95.5" height="76"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

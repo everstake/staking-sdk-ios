@@ -36,6 +36,7 @@ class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLog
   
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var emptyStateView: UIView!
     
     let displayManager = ESEverstakeListDisplayDataManager()
     
@@ -54,7 +55,8 @@ class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLog
     
     func unableToLoadData() {
         activityIndicator.stopAnimating()
-        //TODO: show proper view
+        tableView.isHidden = true
+        emptyStateView.isHidden = false
     }
     
 //MARK: ESEverstakeListDisplayDataManagerDelegate

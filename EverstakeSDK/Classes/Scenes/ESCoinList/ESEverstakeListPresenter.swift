@@ -10,6 +10,7 @@ import UIKit
 protocol ESEverstakeListPresentationLogic {
     func updateWith(coins: [String: ESServerModel.Coin],
                     stakes: [String: ESServerModel.Stake])
+    func unableToLoadData()
 }
 
 class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
@@ -27,6 +28,12 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
         viewController?.updateWith(viewModel: viewModel)
     }
     
+    func unableToLoadData() {
+        viewController?.unableToLoadData()
+    }
+    
+//MARK: Private
+    
     private func sortLogic(this: ESEverstakeList.Coin,
                         that: ESEverstakeList.Coin) -> Bool {
         if (this.order == that.order) {
@@ -35,8 +42,6 @@ class ESEverstakeListPresenter: ESEverstakeListPresentationLogic {
             return this.order > that.order
         }
     }
-    
-//MARK: Private
     
     private func convertToViewModel(coins: [String: ESServerModel.Coin],
                                     stakes: [String: ESServerModel.Stake]) -> ESEverstakeList.ViewModel {
