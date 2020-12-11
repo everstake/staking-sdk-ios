@@ -1,7 +1,7 @@
 //
 //  EverstakeListWorker.swift
 //
-//  Created by Alexander Koziaruk on 20.10.2020.
+//  Created by Alex Koziaruk on 20.10.2020.
 //  Copyright (c) 2020 NoisyMiner. All rights reserved.
 //
 

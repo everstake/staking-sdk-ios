@@ -2,7 +2,7 @@
 //  UIColor+Extentions.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 17.11.2020.
+//  Created by Alex Koziaruk on 17.11.2020.
 //
 
 import Foundation

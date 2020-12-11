@@ -2,7 +2,7 @@
 //  ESCurrencySelectorTableViewCell.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 26.11.2020.
+//  Created by Alex Koziaruk on 26.11.2020.
 //
 
 import UIKit

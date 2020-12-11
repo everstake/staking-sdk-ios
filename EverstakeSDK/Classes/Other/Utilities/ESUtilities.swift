@@ -2,7 +2,7 @@
 //  Utilities.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 22.10.2020.
+//  Created by Alex Koziaruk on 22.10.2020.
 //
 
 import Foundation

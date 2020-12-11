@@ -2,7 +2,7 @@
 //  ESNetworkManager.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 23.10.2020.
+//  Created by Alex Koziaruk on 23.10.2020.
 //
 
 import Foundation

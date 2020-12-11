@@ -2,7 +2,7 @@
 //  ESCache.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 28.10.2020.
+//  Created by Alex Koziaruk on 28.10.2020.
 //
 
 import Foundation

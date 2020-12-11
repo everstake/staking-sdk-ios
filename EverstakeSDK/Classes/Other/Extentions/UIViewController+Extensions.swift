@@ -2,7 +2,7 @@
 //  UIViewController+Extentions.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 25.11.2020.
+//  Created by Alex Koziaruk on 25.11.2020.
 //
 
 import Foundation

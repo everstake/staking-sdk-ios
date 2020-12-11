@@ -2,7 +2,7 @@
 //  ESStakingCoinDetailsConfigurator.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 29.10.2020.
+//  Created by Alex Koziaruk on 29.10.2020.
 //
 
 import Foundation

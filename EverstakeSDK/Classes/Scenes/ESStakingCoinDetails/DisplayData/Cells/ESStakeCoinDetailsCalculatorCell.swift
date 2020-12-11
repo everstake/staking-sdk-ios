@@ -2,7 +2,7 @@
 //  ESStakeCoinDetailsCalculateCell.swift
 //  EverstakeSDK
 //
-//  Created by Alexander Koziaruk on 01.11.2020.
+//  Created by Alex Koziaruk on 01.11.2020.
 //
 
 import UIKit

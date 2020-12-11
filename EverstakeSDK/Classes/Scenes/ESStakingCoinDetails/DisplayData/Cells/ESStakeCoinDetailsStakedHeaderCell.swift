@@ -2,7 +2,7 @@
 //  ESStakeCoinDetailsStakedHeaderCell.swift
 //  EverstakeSDK_Example
 //
-//  Created by Alexander Koziaruk on 20.11.2020.
+//  Created by Alex Koziaruk on 20.11.2020.
 //  Copyright © 2020 CocoaPods. All rights reserved.
 //
 
