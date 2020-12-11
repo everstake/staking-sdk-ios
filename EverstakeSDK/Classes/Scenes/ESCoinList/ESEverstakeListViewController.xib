@@ -28,9 +28,15 @@
                     <state key="normal" image="close.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="closeButtonPressed" destination="-1" eventType="touchUpInside" id="ZaT-l9-TuP"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzF-KV-Dds" userLabel="Info">
                     <rect key="frame" x="363" y="44" width="25" height="24"/>
+                    <connections>
+                        <action selector="infoButtonPressed" destination="-1" eventType="touchUpInside" id="QgA-P2-Xsr"/>
+                    </connections>
                 </button>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bWa-Ys-HOZ">
                     <rect key="frame" x="197" y="438" width="20" height="20"/>

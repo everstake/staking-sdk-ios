@@ -17,6 +17,8 @@ protocol ESStakeCoinDetailsRoutingLogic {
     func openCalculator()
     func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
     func claim()
+    func back()
+    func showInfo()
 }
 
 protocol ESStakeCoinDetailsDataPassing {
@@ -63,4 +65,15 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
                                                                  animated: true)
     }
     
+    func back() {
+        viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func showInfo() {
+        if let link = URL(string: "https://everstake.one/") {
+            UIApplication.shared.open(link)
+        }
+    }
+    
 }
+

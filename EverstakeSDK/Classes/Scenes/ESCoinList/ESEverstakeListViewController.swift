@@ -17,7 +17,17 @@ class ESEverstakeListViewController: UIViewController, ESEverstakeListDisplayLog
         
     var interactor: ESEverstakeListBusinessLogic?
     var router: (NSObjectProtocol & ESEverstakeListRoutingLogic)?
-  
+    
+//MARK: Actions
+    
+    @IBAction func closeButtonPressed() {
+        router?.close()
+    }
+    
+    @IBAction func infoButtonPressed() {
+        router?.showInfo()
+    }
+    
 // MARK: View lifecycle
   
     override func viewDidLoad() {

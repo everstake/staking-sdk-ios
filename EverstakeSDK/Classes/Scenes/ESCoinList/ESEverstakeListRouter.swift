@@ -9,6 +9,8 @@ import UIKit
 
 protocol ESEverstakeListRoutingLogic {
     func routeToStakeCoinDetailsWith(id: String)
+    func showInfo()
+    func close()
 }
 
 class ESEverstakeListRouter: NSObject, ESEverstakeListRoutingLogic {
@@ -28,4 +30,13 @@ class ESEverstakeListRouter: NSObject, ESEverstakeListRoutingLogic {
                                                                  animated: true)
     }
     
+    func showInfo() {
+        if let link = URL(string: "https://everstake.one/") {
+            UIApplication.shared.open(link)
+        }
+    }
+    
+    func close() {
+        viewController?.dismiss(animated: true, completion: nil)
+    }
 }

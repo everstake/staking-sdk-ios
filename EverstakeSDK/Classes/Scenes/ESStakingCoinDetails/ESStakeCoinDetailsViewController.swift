@@ -32,11 +32,11 @@ class ESStakeCoinDetailsViewController: UIViewController,
   // MARK: Actions
   
     @IBAction func backPressed() {
-        navigationController?.popViewController(animated: true)
+        router?.back()
     }
     
     @IBAction func infoButtonPressed() {
-        //TODO: implement
+        router?.showInfo()
     }
     
     // MARK: View lifecycle
