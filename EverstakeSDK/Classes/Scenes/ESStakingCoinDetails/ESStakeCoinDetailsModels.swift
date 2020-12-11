@@ -125,13 +125,15 @@ enum ESStakeCoinDetails {
         struct ValidatorStake {
             let title: String!
             let amount: String!
+            let displayAmount: String!
             let id: String!
             let symbol: String!
             let address: String!
             
             init(validator: ESServerModel.Validator, _symbol: String) {
                 title = validator.name ?? ""
-                amount = (validator.amount ?? "0") + " " + _symbol.uppercased()
+                amount = (validator.amount ?? "0")
+                displayAmount = amount + " " + _symbol.uppercased()
                 id = validator.id ?? ""
                 address = validator.address ?? ""
                 symbol = _symbol

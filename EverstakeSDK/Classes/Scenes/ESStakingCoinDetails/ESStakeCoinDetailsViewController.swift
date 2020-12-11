@@ -58,7 +58,7 @@ class ESStakeCoinDetailsViewController: UIViewController,
 //MARK: - ESStakeCoinDetailsDisplayDataManagerDelegate
     
     func unstakeButtonPressedFor(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
-        router?.unstakeValidator(validator)
+        router?.routeToNewUnstakeWith(validator)
     }
     
     func stakeButtonPressed() {

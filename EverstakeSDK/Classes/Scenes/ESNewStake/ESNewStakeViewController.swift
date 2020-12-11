@@ -62,6 +62,12 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
         navigationController?.popViewController(animated: true)
     }
     
+    @objc func doneButtonAction() {
+        amountTextField.resignFirstResponder()
+        viewModel?.amountToStake = Double(amountTextField.text ?? "0") ?? 0
+        updateWithNewAmount()
+    }
+    
     // MARK: View lifecycle
   
     override func viewDidLoad() {
@@ -74,7 +80,6 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
                                                  two: UIColor(hex: "#7CB518")!.withAlphaComponent(0.1))
         sliderController.setupSlider()
         sliderController.delegate = self
-        sliderLastAnchorView.backgroundColor = UIColor(hex: "#CCCCCC")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +125,7 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
         reliableContainer.isHidden = !viewModel.isReliable
     }
 
-    func updateWithNewAmount() {
+    private func updateWithNewAmount() {
         var val = 0 as Float
         if let viewModel = viewModel,
            let maxAmount = viewModel.balance,
@@ -133,9 +138,4 @@ class ESNewStakeViewController: UIViewController, ESNewStakeDisplayLogic, Slider
         sliderValueDidChange(value: val)
     }
     
-    @objc func doneButtonAction() {
-        amountTextField.resignFirstResponder()
-        viewModel?.amountToStake = Double(amountTextField.text ?? "0") ?? 0
-        updateWithNewAmount()
-    }
 }

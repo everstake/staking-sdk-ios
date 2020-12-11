@@ -15,7 +15,7 @@ import UIKit
 protocol ESStakeCoinDetailsRoutingLogic {
     func stakePressed()
     func openCalculator()
-    func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
+    func routeToNewUnstakeWith(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake)
     func claim()
     func back()
     func showInfo()
@@ -48,9 +48,10 @@ class ESStakeCoinDetailsRouter: NSObject, ESStakeCoinDetailsRoutingLogic, ESStak
                                                                  animated: true)
     }
     
-    func unstakeValidator(_ validator: ESStakeCoinDetails.ViewModel.ValidatorStake) {
-        EverstakeSDK.shared.onAction?(.unstake, validator.symbol, nil,
-                                      [ESValidatorInfo(name: validator.title, address: validator.address)])
+    func routeToNewUnstakeWith(_ model: ESStakeCoinDetails.ViewModel.ValidatorStake) {
+        let newUnstakeViewController = ESNewUnstakeConfigurator.viewControllerWith(model: model)
+        viewController?.navigationController?.pushViewController(newUnstakeViewController,
+                                                                 animated: true)
     }
     
     func claim() {
